@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Date;
 
 
 @NoArgsConstructor
@@ -15,11 +16,12 @@ import java.time.LocalDate;
 public class NotaFiscal {
     @Id
     @GeneratedValue
-    @Column(name ="id_nota_fiscal")
-    private Long id;
+    @Column(name ="id_nf")
+    private Long idNf;
     @NotNull
     @Column(name = "dt_emissao")
-    private LocalDate data;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date data;
     @NotNull
     @Column(name ="id_cliente")
     private Long idCliente;

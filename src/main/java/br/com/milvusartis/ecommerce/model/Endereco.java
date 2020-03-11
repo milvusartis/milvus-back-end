@@ -16,7 +16,7 @@ public class Endereco {
     @Id
     @GeneratedValue
     @Column(name = "id_endereco")
-    private Long id;
+    private Long idEndereco;
     @NotNull
     @Column(name = "ds_cep")
     private String cep;

@@ -16,7 +16,7 @@ public class Empresa {
     @Id
     @GeneratedValue
     @Column(name ="id_empresa")
-    private Long id;
+    private Long idEmpresa;
     @NotNull
     @Column(name ="ds_razao_social")
     private String razaoSocial;
