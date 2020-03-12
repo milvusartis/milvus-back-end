@@ -6,13 +6,14 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_endereco")
-public class Endereco {
+public class Endereco implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "id_endereco")
@@ -36,4 +37,6 @@ public class Endereco {
     @NotNull
     @Column(name = "sg_estado")
     private String estado;
+    @OneToOne(mappedBy = "tb_endereco")
+    private Empresa empresa;
 }

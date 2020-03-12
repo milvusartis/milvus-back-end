@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -13,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_nota_fiscal")
-public class NotaFiscal {
+public class NotaFiscal implements Serializable {
     @Id
     @GeneratedValue
     @Column(name ="id_nf")
@@ -26,8 +27,9 @@ public class NotaFiscal {
     @Column(name ="id_cliente")
     private Long idCliente;
     @NotNull
-    @Column(name ="id_empresa")
-    private Long idEmpresa;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_empresa",referencedColumnName = "id_empresa")
+    private Empresa empresa;
     @NotNull
     @Column(name ="id_pedido")
     private Long idPedido;
