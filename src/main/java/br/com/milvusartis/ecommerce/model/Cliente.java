@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -40,7 +41,24 @@ public class Cliente implements Serializable {
     @Column(name="ds_senha")
     private String dsSenha;
 
-    //@JoinColumn(name="id_endereco")
-    //private Long idEndereco;
+    //@NotNull
+    //@Column(name="id_endereco")
+    //private Endereco endereco;
+
+
+    @OneToMany
+    @JoinColumn(name="cliente")
+    private List<Pedido> pedidoCliente;
+
+//    @OneToMany
+//    @JoinColumn(name="cliente")
+//    private List<NotaFiscal> notaFiscalCliente;
+
+
+
+    //na tabela endereço:
+    //@OneToOne
+    //@JoinColumn(name = "id_endereco")
+    //private List<Cliente> clienteEndereco;
 
 }

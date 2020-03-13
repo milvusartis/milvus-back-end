@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -36,7 +37,8 @@ public class Pedido implements Serializable {
     @Column(name="vl_frete")
     private BigDecimal vlFrete;
 
-    //@JoinColumn(name="id_cliente")
+    @Column(name="id_cliente")
+    private Cliente cliente;
 
     @NotNull
     @Column(name="ds_status_pedido")
@@ -46,4 +48,19 @@ public class Pedido implements Serializable {
     @Column(name="vl_total")
     private BigDecimal vlTotal;
 
+    @OneToMany
+    @JoinColumn(name="pedido")
+    private List<PedidoItem> pedidoItemPedido;
+
+
+    //na tb_nota_fiscal:
+    //@OneToOne
+    //@JoinColumn(name="notafiscal")
+    //private List<Pedido> pedidoNotaFiscal;
+
+    //na tb_endereco:
+    //@OneToManyfr
+    //@JoinColumn(name="endereco")
+    //private List<Pedido> pedidoEndereco;
+   //TODO listar ti
 }

@@ -21,19 +21,23 @@ public class PedidoItem implements Serializable {
     private Long idPedido;
 
     @Id
-    @Column(name="nr_pedido")
-    private Integer nrPedido;
+    @Column(name="nr_item_pedido")
+    private Long nrItemPedido;
 
-    @NotNull
-    @Column(name="nr_produto_pedido")
-    private Integer nrProdutoPedido;
+    //@NotNull
+    //@Column(name="id_produto")
+    //private Long idProduto;
 
     @NotNull
     @Column(name="vl_produto")
     private BigDecimal vlProduto;
 
-    @NotNull
-    @JoinColumn(name="id_produto")
-    private Long idProduto;
 
+    //na tb_produto:
+    //@OneToOne
+    //@JoinColumn(name="produto")
+    //private List<PedidoItem> pedidoItemProduto;
+
+    //ao finalizar pedido, voltar contador para 1 para proximo pedido
+    //FALAR COM LEO SOBRE NRPRODUTOPEDIDO
 }
