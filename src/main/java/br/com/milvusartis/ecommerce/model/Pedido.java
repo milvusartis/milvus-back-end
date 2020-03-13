@@ -26,7 +26,7 @@ public class Pedido implements Serializable {
 
     @NotNull
     @Column(name="nr_pedido")
-    private Integer nrPedido;
+    private Long nrPedido;
 
     @NotNull
     @Column(name="dt_pedido")

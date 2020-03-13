@@ -25,17 +25,17 @@ public class PedidoController {
     }
 
     @GetMapping("/pedido")
-    public ResponseEntity<List<Pedido>> findById(@PathParam("id_pedido") Long id,
-                                                 @PathParam("nr_pedido") Integer nr) {
+    public ResponseEntity<List<Pedido>> findById(@PathParam("nr_pedido") Long nr,
+                                                 @PathParam("ds_status_pedido") String ds) {
 
         List<Pedido> pedido = new ArrayList<>();
 
 
-        if (id != null && nr != null)
-            pedido = pedidoRepository.findByIdPedidoAndNrPedido(id, nr);
-        else if (id != null)
-            pedido.add(pedidoRepository.findById(id).get());
-        else if (pedido != null)
+        if (nr != null && ds != null)
+            pedido = pedidoRepository.findByNrPedidoAndDsStatusPedido(nr, ds);
+        else if (ds != null)
+            pedido = pedidoRepository.findByDsStatusPedido(ds);
+        else if (nr != null)
             pedido = pedidoRepository.findByNrPedido(nr);
 
         if (pedido != null && pedido.size() > 0)
