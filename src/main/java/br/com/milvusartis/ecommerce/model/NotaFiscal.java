@@ -23,16 +23,16 @@ public class NotaFiscal implements Serializable {
     @Column(name = "dt_emissao")
     @Temporal(TemporalType.TIMESTAMP)
     private Date data;
-    //@OneToOne(cascade = CascadeType.ALL)
-    //private Cliente cliente;
-    @Column(name ="id_cliente")
-    private Long idCliente;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Cliente cliente;
+    //@Column(name ="id_cliente")
+    //private Long idCliente;
     @OneToOne(cascade = CascadeType.ALL)
     private Empresa empresa;
-    //@OneToOne(cascade = CascadeType.ALL)
-    //private Pedido pedido;
-    @Column(name ="id_pedido")
-    private Long idPedido;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Pedido pedido;
+    //@Column(name ="id_pedido")
+    //private Long idPedido;
     @Column(name ="ds_natureza_operacao")
     private String naturezaOperacao;
     @Column(name ="nr_nfe")

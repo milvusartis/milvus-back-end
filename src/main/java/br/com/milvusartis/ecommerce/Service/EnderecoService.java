@@ -2,6 +2,7 @@ package br.com.milvusartis.ecommerce.Service;
 
 import br.com.milvusartis.ecommerce.model.DTO.EnderecoDTO;
 import br.com.milvusartis.ecommerce.model.Endereco;
+import br.com.milvusartis.ecommerce.model.NotaFiscal;
 import br.com.milvusartis.ecommerce.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +32,19 @@ public class EnderecoService {
     }
     public void deleteById(Long id) {
         enderecoRepository.deleteById(id);
+    }
+
+    public ResponseEntity alterar(Endereco endereco) {
+       Endereco enderecoEntity = enderecoRepository.getOne(endereco.getIdEndereco());
+
+        enderecoEntity.setCep(endereco.getCep());
+        enderecoEntity.setRua(endereco.getRua());
+        enderecoEntity.setNumero(endereco.getNumero());
+        enderecoEntity.setComplemento(endereco.getComplemento());
+        enderecoEntity.setBairro(endereco.getBairro());
+        enderecoEntity.setCidade(endereco.getCidade());
+        enderecoEntity.setEstado(endereco.getEstado());
+
+       return ResponseEntity.ok().body(enderecoRepository.save(enderecoEntity));
     }
 }

@@ -3,6 +3,7 @@ package br.com.milvusartis.ecommerce.controller;
 import br.com.milvusartis.ecommerce.Service.EnderecoService;
 import br.com.milvusartis.ecommerce.model.DTO.EnderecoDTO;
 import br.com.milvusartis.ecommerce.model.Endereco;
+import br.com.milvusartis.ecommerce.model.NotaFiscal;
 import br.com.milvusartis.ecommerce.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,11 +33,15 @@ public class EnderecoController {
 
     @GetMapping("/endereco/{idEndereco}")
     public Endereco findById(@PathVariable("idEndereco")Long idEndereco){
-        return enderecoRepository.findById(idEndereco).get();
-    }
+        return enderecoRepository.findById(idEndereco).get(); }
 
     @DeleteMapping("/endereco/{idEndereco}")
     public void deleteById(@PathVariable("idEndereco") Long idEndereco) {
         enderecoService.deleteById(idEndereco);
+    }
+
+    @PutMapping("/endereco")
+    public ResponseEntity alterar(@RequestBody Endereco endereco) {
+        return ResponseEntity.ok().body(enderecoService.alterar(endereco));
     }
 }
