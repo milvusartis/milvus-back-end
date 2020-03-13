@@ -41,24 +41,12 @@ public class Cliente implements Serializable {
     @Column(name="ds_senha")
     private String dsSenha;
 
-    //@NotNull
-    //@Column(name="id_endereco")
-    //private Endereco endereco;
+    @NotNull
+    @Column(name="id_endereco")
+    private Integer endereco;
 
-
-    @OneToMany
-    @JoinColumn(name="cliente")
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="id_cliente")
     private List<Pedido> pedidoCliente;
-
-//    @OneToMany
-//    @JoinColumn(name="cliente")
-//    private List<NotaFiscal> notaFiscalCliente;
-
-
-
-    //na tabela endereço:
-    //@OneToOne
-    //@JoinColumn(name = "id_endereco")
-    //private List<Cliente> clienteEndereco;
 
 }

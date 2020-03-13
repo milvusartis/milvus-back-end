@@ -37,8 +37,9 @@ public class Pedido implements Serializable {
     @Column(name="vl_frete")
     private BigDecimal vlFrete;
 
+    @NotNull
     @Column(name="id_cliente")
-    private Cliente cliente;
+    private Long idCliente;
 
     @NotNull
     @Column(name="ds_status_pedido")
@@ -48,19 +49,8 @@ public class Pedido implements Serializable {
     @Column(name="vl_total")
     private BigDecimal vlTotal;
 
-    @OneToMany
-    @JoinColumn(name="pedido")
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="id_pedido")
     private List<PedidoItem> pedidoItemPedido;
 
-
-    //na tb_nota_fiscal:
-    //@OneToOne
-    //@JoinColumn(name="notafiscal")
-    //private List<Pedido> pedidoNotaFiscal;
-
-    //na tb_endereco:
-    //@OneToManyfr
-    //@JoinColumn(name="endereco")
-    //private List<Pedido> pedidoEndereco;
-   //TODO listar ti
 }
