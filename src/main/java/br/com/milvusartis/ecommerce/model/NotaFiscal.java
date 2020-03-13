@@ -1,6 +1,7 @@
 package br.com.milvusartis.ecommerce.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
-
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -19,25 +20,21 @@ public class NotaFiscal implements Serializable {
     @GeneratedValue
     @Column(name ="id_nf")
     private Long idNf;
-    @NotNull
     @Column(name = "dt_emissao")
     @Temporal(TemporalType.TIMESTAMP)
     private Date data;
-    @NotNull
+    //@OneToOne(cascade = CascadeType.ALL)
+    //private Cliente cliente;
     @Column(name ="id_cliente")
     private Long idCliente;
-    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_empresa",referencedColumnName = "id_empresa")
     private Empresa empresa;
-    @NotNull
+    //@OneToOne(cascade = CascadeType.ALL)
+    //private Pedido pedido;
     @Column(name ="id_pedido")
     private Long idPedido;
-    @NotNull
     @Column(name ="ds_natureza_operacao")
     private String naturezaOperacao;
-    @NotNull
     @Column(name ="nr_nfe")
     private Integer nfe;
-
 }

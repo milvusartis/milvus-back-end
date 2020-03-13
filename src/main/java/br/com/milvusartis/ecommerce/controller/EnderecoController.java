@@ -1,8 +1,11 @@
 package br.com.milvusartis.ecommerce.controller;
 
+import br.com.milvusartis.ecommerce.Service.EnderecoService;
+import br.com.milvusartis.ecommerce.model.DTO.EnderecoDTO;
 import br.com.milvusartis.ecommerce.model.Endereco;
 import br.com.milvusartis.ecommerce.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,19 +17,15 @@ import java.util.List;
 public class EnderecoController {
 
     @Autowired
-    private EnderecoRepository enderecoRepository;
+    private EnderecoService enderecoService;
 
-    public EnderecoController(EnderecoRepository enderecoRepository){
-        this.enderecoRepository = enderecoRepository;
+    @PostMapping("/endereco")
+    public ResponseEntity save(@RequestBody EnderecoDTO enderecoDTO){
+        return ResponseEntity.ok().body(enderecoService.save(enderecoDTO));
     }
 
-    @PostMapping("/create-endereco")
-    public Endereco save(@RequestBody Endereco endereco){
-        return enderecoRepository.save(endereco);
-    }
-
-    @GetMapping("/find-endereco/list")
-    public List<Endereco> find(){
-        return enderecoRepository.findAll();
-    }
+//    @GetMapping("/find-endereco/list")
+//    public List<Endereco> find(){
+//        return enderecoRepository.findAll();
+//    }
 }

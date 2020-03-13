@@ -1,5 +1,7 @@
 package br.com.milvusartis.ecommerce.model.DTO;
 
+import br.com.milvusartis.ecommerce.model.Empresa;
+import br.com.milvusartis.ecommerce.model.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,5 +16,5 @@ public class EmpresaDTO {
     private String razaoSocial;
     private String cnpj;
     private String inscricaoEstadual;
-    private List<Long> idEndereco;
+    private Endereco endereco;
 }
