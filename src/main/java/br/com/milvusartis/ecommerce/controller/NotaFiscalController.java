@@ -35,4 +35,14 @@ public class NotaFiscalController {
     public NotaFiscal findById(@PathVariable("idNf")Long idNf){
         return notaFiscalRepository.findById(idNf).get();
     }
+
+    @DeleteMapping("/notaFiscal/{idnf}")
+    public void deleteById(@PathVariable("idNf") Long idNf) {
+        notaFiscalService.deleteById(idNf);
+    }
+
+    @PutMapping("/categoria")
+    public ResponseEntity alterar(@RequestBody NotaFiscal notaFiscal) {
+        return ResponseEntity.ok().body(notaFiscalService.alterar(notaFiscal));
+    }
 }

@@ -29,4 +29,23 @@ public class NotaFiscalService {
         notaFiscalDTO.setIdNf(retornoNotaFiscal.getIdNf());
         return ResponseEntity.ok().body(notaFiscalDTO);
     }
+
+    public void deleteById(Long id) {
+        notaFiscalRepository.deleteById(id);
+    }
+
+    public ResponseEntity alterar(NotaFiscal notaFiscal) {
+        NotaFiscal notaFiscalEntity = notaFiscalRepository.getOne(notaFiscal.getIdNf());
+
+        notaFiscalEntity.setData(notaFiscal.getData());
+        //notaFiscalEntity.setCliente(notaFiscal.getCliente());
+        notaFiscalEntity.setIdCliente(notaFiscal.getIdCliente());
+        notaFiscalEntity.setEmpresa(notaFiscal.getEmpresa());
+        //notaFiscalEntity.setPedido(notaFiscal.getPedido());
+        notaFiscalEntity.setIdPedido(notaFiscal.getIdPedido());
+        notaFiscalEntity.setNaturezaOperacao(notaFiscal.getNaturezaOperacao());
+        notaFiscalEntity.setNfe(notaFiscal.getNfe());
+
+        return ResponseEntity.ok().body(notaFiscalRepository.save(notaFiscalEntity));
+    }
 }

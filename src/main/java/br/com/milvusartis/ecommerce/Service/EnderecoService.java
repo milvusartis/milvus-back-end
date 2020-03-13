@@ -29,4 +29,7 @@ public class EnderecoService {
         enderecoDTO.setIdEndereco(retornoEndereco.getIdEndereco());
         return ResponseEntity.ok().body(enderecoDTO);
     }
+    public void deleteById(Long id) {
+        enderecoRepository.deleteById(id);
+    }
 }

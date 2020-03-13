@@ -34,4 +34,9 @@ public class EnderecoController {
     public Endereco findById(@PathVariable("idEndereco")Long idEndereco){
         return enderecoRepository.findById(idEndereco).get();
     }
+
+    @DeleteMapping("/endereco/{idEndereco}")
+    public void deleteById(@PathVariable("idEndereco") Long idEndereco) {
+        enderecoService.deleteById(idEndereco);
+    }
 }
