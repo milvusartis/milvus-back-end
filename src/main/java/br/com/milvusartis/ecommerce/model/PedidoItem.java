@@ -17,16 +17,15 @@ import java.math.BigDecimal;
 public class PedidoItem implements Serializable {
 
     @Id
-    @Column(name="id_pedido")
-    private Long idPedido;
-
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="nr_item_pedido")
     private Long nrItemPedido;
 
-    @NotNull
-    @Column(name="id_produto")
+    @Column(name="id_pedido")
+    private Long idPedido;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_produto")
     private Produto idProduto;
 
     @NotNull

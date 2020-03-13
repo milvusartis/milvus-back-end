@@ -37,9 +37,9 @@ public class Pedido implements Serializable {
     @Column(name="vl_frete")
     private BigDecimal vlFrete;
 
-    @NotNull
-    @Column(name="id_cliente")
-    private Long idCliente;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="id_cliente")
+    private Cliente cliente;
 
     @NotNull
     @Column(name="ds_status_pedido")
