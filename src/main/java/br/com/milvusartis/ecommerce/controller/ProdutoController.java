@@ -1,5 +1,6 @@
 package br.com.milvusartis.ecommerce.controller;
 
+import br.com.milvusartis.ecommerce.model.DTO.ProdutoDTO;
 import br.com.milvusartis.ecommerce.model.Produto;
 import br.com.milvusartis.ecommerce.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,13 @@ public class ProdutoController {
 
 
     @PostMapping("/produto")
-    public ResponseEntity<Produto> salvar(@RequestBody Produto produto) {
-        return service.salvar(produto);
+    public ResponseEntity<Produto> salvar(@RequestBody ProdutoDTO produtoDTO) {
+        return service.salvar(produtoDTO);
     }
 
 
     @GetMapping("/produto")
-    public ResponseEntity<List<Produto>> listar() {
+    public ResponseEntity<List<ProdutoDTO>> listar() {
         return service.listar();
     }
 
@@ -39,8 +40,8 @@ public class ProdutoController {
 
 
     @PutMapping("/produto")
-    public ResponseEntity<Produto> atulizarProduto(@RequestBody Produto produto) {
-        return service.atualizar(produto);
+    public ResponseEntity<Produto> atulizarProduto(@RequestBody ProdutoDTO produtoDTO) {
+        return service.atualizar(produtoDTO);
     }
 
 }

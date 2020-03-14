@@ -1,5 +1,6 @@
 package br.com.milvusartis.ecommerce.model;
 
+import br.com.milvusartis.ecommerce.model.DTO.CategoriaDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,4 +22,12 @@ public class Categoria implements Serializable {
 
     @Column(name = "nm_categoria")
     private String descricao;
+
+
+    public CategoriaDTO getCategoriaDTO(Categoria categoria){
+        CategoriaDTO categoriaDTO = new CategoriaDTO();
+        categoriaDTO.setCodigo(categoria.getId());
+        categoriaDTO.setDescricao(categoria.getDescricao());
+        return categoriaDTO;
+    }
 }
