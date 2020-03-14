@@ -17,7 +17,7 @@ public class CategoriaController {
     private CategoriaService service;
 
     @PostMapping("/categoria")
-    public ResponseEntity salvar(@RequestBody CategoriaDTO categoriaDTO) {
+    public ResponseEntity<Categoria> salvar(@RequestBody CategoriaDTO categoriaDTO) {
         return service.salvar(categoriaDTO);
     }
 
