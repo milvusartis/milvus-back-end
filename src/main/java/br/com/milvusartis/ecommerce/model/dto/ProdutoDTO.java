@@ -1,25 +1,32 @@
 package br.com.milvusartis.ecommerce.model.DTO;
 
-import br.com.milvusartis.ecommerce.model.Categoria;
+import br.com.milvusartis.ecommerce.model.Produto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProdutoDTO {
 
-    private Long id;
+    private Long codigo;
     private String nome;
     private String descricao;
     private String imagem;
     private Double valor;
     private Boolean disponibilidade;
-    private Categoria categoria;
+    private CategoriaDTO categoriaDTO;
+
+
+    public static ProdutoDTO transformaEmDTO(Produto p){
+
+        return new ProdutoDTO(p.getIdProduto(), p.getNome(), p.getDescricao(), p.getImagem(), p.getValorUnitario(), p.getDisponibilidade(), CategoriaDTO.transformaEmDTO(p.getCategoria()));
+    }
+
+    public Produto trasnsformaParaProduto(){
+        return new Produto(codigo, nome, descricao, imagem, valor, disponibilidade, categoriaDTO.transformaParaCategoria());
+    }
+
+
 }

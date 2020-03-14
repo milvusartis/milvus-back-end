@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,19 +19,29 @@ public class ProdutoController {
 
 
     @PostMapping("/produto")
-    public ResponseEntity<Produto> salvar(@RequestBody ProdutoDTO produtoDTO) {
-        return service.salvar(produtoDTO);
+    public ResponseEntity<ProdutoDTO> salvar(@RequestBody ProdutoDTO produtoDTO) {
+        Produto produto = service.salvar(produtoDTO.trasnsformaParaProduto());
+        return ResponseEntity.ok().body(ProdutoDTO.transformaEmDTO(produto));
     }
 
 
     @GetMapping("/produto")
     public ResponseEntity<List<ProdutoDTO>> listar() {
-        return service.listar();
+        List<Produto> produtos = service.listar();
+        List<ProdutoDTO> listaDTO = new ArrayList<>();
+
+        for (Produto p :  produtos){
+            ProdutoDTO dto = ProdutoDTO.transformaEmDTO(p);
+            listaDTO.add(dto);
+        }
+        return ResponseEntity.ok().body(listaDTO);
     }
 
     @GetMapping("/produto/{id}")
-    public ResponseEntity<Produto> buscarProdutoPorID(@PathVariable("id") Long id) {
-        return service.buscarProdutoPorID(id);
+    public ResponseEntity<ProdutoDTO> buscarProdutoPorID(@PathVariable("id") Long id) {
+        Produto produto = service.buscarProdutoPorID(id);
+        ProdutoDTO dto =  ProdutoDTO.transformaEmDTO(produto);
+        return ResponseEntity.ok().body(dto);
     }
 
     @DeleteMapping("/produto/{id}")
@@ -40,8 +51,10 @@ public class ProdutoController {
 
 
     @PutMapping("/produto")
-    public ResponseEntity<Produto> atulizarProduto(@RequestBody ProdutoDTO produtoDTO) {
-        return service.atualizar(produtoDTO);
+    public ResponseEntity<ProdutoDTO> atulizarProduto(@RequestBody ProdutoDTO produtoDTO) {
+        Produto produto = service.atualizar(produtoDTO.trasnsformaParaProduto());
+        ProdutoDTO dto = ProdutoDTO.transformaEmDTO(produto);
+        return ResponseEntity.ok().body(dto);
     }
 
 }

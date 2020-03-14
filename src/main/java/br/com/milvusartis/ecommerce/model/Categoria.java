@@ -23,11 +23,4 @@ public class Categoria implements Serializable {
     @Column(name = "nm_categoria")
     private String descricao;
 
-
-    public CategoriaDTO getCategoriaDTO(Categoria categoria){
-        CategoriaDTO categoriaDTO = new CategoriaDTO();
-        categoriaDTO.setCodigo(categoria.getId());
-        categoriaDTO.setDescricao(categoria.getDescricao());
-        return categoriaDTO;
-    }
 }
