@@ -31,6 +31,16 @@ public class NotaFiscalController {
         return notaFiscalRepository.findAll();
     }
 
+<<<<<<< HEAD
+    @GetMapping("/nf/{idNf}")
+    public NotaFiscal findById(@PathVariable("idNf")Long idNf){
+        return notaFiscalRepository.findById(idNf).get();
+    }
+
+    @DeleteMapping("/nf/{idnf}")
+    public void deleteById(@PathVariable("idNf") Long idNf) {
+        notaFiscalService.deleteById(idNf);
+=======
     @GetMapping("/nf/{idnf}")
     public NotaFiscal findById(@PathVariable("idnf")Long idnf){
         return notaFiscalRepository.findById(idnf).get();
@@ -39,6 +49,7 @@ public class NotaFiscalController {
     @DeleteMapping("/nf/{idnf}")
     public void deleteById(@PathVariable("idnf") Long idnf) {
         notaFiscalService.deleteById(idnf);
+>>>>>>> dev
     }
 
     @PutMapping("/nf")
