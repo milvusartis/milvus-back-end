@@ -31,13 +31,13 @@ public class EnderecoController {
         return enderecoRepository.findAll();
     }
 
-    @GetMapping("/endereco/{idEndereco}")
-    public Endereco findById(@PathVariable("idEndereco")Long idEndereco){
-        return enderecoRepository.findById(idEndereco).get(); }
+    @GetMapping("/endereco/{idendereco}")
+    public Endereco findById(@PathVariable("idendereco")Long idendereco){
+        return enderecoRepository.findById(idendereco).get(); }
 
-    @DeleteMapping("/endereco/{idEndereco}")
-    public void deleteById(@PathVariable("idEndereco") Long idEndereco) {
-        enderecoService.deleteById(idEndereco);
+    @DeleteMapping("/endereco/{idendereco}")
+    public void deleteById(@PathVariable("idendereco") Long idendereco) {
+        enderecoService.deleteById(idendereco);
     }
 
     @PutMapping("/endereco")

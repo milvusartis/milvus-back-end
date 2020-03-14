@@ -15,10 +15,8 @@ import java.util.Date;
 public class NotaFiscalDTO {
     private Long idNf;
     private Date data;
-    //private Long idCliente;
     private Cliente cliente;
     private Empresa empresa;
-    //private Long idPedido;
     private Pedido pedido;
     private String naturezaOperacao;
     private Integer nfe;

@@ -18,10 +18,8 @@ public class NotaFiscalService {
 
         notaFiscalEntity.setData(notaFiscalDTO.getData());
         notaFiscalEntity.setCliente(notaFiscalDTO.getCliente());
-        //notaFiscalEntity.setIdCliente(notaFiscalDTO.getIdCliente());
         notaFiscalEntity.setEmpresa(notaFiscalDTO.getEmpresa());
         notaFiscalEntity.setPedido(notaFiscalDTO.getPedido());
-        //notaFiscalEntity.setIdPedido(notaFiscalDTO.getIdPedido());
         notaFiscalEntity.setNaturezaOperacao(notaFiscalDTO.getNaturezaOperacao());
         notaFiscalEntity.setNfe(notaFiscalDTO.getNfe());
 
@@ -39,10 +37,8 @@ public class NotaFiscalService {
 
         notaFiscalEntity.setData(notaFiscal.getData());
         notaFiscalEntity.setCliente(notaFiscal.getCliente());
-        //notaFiscalEntity.setIdCliente(notaFiscal.getIdCliente());
         notaFiscalEntity.setEmpresa(notaFiscal.getEmpresa());
         notaFiscalEntity.setPedido(notaFiscal.getPedido());
-        //notaFiscalEntity.setIdPedido(notaFiscal.getIdPedido());
         notaFiscalEntity.setNaturezaOperacao(notaFiscal.getNaturezaOperacao());
         notaFiscalEntity.setNfe(notaFiscal.getNfe());
 
