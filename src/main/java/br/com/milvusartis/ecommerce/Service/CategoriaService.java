@@ -16,23 +16,17 @@ public class CategoriaService {
     @Autowired
     CategoriaRepository repository;
 
-    public ResponseEntity salvar(CategoriaDTO categoriaDTO) {
-
-        Categoria categoriaEntity = new Categoria();
-        categoriaEntity.setDescricao(categoriaDTO.getDescricao());
-
-        return ResponseEntity.ok().body(repository.save(categoriaEntity));
+    public Categoria salvar(Categoria categoria) {
+        return repository.save(categoria);
     }
 
-    public ResponseEntity buscaPorId(Long idCategoria) {
-        return ResponseEntity.ok().body(repository.findById(idCategoria).get());
+    public Categoria buscaPorId(Long idCategoria) {
+        return repository.findById(idCategoria).get();
     }
 
-    public ResponseEntity<List<Categoria>> buscarCategoria(Long id, String descricao) {
+    public List<Categoria> buscarCategoria(Long id, String descricao) {
 
         List<Categoria> lista = new ArrayList<>();
-        System.out.println(id);
-        System.out.println(descricao);
 
         if (id == null && descricao == null)
             lista = repository.findAll();
@@ -41,12 +35,7 @@ public class CategoriaService {
         else if (descricao != null)
             lista = repository.findByDescricao(descricao);
 
-        //Se passa um id que existe mas uma descricao que nao existe,ele sempre está considerando o primeiro parametro
-        if (lista != null && lista.size() > 0) {
-            return ResponseEntity.ok().body(lista);
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
+        return lista;
     }
 
 
@@ -54,14 +43,14 @@ public class CategoriaService {
         repository.deleteById(id);
     }
 
-    public ResponseEntity alterar(CategoriaDTO categoriaDTO) {
-        Categoria categoriaEntity = repository.getOne(categoriaDTO.getCodigo());
-        categoriaEntity.setDescricao(categoriaDTO.getDescricao());
-        return ResponseEntity.ok().body(repository.save(categoriaEntity));
+    public Categoria alterar(Categoria categoria) {
+        Categoria categoriaEntity = repository.getOne(categoria.getId());
+        categoriaEntity.setDescricao(categoria.getDescricao());
+        return repository.save(categoriaEntity);
     }
 
-    public ResponseEntity alterarCamposEspecificos(CategoriaDTO categoriaDTO) {
-        return alterar(categoriaDTO);
+    public Categoria alterarCamposEspecificos(Categoria categoria) {
+        return this.alterar(categoria);
     }
 
 

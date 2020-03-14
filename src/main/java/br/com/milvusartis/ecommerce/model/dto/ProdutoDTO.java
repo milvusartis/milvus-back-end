@@ -16,7 +16,7 @@ public class ProdutoDTO {
     private String imagem;
     private Double valor;
     private Boolean disponibilidade;
-    private CategoriaDTO categoriaDTO;
+    private CategoriaDTO categoria;
 
 
     public static ProdutoDTO transformaEmDTO(Produto p){
@@ -25,7 +25,7 @@ public class ProdutoDTO {
     }
 
     public Produto trasnsformaParaProduto(){
-        return new Produto(codigo, nome, descricao, imagem, valor, disponibilidade, categoriaDTO.transformaParaCategoria());
+        return new Produto(codigo, nome, descricao, imagem, valor, disponibilidade, categoria.transformaParaCategoria());
     }
 
 

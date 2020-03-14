@@ -8,24 +8,39 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.util.ArrayList;
 import java.util.List;
 
 
 @RestController
 public class CategoriaController {
+
     @Autowired
     private CategoriaService service;
 
     @PostMapping("/categoria")
-    public ResponseEntity<Categoria> salvar(@RequestBody CategoriaDTO categoriaDTO) {
-        return service.salvar(categoriaDTO);
+    public ResponseEntity<CategoriaDTO> salvar(@RequestBody CategoriaDTO categoriaDTO) {
+        Categoria categoria = service.salvar(categoriaDTO.transformaParaCategoria());
+        CategoriaDTO dto = CategoriaDTO.transformaEmDTO(categoria);
+        return ResponseEntity.ok().body(dto);
     }
 
-      //Parametro opicional, se não passar nada ele listrá todas as categorias
+    //Parametro opicional, se não passar nada ele listrá todas as categorias
     @GetMapping("/categoria")
-    public ResponseEntity<List<Categoria>> buscarCategoria(@PathParam("id") Long id,
-                                                           @PathParam("descricao") String descricao) {
-        return service.buscarCategoria(id, descricao);
+    public ResponseEntity<List<CategoriaDTO>> buscarCategoria(@PathParam("id") Long id,
+                                                              @PathParam("descricao") String descricao) {
+        List<Categoria> listaDeCategorias = service.buscarCategoria(id, descricao);
+        //Se passa um id que existe mas uma descricao que nao existe,ele sempre está considerando o primeiro parametro
+        if (listaDeCategorias != null && listaDeCategorias.size() > 0) {
+            List<CategoriaDTO> listaDTO = new ArrayList<>();
+            for (Categoria c : listaDeCategorias) {
+                listaDTO.add(CategoriaDTO.transformaEmDTO(c));
+            }
+            return ResponseEntity.ok().body(listaDTO);
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+
     }
 
     @DeleteMapping("/categoria/{id}")
@@ -39,15 +54,16 @@ public class CategoriaController {
 
 
     @PutMapping("/categoria")
-    public ResponseEntity<Categoria> alterar(@RequestBody CategoriaDTO categoriaDTO) {
-        return service.alterar(categoriaDTO);
+    public ResponseEntity<CategoriaDTO> alterar(@RequestBody CategoriaDTO categoriaDTO) {
+        Categoria categoria = service.alterar(categoriaDTO.transformaParaCategoria());
+        return ResponseEntity.ok().body(CategoriaDTO.transformaEmDTO(categoria));
+
     }
 
 //    @PatchMapping("/categoria")
 //    public ResponseEntity alterarCamposEspecificos(@RequestBody CategoriaDTO categoriaDTO) {
 //       return service.alterarCamposEspecificos(categoriaDTO);
 //    }
-
 
 
 }
