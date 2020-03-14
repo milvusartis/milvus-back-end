@@ -21,27 +21,27 @@ public class NotaFiscalController {
     @Autowired
     private NotaFiscalRepository notaFiscalRepository;
 
-    @PostMapping("/notaFiscal")
+    @PostMapping("/nf")
     public ResponseEntity save(@RequestBody NotaFiscalDTO notaFiscalDTO){
         return ResponseEntity.ok().body(notaFiscalService.save(notaFiscalDTO));
     }
 
-    @GetMapping("/notaFiscal/")
+    @GetMapping("/nf/")
     public List<NotaFiscal> find(){
         return notaFiscalRepository.findAll();
     }
 
-    @GetMapping("/notaFiscal/{idNf}")
+    @GetMapping("/nf/{idNf}")
     public NotaFiscal findById(@PathVariable("idNf")Long idNf){
         return notaFiscalRepository.findById(idNf).get();
     }
 
-    @DeleteMapping("/notaFiscal/{idnf}")
+    @DeleteMapping("/nf/{idnf}")
     public void deleteById(@PathVariable("idNf") Long idNf) {
         notaFiscalService.deleteById(idNf);
     }
 
-    @PutMapping("/categoria")
+    @PutMapping("/nf")
     public ResponseEntity alterar(@RequestBody NotaFiscal notaFiscal) {
         return ResponseEntity.ok().body(notaFiscalService.alterar(notaFiscal));
     }

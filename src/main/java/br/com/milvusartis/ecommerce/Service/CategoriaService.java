@@ -1,6 +1,7 @@
 package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.Categoria;
+import br.com.milvusartis.ecommerce.model.DTO.CategoriaDTO;
 import br.com.milvusartis.ecommerce.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +16,12 @@ public class CategoriaService {
     @Autowired
     CategoriaRepository repository;
 
-    public ResponseEntity salvar(Categoria categoria) {
-        return ResponseEntity.ok().body(repository.save(categoria));
+    public ResponseEntity salvar(CategoriaDTO categoriaDTO) {
+
+        Categoria categoriaEntity = new Categoria();
+        categoriaEntity.setDescricao(categoriaDTO.getDescricao());
+
+        return ResponseEntity.ok().body(repository.save(categoriaEntity));
     }
 
     public ResponseEntity buscaPorId(Long idCategoria) {
@@ -49,16 +54,18 @@ public class CategoriaService {
         repository.deleteById(id);
     }
 
-    public ResponseEntity alterar(Categoria categoria) {
-        Categoria categoriaEntity = repository.getOne(categoria.getId());
-        categoriaEntity.setDescricao(categoria.getDescricao());
-        return ResponseEntity.ok().body(repository.save(categoria));
-    }
-
-
-    public ResponseEntity alteraCamposEspecificos(Categoria categoria) {
-        Categoria categoriaEntity = repository.getOne(categoria.getId());
-        categoriaEntity.setDescricao(categoria.getDescricao());
+    public ResponseEntity alterar(CategoriaDTO categoriaDTO) {
+        Categoria categoriaEntity = repository.getOne(categoriaDTO.getCodigo());
+        categoriaEntity.setDescricao(categoriaDTO.getDescricao());
         return ResponseEntity.ok().body(repository.save(categoriaEntity));
     }
+
+    public ResponseEntity alterarCamposEspecificos(CategoriaDTO categoriaDTO) {
+        return alterar(categoriaDTO);
+    }
+
+
+
+
+
 }
