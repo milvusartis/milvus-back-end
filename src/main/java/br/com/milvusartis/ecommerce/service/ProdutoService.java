@@ -34,7 +34,7 @@ public class ProdutoService {
         Produto produtoEntity = produtoRepository.getOne(produto.getIdProduto());
         produtoEntity.setDescricao(produto.getDescricao());
         produtoEntity.setValorUnitario(produto.getValorUnitario());
-        produto.setCategoria(produto.getCategoria());
+        produtoEntity.setCategoria(produto.getCategoria());
         return produtoRepository.save(produtoEntity);
     }
 
