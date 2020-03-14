@@ -33,7 +33,11 @@ public class Produto implements Serializable {
     private Double valorUnitario;
     @Column(name = "cd_disponibilidade_produto")
     private Boolean disponibilidade;
-    //    private Category category
+    @ManyToOne
+    @JoinColumn(name = "id_categoria")
+    private Categoria categoria;
+
+
 
 
 }
