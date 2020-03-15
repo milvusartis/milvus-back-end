@@ -1,6 +1,6 @@
 package br.com.milvusartis.ecommerce.controller;
 
-import br.com.milvusartis.ecommerce.Service.EnderecoService;
+import br.com.milvusartis.ecommerce.service.EnderecoService;
 import br.com.milvusartis.ecommerce.model.dto.EnderecoDTO;
 import br.com.milvusartis.ecommerce.model.Endereco;
 import br.com.milvusartis.ecommerce.repository.EnderecoRepository;

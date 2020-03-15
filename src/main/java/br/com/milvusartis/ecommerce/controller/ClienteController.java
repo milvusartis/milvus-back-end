@@ -1,6 +1,6 @@
 package br.com.milvusartis.ecommerce.controller;
 
-import br.com.milvusartis.ecommerce.Service.ClienteService;
+import br.com.milvusartis.ecommerce.service.ClienteService;
 import br.com.milvusartis.ecommerce.model.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
