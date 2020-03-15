@@ -1,47 +1,43 @@
 package br.com.milvusartis.ecommerce.controller;
 
+import br.com.milvusartis.ecommerce.Service.PedidoService;
+import br.com.milvusartis.ecommerce.model.Cliente;
 import br.com.milvusartis.ecommerce.model.Pedido;
-import br.com.milvusartis.ecommerce.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.websocket.server.PathParam;
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 public class PedidoController {
 
     @Autowired
-    private PedidoRepository pedidoRepository;
+    PedidoService pedidoService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/pedido")
-    public Pedido save (@RequestBody Pedido pedido) {
-        return pedidoRepository.save(pedido);
+    public ResponseEntity  save(@RequestBody Pedido pd) {
+        return ResponseEntity.ok().body(pedidoService.cadastrarPedido(pd));
     }
 
     @GetMapping("/pedido")
-    public ResponseEntity<List<Pedido>> findById(@PathParam("nr_pedido") Long nr,
-                                                 @PathParam("ds_status_pedido") String ds) {
-
-        List<Pedido> pedido = new ArrayList<>();
-
-
-        if (nr != null && ds != null)
-            pedido = pedidoRepository.findByNrPedidoAndDsStatusPedido(nr, ds);
-        else if (ds != null)
-            pedido = pedidoRepository.findByDsStatusPedido(ds);
-        else if (nr != null)
-            pedido = pedidoRepository.findByNrPedido(nr);
-
-        if (pedido != null && pedido.size() > 0)
-            return ResponseEntity.ok().body(pedido);
-        else
-            return ResponseEntity.badRequest().build();
-
+    public ResponseEntity buscarLista(Long id, String st, Cliente cl) {
+        return ResponseEntity.ok().body(pedidoService.buscarPedido(id, st, cl));
     }
+
+    @GetMapping("/pedidos")
+    public ResponseEntity buscarTodos() {
+        return ResponseEntity.ok().body(pedidoService.buscarTodosOsPedidos());
+    }
+
+    @PutMapping("/pedido")
+    public ResponseEntity alterar(@RequestBody Pedido pd) {
+        return ResponseEntity.ok().body(pedidoService.alterarPedido(pd));
+    }
+
+    @DeleteMapping("/pedido")
+    public void deletar(Long id) {
+        pedidoService.deletarPedido(id);
+    }
+
 }

@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -28,8 +27,38 @@ public class PedidoItem implements Serializable {
     @JoinColumn(name="id_produto")
     private Produto idProduto;
 
-    @NotNull
     @Column(name="vl_produto")
     private BigDecimal vlProduto;
 
+    public Long getNrItemPedido() {
+        return nrItemPedido;
+    }
+
+    public void setNrItemPedido(Long nrItemPedido) {
+        this.nrItemPedido = nrItemPedido;
+    }
+
+    public Long getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Long idPedido) {
+        this.idPedido = idPedido;
+    }
+
+    public Produto getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(Produto idProduto) {
+        this.idProduto = idProduto;
+    }
+
+    public BigDecimal getVlProduto() {
+        return vlProduto;
+    }
+
+    public void setVlProduto(BigDecimal vlProduto) {
+        this.vlProduto = vlProduto;
+    }
 }
