@@ -1,6 +1,7 @@
 package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.DTO.ProdutoDTO;
+import br.com.milvusartis.ecommerce.model.Estoque;
 import br.com.milvusartis.ecommerce.model.Produto;
 import br.com.milvusartis.ecommerce.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class ProdutoService {
         produtoEntity.setDescricao(produto.getDescricao());
         produtoEntity.setValorUnitario(produto.getValorUnitario());
         produtoEntity.setCategoria(produto.getCategoria());
+        produtoEntity.setEstoque(produto.getEstoque());
         return produtoRepository.save(produtoEntity);
     }
 
