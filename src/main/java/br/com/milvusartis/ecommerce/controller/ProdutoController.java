@@ -18,6 +18,7 @@ public class ProdutoController {
     private ProdutoService service;
 
 
+
     @PostMapping("/produto")
     public ResponseEntity<ProdutoDTO> salvar(@RequestBody ProdutoDTO produtoDTO) {
         Produto produto = service.salvar(produtoDTO.trasnsformaParaProduto());
@@ -56,5 +57,33 @@ public class ProdutoController {
         ProdutoDTO dto = ProdutoDTO.transformaEmDTO(produto);
         return ResponseEntity.ok().body(dto);
     }
+
+//    @PostMapping("/produto")
+//    public ResponseEntity<Produto> salvar(@RequestBody Produto produto) {
+//        Produto produtoEntity = service.salvar(produto);
+//
+//
+//        return ResponseEntity.ok().body(produtoEntity);
+//    }
+//
+//    @GetMapping("/produto")
+//    public ResponseEntity<List<Produto>> listar() {
+//        return ResponseEntity.ok().body(service.listar());
+//    }
+//
+//    @GetMapping("/produto/{id}")
+//    public ResponseEntity<Produto> buscarProdutoPorID(@PathVariable("id") Long id) {
+//        return ResponseEntity.ok().body(service.buscarProdutoPorID(id));
+//    }
+//
+//    @DeleteMapping("/produto/{id}")
+//    public void excluirProduto(@PathVariable("id") Long id) {
+//        service.excluirProdutoPorId(id);
+//    }
+//
+//    @PutMapping("/produto")
+//    public ResponseEntity<Produto> atulizarProduto(@RequestBody Produto produto) {
+//        return ResponseEntity.ok().body(service.atualizar(produto));
+//    }
 
 }

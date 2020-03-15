@@ -27,7 +27,7 @@ public class CategoriaController {
 
     //Parametro opicional, se não passar nada ele listrá todas as categorias
     @GetMapping("/categoria")
-    public ResponseEntity<List<CategoriaDTO>> buscarCategoria(@PathParam("id") Long id,
+    public ResponseEntity<List<CategoriaDTO>> buscarCategoria(@PathParam("codigo") Long id,
                                                               @PathParam("descricao") String descricao) {
         List<Categoria> listaDeCategorias = service.buscarCategoria(id, descricao);
         //Se passa um id que existe mas uma descricao que nao existe,ele sempre está considerando o primeiro parametro
@@ -65,5 +65,39 @@ public class CategoriaController {
 //       return service.alterarCamposEspecificos(categoriaDTO);
 //    }
 
-
+//    @PostMapping("/categoria")
+//    public ResponseEntity<Categoria> salvar(@RequestBody Categoria categoria) {
+//        return ResponseEntity.ok().body(service.salvar(categoria));
+//    }
+//
+//    //Parametro opicional, se não passar nada ele listrá todas as categorias
+//    @GetMapping("/categoria")
+//    public ResponseEntity<List<Categoria>> buscarCategoria(@PathParam("codigo") Long id,
+//                                                              @PathParam("descricao") String descricao) {
+//        List<Categoria> listaDeCategorias = service.buscarCategoria(id, descricao);
+//        //Se passa um id que existe mas uma descricao que nao existe,ele sempre está considerando o primeiro parametro
+//        if (listaDeCategorias != null && listaDeCategorias.size() > 0) {
+//
+//            return ResponseEntity.ok().body(listaDeCategorias);
+//        } else {
+//            return ResponseEntity.badRequest().build();
+//        }
+//
+//    }
+//
+//    @DeleteMapping("/categoria/{id}")
+//    public void excluirPorId(@PathVariable("id") Long id) {
+//        service.excluirPorId(id);
+//    }
+//
+////
+//
+//    //Put alterar todos os campos, Patch alterar alguns apenas
+//
+//
+//    @PutMapping("/categoria")
+//    public ResponseEntity<Categoria> alterar(@RequestBody Categoria categoria) {
+//        return ResponseEntity.ok().body(service.alterar(categoria));
+//
+//    }
 }
