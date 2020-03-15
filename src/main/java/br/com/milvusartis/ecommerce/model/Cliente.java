@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -21,44 +19,78 @@ public class Cliente implements Serializable {
     @Column(name="id_cliente")
     private Long idCliente;
 
-    @NotNull
     @Column(name="nm_cliente")
     private String nmCliente;
 
-    @NotNull
     @Column(name="ds_cpf")
     private String dsCpf;
 
-    @NotNull
     @Column(name="ds_telefone")
     private String dsTelefone;
 
-    @NotNull
     @Column(name="ds_email")
     private String dsEmail;
 
-    @NotNull
     @Column(name="ds_senha")
     private String dsSenha;
 
-    @NotNull
-    @Column(name="id_endereco")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_endereco")
     private Endereco endereco;
 
+    public Long getIdCliente() {
+        return idCliente;
+    }
 
-    @OneToMany
-    @JoinColumn(name="cliente")
-    private List<Pedido> pedidoCliente;
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
+    }
 
-//    @OneToMany
-//    @JoinColumn(name="cliente")
-//    private List<NotaFiscal> notaFiscalCliente;
+    public String getNmCliente() {
+        return nmCliente;
+    }
 
+    public void setNmCliente(String nmCliente) {
+        this.nmCliente = nmCliente;
+    }
 
+    public String getDsCpf() {
+        return dsCpf;
+    }
 
-    //na tabela endereço:
-    //@OneToOne
-    //@JoinColumn(name = "id_endereco")
-    //private List<Cliente> clienteEndereco;
+    public void setDsCpf(String dsCpf) {
+        this.dsCpf = dsCpf;
+    }
 
+    public String getDsTelefone() {
+        return dsTelefone;
+    }
+
+    public void setDsTelefone(String dsTelefone) {
+        this.dsTelefone = dsTelefone;
+    }
+
+    public String getDsEmail() {
+        return dsEmail;
+    }
+
+    public void setDsEmail(String dsEmail) {
+        this.dsEmail = dsEmail;
+    }
+
+    public String getDsSenha() {
+        return dsSenha;
+    }
+
+    public void setDsSenha(String dsSenha) {
+        this.dsSenha = dsSenha;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 }
