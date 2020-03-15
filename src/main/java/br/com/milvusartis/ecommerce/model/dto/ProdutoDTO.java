@@ -17,7 +17,6 @@ public class ProdutoDTO {
     private Double valor;
     private Boolean disponibilidade;
     private CategoriaDTO categoria;
-    private EstoqueDTO estoque;
 
 
 //    public static ProdutoDTO transformaEmDTO(Produto p){

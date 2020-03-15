@@ -1,14 +1,11 @@
 package br.com.milvusartis.ecommerce.service;
 
-import br.com.milvusartis.ecommerce.model.DTO.ProdutoDTO;
-import br.com.milvusartis.ecommerce.model.Estoque;
 import br.com.milvusartis.ecommerce.model.Produto;
 import br.com.milvusartis.ecommerce.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service("ProdutoService")
@@ -17,13 +14,17 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
+    @Autowired
+    private CategoriaService categoriaService;
 
     public Produto salvar(Produto produto) {
-        return produtoRepository.save(produto);
+        Produto produtoEntity = produto;
+        produtoEntity.setCategoria(categoriaService.buscaPorId(produto.getCategoria().getId()));
+        return produtoRepository.save(produtoEntity);
     }
 
     public List<Produto> listar() {
-         return produtoRepository.findAll();
+        return produtoRepository.findAll();
     }
 
 
@@ -36,7 +37,7 @@ public class ProdutoService {
         produtoEntity.setDescricao(produto.getDescricao());
         produtoEntity.setValorUnitario(produto.getValorUnitario());
         produtoEntity.setCategoria(produto.getCategoria());
-        produtoEntity.setEstoque(produto.getEstoque());
+//        produtoEntity.setEstoque(produto.getEstoque());
         return produtoRepository.save(produtoEntity);
     }
 

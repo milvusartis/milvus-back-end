@@ -36,7 +36,11 @@ public class Produto implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
-    @OneToOne(mappedBy = "produto", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
-    private Estoque estoque;
+//    @OneToOne(mappedBy = "produto", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
+//    private Estoque estoque;
 
+    @Column(name = "nr_quantidade_estocado")
+    private Integer quantidadeEstoque;
+    @Column(name = "nr_qauntidade_reservado")
+    private Integer quantidadeReservada;
 }

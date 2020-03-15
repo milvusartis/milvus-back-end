@@ -1,9 +1,7 @@
 package br.com.milvusartis.ecommerce.controller;
 
 import br.com.milvusartis.ecommerce.model.DTO.ProdutoDTO;
-import br.com.milvusartis.ecommerce.model.Estoque;
 import br.com.milvusartis.ecommerce.model.Produto;
-import br.com.milvusartis.ecommerce.service.EstoqueService;
 import br.com.milvusartis.ecommerce.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +17,6 @@ public class ProdutoController {
     @Autowired
     private ProdutoService service;
 
-    @Autowired
-    private EstoqueService estoqueService;
 
 
 //    @PostMapping("/produto")
