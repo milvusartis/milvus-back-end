@@ -1,6 +1,6 @@
 package br.com.milvusartis.ecommerce.controller;
 
-import br.com.milvusartis.ecommerce.Service.NotaFiscalService;
+import br.com.milvusartis.ecommerce.service.NotaFiscalService;
 import br.com.milvusartis.ecommerce.model.dto.NotaFiscalDTO;
 import br.com.milvusartis.ecommerce.model.NotaFiscal;
 import br.com.milvusartis.ecommerce.repository.NotaFiscalRepository;

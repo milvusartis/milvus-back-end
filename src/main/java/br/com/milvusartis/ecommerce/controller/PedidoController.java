@@ -1,6 +1,6 @@
 package br.com.milvusartis.ecommerce.controller;
 
-import br.com.milvusartis.ecommerce.Service.PedidoService;
+import br.com.milvusartis.ecommerce.service.PedidoService;
 import br.com.milvusartis.ecommerce.model.Cliente;
 import br.com.milvusartis.ecommerce.model.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;

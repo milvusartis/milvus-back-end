@@ -1,6 +1,6 @@
 package br.com.milvusartis.ecommerce.controller;
 
-import br.com.milvusartis.ecommerce.Service.EmpresaService;
+import br.com.milvusartis.ecommerce.service.EmpresaService;
 import br.com.milvusartis.ecommerce.model.dto.EmpresaDTO;
 import br.com.milvusartis.ecommerce.model.Empresa;
 import br.com.milvusartis.ecommerce.repository.EmpresaRepository;
