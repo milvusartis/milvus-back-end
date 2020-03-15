@@ -1,4 +1,4 @@
-package br.com.milvusartis.ecommerce.Service;
+package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.dto.EnderecoDTO;
 import br.com.milvusartis.ecommerce.model.Endereco;

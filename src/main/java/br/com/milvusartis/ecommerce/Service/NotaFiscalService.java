@@ -1,4 +1,4 @@
-package br.com.milvusartis.ecommerce.Service;
+package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.dto.NotaFiscalDTO;
 import br.com.milvusartis.ecommerce.model.NotaFiscal;
