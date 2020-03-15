@@ -1,4 +1,4 @@
-package br.com.milvusartis.ecommerce.model.DTO;
+package br.com.milvusartis.ecommerce.model.dto;
 
 import br.com.milvusartis.ecommerce.model.Endereco;
 import lombok.AllArgsConstructor;

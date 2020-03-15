@@ -1,6 +1,6 @@
 package br.com.milvusartis.ecommerce.controller;
 
-import br.com.milvusartis.ecommerce.model.DTO.ProdutoDTO;
+import br.com.milvusartis.ecommerce.model.dto.ProdutoDTO;
 import br.com.milvusartis.ecommerce.model.Produto;
 import br.com.milvusartis.ecommerce.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,5 @@
 package br.com.milvusartis.ecommerce.model;
 
-import br.com.milvusartis.ecommerce.model.DTO.CategoriaDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

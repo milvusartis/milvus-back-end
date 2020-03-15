@@ -1,7 +1,7 @@
 package br.com.milvusartis.ecommerce.controller;
 
 import br.com.milvusartis.ecommerce.model.Categoria;
-import br.com.milvusartis.ecommerce.model.DTO.CategoriaDTO;
+import br.com.milvusartis.ecommerce.model.dto.CategoriaDTO;
 import br.com.milvusartis.ecommerce.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
