@@ -38,7 +38,7 @@ public class EstoqueService {
         return repository.save(estoqueEntity);
     }
 
-    public void excluirProdutoPorId(Long id) {
+    public void excluirEstoquePorId(Long id) {
         repository.deleteById(id);
     }
 }

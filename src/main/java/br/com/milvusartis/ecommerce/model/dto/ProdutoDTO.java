@@ -23,7 +23,7 @@ public class ProdutoDTO {
 
         return new ProdutoDTO(p.getIdProduto(), p.getNome(), p.getDescricao(), p.getImagem(), p.getValorUnitario(), p.getDisponibilidade(), CategoriaDTO.transformaEmDTO(p.getCategoria()));
     }
-
+//TODO Dando erro ao consultar estoque
     public Produto trasnsformaParaProduto(){
         return new Produto(codigo, nome, descricao, imagem, valor, disponibilidade, categoria.transformaParaCategoria());
     }
