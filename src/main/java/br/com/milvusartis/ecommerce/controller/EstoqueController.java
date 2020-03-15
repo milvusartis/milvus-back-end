@@ -23,6 +23,13 @@ public class EstoqueController {
 
     @PostMapping("/estoque")
     public ResponseEntity<EstoqueDTO> salvar(@RequestBody EstoqueDTO estoqueDTO) {
+
+        System.out.println("ID:::"+estoqueDTO.getId());
+        System.out.println("PR:::"+estoqueDTO.getProduto());
+        System.out.println("QT:::"+estoqueDTO.getQtdestoque());
+        Estoque e = estoqueDTO.trasnsformaParaEstoque();
+        System.out.printf("SOU O ESTOQUE"+e);
+
         Estoque estoque = service.salvar(estoqueDTO.trasnsformaParaEstoque());
         return ResponseEntity.ok().body(EstoqueDTO.transformaEmDTO(estoque));
     }

@@ -16,7 +16,7 @@ public class EstoqueDTO {
     private Integer qtdreservada;
 
     public static EstoqueDTO transformaEmDTO(Estoque e){
-        return new EstoqueDTO(e.getIdEstoque(), ProdutoDTO.transformaEmDTO(e.getProduto()), e.getQuantidadeEstoque(), e.getQuantidadeReservada());
+        return new EstoqueDTO(e.getId(), ProdutoDTO.transformaEmDTO(e.getProduto()), e.getQuantidadeEstoque(), e.getQuantidadeReservada());
     }
 
     public Estoque trasnsformaParaEstoque(){

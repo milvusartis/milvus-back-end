@@ -15,9 +15,9 @@ import java.io.Serializable;
 public class Estoque implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEstoque;
-    @OneToOne(cascade = CascadeType.ALL)
+    private Long id;
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_produto")
     private Produto produto;
     @Column(name = "nr_quantidade_estocado")

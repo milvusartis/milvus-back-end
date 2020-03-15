@@ -27,7 +27,7 @@ public class CategoriaController {
 
     //Parametro opicional, se não passar nada ele listrá todas as categorias
     @GetMapping("/categoria")
-    public ResponseEntity<List<CategoriaDTO>> buscarCategoria(@PathParam("id") Long id,
+    public ResponseEntity<List<CategoriaDTO>> buscarCategoria(@PathParam("codigo") Long id,
                                                               @PathParam("descricao") String descricao) {
         List<Categoria> listaDeCategorias = service.buscarCategoria(id, descricao);
         //Se passa um id que existe mas uma descricao que nao existe,ele sempre está considerando o primeiro parametro

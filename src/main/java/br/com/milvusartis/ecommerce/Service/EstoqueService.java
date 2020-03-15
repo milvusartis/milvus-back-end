@@ -31,7 +31,7 @@ public class EstoqueService {
     }
 
     public Estoque atualizar(Estoque estoque) {
-        Estoque estoqueEntity = repository.getOne(estoque.getIdEstoque());
+        Estoque estoqueEntity = repository.getOne(estoque.getId());
         estoqueEntity.setProduto(estoque.getProduto());
         estoqueEntity.setQuantidadeEstoque(estoque.getQuantidadeEstoque());
         estoqueEntity.setQuantidadeReservada(estoque.getQuantidadeReservada());
