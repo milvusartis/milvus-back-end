@@ -76,7 +76,7 @@ public class ClienteService {
             return ResponseEntity.badRequest().build();
     }
 
-    public void deletarCliente(@PathVariable("id_cliente") Long idCliente) {
-        clienteRepository.deleteById(idCliente);
+    public void deletarCliente(@PathVariable("id_cliente") Long id) {
+        clienteRepository.deleteById(id);
     }
 }
