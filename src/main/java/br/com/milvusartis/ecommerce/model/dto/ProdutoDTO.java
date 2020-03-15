@@ -17,16 +17,17 @@ public class ProdutoDTO {
     private Double valor;
     private Boolean disponibilidade;
     private CategoriaDTO categoria;
+    private Integer qtd_estoque;
+    private Integer qtd_reservada;
 
+    public static ProdutoDTO transformaEmDTO(Produto p){
 
-//    public static ProdutoDTO transformaEmDTO(Produto p){
-//
-//        return new ProdutoDTO(p.getIdProduto(), p.getNome(), p.getDescricao(), p.getImagem(), p.getValorUnitario(), p.getDisponibilidade(), CategoriaDTO.transformaEmDTO(p.getCategoria()), EstoqueDTO.transformaEmDTO(p.getEstoque()));
-//    }
-////TODO Dando erro ao consultar estoque
-//    public Produto trasnsformaParaProduto(){
-//        return new Produto(codigo, nome, descricao, imagem, valor, disponibilidade, categoria.transformaParaCategoria(),estoque.trasnsformaParaEstoque());
-//    }
+        return new ProdutoDTO(p.getIdProduto(), p.getNome(), p.getDescricao(), p.getImagem(), p.getValorUnitario(), p.getDisponibilidade(), CategoriaDTO.transformaEmDTO(p.getCategoria()), p.getQuantidadeEstoque(), p.getQuantidadeReservada());
+    }
+//TODO Dando erro ao consultar estoque
+    public Produto trasnsformaParaProduto(){
+        return new Produto(codigo, nome, descricao, imagem, valor, disponibilidade, categoria.transformaParaCategoria(), qtd_estoque, qtd_reservada);
+    }
 
 
 }
