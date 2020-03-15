@@ -24,4 +24,17 @@ public class EmpresaService {
         empresaDTO.setIdEmpresa(retornoEmpresa.getIdEmpresa());
         return ResponseEntity.ok().body(empresaDTO);
     }
+    public void deleteById(Long id){
+        empresaRepository.deleteById(id);
+    }
+    public ResponseEntity alterar(Empresa empresa){
+        Empresa empresaEntity = new Empresa();
+
+        empresaEntity.setRazaoSocial(empresa.getRazaoSocial());
+        empresaEntity.setCnpj(empresa.getCnpj());
+        empresaEntity.setInscricaoEstadual(empresa.getInscricaoEstadual());
+        empresaEntity.setEndereco(empresa.getEndereco());
+
+        return ResponseEntity.ok().body(empresaRepository.save(empresaEntity));
+    }
 }

@@ -30,10 +30,18 @@ public class EmpresaController {
         return empresaRepository.findAll();
     }
 
-    @GetMapping("/endereco/{idEmpresa}")
-    public Empresa findById(@PathVariable("idEmpresa")Long idEmpresa){
-        return empresaRepository.findById(idEmpresa).get();
+    @GetMapping("/empresa/{idempresa}")
+    public Empresa findById(@PathVariable("idempresa")Long idempresa){
+        return empresaRepository.findById(idempresa).get();
     }
 
+    @DeleteMapping("/empresa/{idempresa}")
+    public void deleteById(@PathVariable("idempresa") Long idempresa) {
+        empresaService.deleteById(idempresa);
+    }
 
+    @PutMapping("/empresa")
+    public ResponseEntity alterar(@RequestBody Empresa empresa){
+        return ResponseEntity.ok().body(empresaService.alterar(empresa));
+    }
 }

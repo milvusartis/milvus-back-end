@@ -24,5 +24,6 @@ public class Empresa implements Serializable {
     @Column(name ="ds_inscricao_estadual")
     private String inscricaoEstadual;
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 }
