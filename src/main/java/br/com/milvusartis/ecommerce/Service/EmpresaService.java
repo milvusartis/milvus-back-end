@@ -1,4 +1,4 @@
-package br.com.milvusartis.ecommerce.Service;
+package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.dto.EmpresaDTO;
 import br.com.milvusartis.ecommerce.model.Empresa;
