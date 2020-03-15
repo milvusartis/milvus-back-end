@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Table(name = "tb_estoque")
 public class Estoque implements Serializable {
 
-    @Id
+    @Id()
     private Long id;
     @MapsId
     @OneToOne(fetch = FetchType.LAZY)
