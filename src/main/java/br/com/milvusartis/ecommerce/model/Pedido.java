@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class Pedido implements Serializable {
     private Date dtPedido;
 
     @Column(name="vl_frete")
-    private BigDecimal vlFrete;
+    private Double vlFrete;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_cliente")
@@ -40,7 +41,7 @@ public class Pedido implements Serializable {
     private String dsStatusPedido;
 
     @Column(name="vl_total")
-    private BigDecimal vlTotal;
+    private Double vlTotal;
 
     @Column(name="nr_cartao")
     private Integer nrCartao;
@@ -61,107 +62,15 @@ public class Pedido implements Serializable {
     @JoinColumn(name="id_pedido")
     private List<PedidoItem> pedidoItemPedido;
 
-    public Long getIdPedido() {
-        return idPedido;
+    public void adicionarItem(PedidoItem item) {
+        if(pedidoItemPedido == null)
+            pedidoItemPedido = new ArrayList<>();
+        pedidoItemPedido.add(item);
     }
-
-    public void setIdPedido(Long idPedido) {
-        this.idPedido = idPedido;
-    }
-
-    public Long getNrPedido() {
-        return nrPedido;
-    }
-
-    public void setNrPedido(Long nrPedido) {
-        this.nrPedido = nrPedido;
-    }
-
-    public Date getDtPedido() {
-        return dtPedido;
-    }
-
-    public void setDtPedido(Date dtPedido) {
-        this.dtPedido = dtPedido;
-    }
-
-    public BigDecimal getVlFrete() {
-        return vlFrete;
-    }
-
-    public void setVlFrete(BigDecimal vlFrete) {
-        this.vlFrete = vlFrete;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public String getDsStatusPedido() {
-        return dsStatusPedido;
-    }
-
-    public void setDsStatusPedido(String dsStatusPedido) {
-        this.dsStatusPedido = dsStatusPedido;
-    }
-
-    public BigDecimal getVlTotal() {
-        return vlTotal;
-    }
-
-    public void setVlTotal(BigDecimal vlTotal) {
-        this.vlTotal = vlTotal;
-    }
-
-    public Integer getNrCartao() {
-        return nrCartao;
-    }
-
-    public void setNrCartao(Integer nrCartao) {
-        this.nrCartao = nrCartao;
-    }
-
-    public String getNmCartao() {
-        return nmCartao;
-    }
-
-    public void setNmCartao(String nmCartao) {
-        this.nmCartao = nmCartao;
-    }
-
-    public Date getDtValidadeCartao() {
-        return dtValidadeCartao;
-    }
-
-    public void setDtValidadeCartao(Date dtValidadeCartao) {
-        this.dtValidadeCartao = dtValidadeCartao;
-    }
-
-    public Integer getCdSegurancaCartao() {
-        return cdSegurancaCartao;
-    }
-
-    public void setCdSegurancaCartao(Integer cdSegurancaCartao) {
-        this.cdSegurancaCartao = cdSegurancaCartao;
-    }
-
-    public Date getDtEntrega() {
-        return dtEntrega;
-    }
-
-    public void setDtEntrega(Date dtEntrega) {
-        this.dtEntrega = dtEntrega;
-    }
-
-    public List<PedidoItem> getPedidoItemPedido() {
-        return pedidoItemPedido;
-    }
-
-    public void setPedidoItemPedido(List<PedidoItem> pedidoItemPedido) {
-        this.pedidoItemPedido = pedidoItemPedido;
+    public Double total() {
+        Double soma = 0.00;
+        for(PedidoItem i: pedidoItemPedido)
+            soma += i.calc();
+        return soma;
     }
 }
