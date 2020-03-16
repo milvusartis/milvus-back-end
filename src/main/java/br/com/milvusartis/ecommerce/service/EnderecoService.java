@@ -1,14 +1,11 @@
-package br.com.milvusartis.ecommerce.Service;
+package br.com.milvusartis.ecommerce.service;
 
-import br.com.milvusartis.ecommerce.model.DTO.EnderecoDTO;
+import br.com.milvusartis.ecommerce.model.dto.EnderecoDTO;
 import br.com.milvusartis.ecommerce.model.Endereco;
-import br.com.milvusartis.ecommerce.model.NotaFiscal;
 import br.com.milvusartis.ecommerce.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 @Service("EnderecoService")
 public class EnderecoService {

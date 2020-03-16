@@ -1,4 +1,4 @@
-package br.com.milvusartis.ecommerce.Service;
+package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.Cliente;
 import br.com.milvusartis.ecommerce.repository.ClienteRepository;
@@ -76,7 +76,7 @@ public class ClienteService {
             return ResponseEntity.badRequest().build();
     }
 
-    public void deletarCliente(@PathVariable("id_cliente") Long idCliente) {
-        clienteRepository.deleteById(idCliente);
+    public void deletarCliente(@PathVariable("id_cliente") Long id) {
+        clienteRepository.deleteById(id);
     }
 }

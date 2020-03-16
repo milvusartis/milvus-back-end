@@ -1,10 +1,8 @@
 package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.Categoria;
-import br.com.milvusartis.ecommerce.model.DTO.CategoriaDTO;
 import br.com.milvusartis.ecommerce.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

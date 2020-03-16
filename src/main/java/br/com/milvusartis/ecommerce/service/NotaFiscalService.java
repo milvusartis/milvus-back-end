@@ -1,8 +1,6 @@
-package br.com.milvusartis.ecommerce.Service;
+package br.com.milvusartis.ecommerce.service;
 
-import br.com.milvusartis.ecommerce.model.DTO.EnderecoDTO;
-import br.com.milvusartis.ecommerce.model.DTO.NotaFiscalDTO;
-import br.com.milvusartis.ecommerce.model.Endereco;
+import br.com.milvusartis.ecommerce.model.dto.NotaFiscalDTO;
 import br.com.milvusartis.ecommerce.model.NotaFiscal;
 import br.com.milvusartis.ecommerce.repository.NotaFiscalRepository;
 import org.springframework.beans.factory.annotation.Autowired;

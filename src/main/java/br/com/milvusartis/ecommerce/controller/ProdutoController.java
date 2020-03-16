@@ -1,12 +1,13 @@
 package br.com.milvusartis.ecommerce.controller;
 
-import br.com.milvusartis.ecommerce.model.DTO.ProdutoDTO;
+import br.com.milvusartis.ecommerce.model.dto.ProdutoDTO;
 import br.com.milvusartis.ecommerce.model.Produto;
 import br.com.milvusartis.ecommerce.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoService service;
+
 
 
     @PostMapping("/produto")
@@ -37,12 +39,27 @@ public class ProdutoController {
         return ResponseEntity.ok().body(listaDTO);
     }
 
-    @GetMapping("/produto/{id}")
+       @GetMapping("/produto/{id}")
     public ResponseEntity<ProdutoDTO> buscarProdutoPorID(@PathVariable("id") Long id) {
         Produto produto = service.buscarProdutoPorID(id);
         ProdutoDTO dto =  ProdutoDTO.transformaEmDTO(produto);
         return ResponseEntity.ok().body(dto);
     }
+
+//    @GetMapping("/produto/{id}")
+//    public ResponseEntity<ProdutoDTO> buscarProdutoPorID(@PathVariable("id") Long id) {
+//        Produto produto = service.buscarProdutoPorID(id);
+//        ProdutoDTO dto =  ProdutoDTO.transformaEmDTO(produto);
+//        return ResponseEntity.ok().body(dto);
+//    }
+
+
+//    @GetMapping("/produto")
+//    public ResponseEntity<ProdutoDTO> buscarProdutoPorID(@PathParam("codigo") Long id) {
+//        Produto produto = service.buscarProdutoPorID(id);
+//        ProdutoDTO dto =  ProdutoDTO.transformaEmDTO(produto);
+//        return ResponseEntity.ok().body(dto);
+//    }
 
     @DeleteMapping("/produto/{id}")
     public void excluirProduto(@PathVariable("id") Long id) {
@@ -56,5 +73,33 @@ public class ProdutoController {
         ProdutoDTO dto = ProdutoDTO.transformaEmDTO(produto);
         return ResponseEntity.ok().body(dto);
     }
+
+//    @PostMapping("/produto")
+//    public ResponseEntity<Produto> salvar(@RequestBody Produto produto) {
+//        Produto produtoEntity = service.salvar(produto);
+//
+//
+//        return ResponseEntity.ok().body(produtoEntity);
+//    }
+//
+//    @GetMapping("/produto")
+//    public ResponseEntity<List<Produto>> listar() {
+//        return ResponseEntity.ok().body(service.listar());
+//    }
+//
+//    @GetMapping("/produto/{id}")
+//    public ResponseEntity<Produto> buscarProdutoPorID(@PathVariable("id") Long id) {
+//        return ResponseEntity.ok().body(service.buscarProdutoPorID(id));
+//    }
+//
+//    @DeleteMapping("/produto/{id}")
+//    public void excluirProduto(@PathVariable("id") Long id) {
+//        service.excluirProdutoPorId(id);
+//    }
+//
+//    @PutMapping("/produto")
+//    public ResponseEntity<Produto> atulizarProduto(@RequestBody Produto produto) {
+//        return ResponseEntity.ok().body(service.atualizar(produto));
+//    }
 
 }
