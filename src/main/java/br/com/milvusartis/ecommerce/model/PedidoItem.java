@@ -27,38 +27,14 @@ public class PedidoItem implements Serializable {
     @JoinColumn(name="id_produto")
     private Produto idProduto;
 
+    @Column(name="nr_quantidade")
+    private Integer nrQuantidade;
+
     @Column(name="vl_produto")
-    private BigDecimal vlProduto;
+    private Double vlProduto;
 
-    public Long getNrItemPedido() {
-        return nrItemPedido;
+    public double calc(){
+        return this.vlProduto * nrQuantidade;
     }
 
-    public void setNrItemPedido(Long nrItemPedido) {
-        this.nrItemPedido = nrItemPedido;
-    }
-
-    public Long getIdPedido() {
-        return idPedido;
-    }
-
-    public void setIdPedido(Long idPedido) {
-        this.idPedido = idPedido;
-    }
-
-    public Produto getIdProduto() {
-        return idProduto;
-    }
-
-    public void setIdProduto(Produto idProduto) {
-        this.idProduto = idProduto;
-    }
-
-    public BigDecimal getVlProduto() {
-        return vlProduto;
-    }
-
-    public void setVlProduto(BigDecimal vlProduto) {
-        this.vlProduto = vlProduto;
-    }
 }
