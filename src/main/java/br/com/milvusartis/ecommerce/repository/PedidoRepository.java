@@ -11,9 +11,11 @@ import java.util.List;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     List<Pedido> findByNrPedido(Long nrPedido);
-    List<Pedido> findByCliente(Cliente cliente);
     List<Pedido> findByDsStatusPedido(String dsStatusPedido);
+    List<Pedido> findByCliente(Cliente cliente);
     List<Pedido> findByClienteAndDsStatusPedido(Cliente cliente, String dsStatusPedido);
 
+//    List<Pedido> findByIdCliente(Long idCliente);
+//    List<Pedido> findByIdClienteAndDsStatusPedido(Long idCliente, String dsStatusPedido);
     //PedidoItem findByPedido(Pedido pedido);
 }

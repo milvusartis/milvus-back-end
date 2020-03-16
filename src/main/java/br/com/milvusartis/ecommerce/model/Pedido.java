@@ -37,6 +37,10 @@ public class Pedido implements Serializable {
     @JoinColumn(name="id_cliente")
     private Cliente cliente;
 
+//    @ManyToOne
+//    @JoinColumn(name="id_cliente")
+//    private Long idCliente;
+
     @Column(name="ds_status_pedido")
     private String dsStatusPedido;
 

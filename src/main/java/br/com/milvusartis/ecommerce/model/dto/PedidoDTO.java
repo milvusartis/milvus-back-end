@@ -19,7 +19,8 @@ public class PedidoDTO {
     private Long nrPedido;
     private Date dtPedido;
     private BigDecimal vlFrete;
-    private Cliente cliente;
+//    private Cliente cliente;
+    private Long idCliente;
     private String dsStatusPedido;
     private BigDecimal vlTotal;
     private Integer nrCartao;
