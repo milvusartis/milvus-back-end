@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,12 +39,27 @@ public class ProdutoController {
         return ResponseEntity.ok().body(listaDTO);
     }
 
-    @GetMapping("/produto/{id}")
+       @GetMapping("/produto/{id}")
     public ResponseEntity<ProdutoDTO> buscarProdutoPorID(@PathVariable("id") Long id) {
         Produto produto = service.buscarProdutoPorID(id);
         ProdutoDTO dto =  ProdutoDTO.transformaEmDTO(produto);
         return ResponseEntity.ok().body(dto);
     }
+
+//    @GetMapping("/produto/{id}")
+//    public ResponseEntity<ProdutoDTO> buscarProdutoPorID(@PathVariable("id") Long id) {
+//        Produto produto = service.buscarProdutoPorID(id);
+//        ProdutoDTO dto =  ProdutoDTO.transformaEmDTO(produto);
+//        return ResponseEntity.ok().body(dto);
+//    }
+
+
+//    @GetMapping("/produto")
+//    public ResponseEntity<ProdutoDTO> buscarProdutoPorID(@PathParam("codigo") Long id) {
+//        Produto produto = service.buscarProdutoPorID(id);
+//        ProdutoDTO dto =  ProdutoDTO.transformaEmDTO(produto);
+//        return ResponseEntity.ok().body(dto);
+//    }
 
     @DeleteMapping("/produto/{id}")
     public void excluirProduto(@PathVariable("id") Long id) {
