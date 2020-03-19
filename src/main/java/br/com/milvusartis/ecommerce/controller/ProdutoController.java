@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class ProdutoController {
@@ -44,6 +45,9 @@ public class ProdutoController {
             ProdutoDTO dto = produtoBO.parseToDTO(p);
             listaDTO.add(dto);
         }
+
+
+
         return ResponseEntity.ok().body(listaDTO);
     }
 
