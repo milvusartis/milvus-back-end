@@ -1,4 +1,4 @@
-package br.com.milvusartis.ecommerce.model;
+package br.com.milvusartis.ecommerce.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

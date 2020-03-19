@@ -1,8 +1,8 @@
 package br.com.milvusartis.ecommerce.model.dto;
 
-import br.com.milvusartis.ecommerce.model.Cliente;
-import br.com.milvusartis.ecommerce.model.Empresa;
-import br.com.milvusartis.ecommerce.model.Pedido;
+import br.com.milvusartis.ecommerce.model.entity.Cliente;
+import br.com.milvusartis.ecommerce.model.entity.Empresa;
+import br.com.milvusartis.ecommerce.model.entity.Pedido;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

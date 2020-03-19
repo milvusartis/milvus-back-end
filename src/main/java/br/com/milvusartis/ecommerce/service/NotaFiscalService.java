@@ -1,7 +1,7 @@
 package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.dto.NotaFiscalDTO;
-import br.com.milvusartis.ecommerce.model.NotaFiscal;
+import br.com.milvusartis.ecommerce.model.entity.NotaFiscal;
 import br.com.milvusartis.ecommerce.repository.NotaFiscalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 public class NotaFiscalService {
     @Autowired
     NotaFiscalRepository notaFiscalRepository;
+
+
     public ResponseEntity save(NotaFiscalDTO notaFiscalDTO){
         NotaFiscal notaFiscalEntity = new NotaFiscal();
 

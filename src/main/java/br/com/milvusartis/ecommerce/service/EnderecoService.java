@@ -1,7 +1,7 @@
 package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.dto.EnderecoDTO;
-import br.com.milvusartis.ecommerce.model.Endereco;
+import br.com.milvusartis.ecommerce.model.entity.Endereco;
 import br.com.milvusartis.ecommerce.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

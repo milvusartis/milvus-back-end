@@ -1,4 +1,4 @@
-package br.com.milvusartis.ecommerce.model;
+package br.com.milvusartis.ecommerce.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,11 +36,7 @@ public class Produto implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
-//    @OneToOne(mappedBy = "produto", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
-//    private Estoque estoque;
-
-    @Column(name = "nr_quantidade_estocado")
-    private Integer quantidadeEstoque;
-    @Column(name = "nr_qauntidade_reservado")
-    private Integer quantidadeReservada;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_estoque")
+    private Estoque estoque;
 }

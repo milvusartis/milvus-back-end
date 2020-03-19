@@ -2,7 +2,7 @@ package br.com.milvusartis.ecommerce.controller;
 
 import br.com.milvusartis.ecommerce.service.EmpresaService;
 import br.com.milvusartis.ecommerce.model.dto.EmpresaDTO;
-import br.com.milvusartis.ecommerce.model.Empresa;
+import br.com.milvusartis.ecommerce.model.entity.Empresa;
 import br.com.milvusartis.ecommerce.repository.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

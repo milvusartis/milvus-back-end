@@ -1,8 +1,7 @@
 package br.com.milvusartis.ecommerce.repository;
 
-import br.com.milvusartis.ecommerce.model.Cliente;
-import br.com.milvusartis.ecommerce.model.Pedido;
-import br.com.milvusartis.ecommerce.model.PedidoItem;
+import br.com.milvusartis.ecommerce.model.entity.Cliente;
+import br.com.milvusartis.ecommerce.model.entity.Pedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

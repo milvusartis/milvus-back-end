@@ -1,6 +1,7 @@
 package br.com.milvusartis.ecommerce.controller;
 
-import br.com.milvusartis.ecommerce.model.Categoria;
+import br.com.milvusartis.ecommerce.model.bo.CategoriaBO;
+import br.com.milvusartis.ecommerce.model.entity.Categoria;
 import br.com.milvusartis.ecommerce.model.dto.CategoriaDTO;
 import br.com.milvusartis.ecommerce.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,13 @@ public class CategoriaController {
     @Autowired
     private CategoriaService service;
 
+    @Autowired
+    private CategoriaBO categoriaBO;
+
     @PostMapping("/categoria")
     public ResponseEntity<CategoriaDTO> salvar(@RequestBody CategoriaDTO categoriaDTO) {
-        Categoria categoria = service.salvar(categoriaDTO.transformaParaCategoria());
-        CategoriaDTO dto = CategoriaDTO.transformaEmDTO(categoria);
+        Categoria categoria = service.salvar(categoriaBO.parseToPOJO(categoriaDTO));
+        CategoriaDTO dto = categoriaBO.parseToDTO(categoria);
         return ResponseEntity.ok().body(dto);
     }
 
@@ -34,7 +38,7 @@ public class CategoriaController {
         if (listaDeCategorias != null && listaDeCategorias.size() > 0) {
             List<CategoriaDTO> listaDTO = new ArrayList<>();
             for (Categoria c : listaDeCategorias) {
-                listaDTO.add(CategoriaDTO.transformaEmDTO(c));
+                listaDTO.add(categoriaBO.parseToDTO(c));
             }
             return ResponseEntity.ok().body(listaDTO);
         } else {
@@ -55,8 +59,8 @@ public class CategoriaController {
 
     @PutMapping("/categoria")
     public ResponseEntity<CategoriaDTO> alterar(@RequestBody CategoriaDTO categoriaDTO) {
-        Categoria categoria = service.alterar(categoriaDTO.transformaParaCategoria());
-        return ResponseEntity.ok().body(CategoriaDTO.transformaEmDTO(categoria));
+        Categoria categoria = service.alterar(categoriaBO.parseToPOJO(categoriaDTO));
+        return ResponseEntity.ok().body(categoriaBO.parseToDTO(categoria));
 
     }
 

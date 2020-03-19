@@ -1,7 +1,7 @@
 package br.com.milvusartis.ecommerce.controller;
 
 import br.com.milvusartis.ecommerce.service.PedidoItemService;
-import br.com.milvusartis.ecommerce.model.PedidoItem;
+import br.com.milvusartis.ecommerce.model.entity.PedidoItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

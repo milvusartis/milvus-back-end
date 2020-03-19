@@ -1,7 +1,6 @@
 package br.com.milvusartis.ecommerce.service;
 
-import br.com.milvusartis.ecommerce.model.Pedido;
-import br.com.milvusartis.ecommerce.model.PedidoItem;
+import br.com.milvusartis.ecommerce.model.entity.PedidoItem;
 import br.com.milvusartis.ecommerce.repository.PedidoItemRepository;
 import br.com.milvusartis.ecommerce.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
