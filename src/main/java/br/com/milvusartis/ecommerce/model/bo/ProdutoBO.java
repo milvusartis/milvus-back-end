@@ -27,11 +27,9 @@ public class ProdutoBO implements IBO<Produto, ProdutoDTO> {
     @Override
     public ProdutoDTO parseToDTO(Produto pojo) {
         ProdutoDTO produtoDTO = modelMapper.map(pojo, ProdutoDTO.class);
-//        CategoriaDTO categoriaDTO = categoriaBO.parseToDTO(pojo.getCategoria());
-//        EstoqueDTO estoqueDTO = estoqueBO.parseToDTO(pojo.getEstoque());
-//        produtoDTO.setCategoria(categoriaDTO);
-//        produtoDTO.setEstoque(estoqueDTO);
 
+//        EstoqueDTO estoqueDTO = estoqueBO.parseToDTO(pojo.getEstoque());
+//        produtoDTO.setEstoque(estoqueDTO);
 //        ProdutoDTO produtoDTO =  new ProdutoDTO(
 //                pojo.getIdProduto(),
 //                pojo.getNome(),
@@ -48,11 +46,7 @@ public class ProdutoBO implements IBO<Produto, ProdutoDTO> {
     @Override
     public Produto parseToPOJO(ProdutoDTO dto) {
         Produto produto = modelMapper.map(dto, Produto.class);
-//        Categoria categoria = categoriaBO.parseToPOJO(dto.getCategoria());
-//        Estoque estoque = estoqueBO.parseToPOJO(dto.getEstoque());
 
-//        produto.setCategoria(categoria);
-//        produto.setEstoque(estoque);
 
 //        Produto produto = new Produto(
 //                dto.getCodigo(),

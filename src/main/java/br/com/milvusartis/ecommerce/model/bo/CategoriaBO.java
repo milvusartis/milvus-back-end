@@ -15,15 +15,12 @@ public class CategoriaBO implements IBO<Categoria, CategoriaDTO> {
     @Override
     public CategoriaDTO parseToDTO(Categoria pojo) {
         CategoriaDTO categoriaDTO = modelMapper.map(pojo, CategoriaDTO.class);
-//        CategoriaDTO categoriaDTO = new CategoriaDTO(pojo.getId(), pojo.getDescricao());
-
         return categoriaDTO;
     }
 
     @Override
     public Categoria parseToPOJO(CategoriaDTO dto) {
         Categoria categoria = modelMapper.map(dto, Categoria.class);
-//        Categoria categoria =  new Categoria(dto.getCodigo(), dto.getDescricao());
         return categoria;
     }
 }

@@ -3,6 +3,7 @@ package br.com.milvusartis.ecommerce.controller;
 import br.com.milvusartis.ecommerce.model.bo.CategoriaBO;
 import br.com.milvusartis.ecommerce.model.bo.ProdutoBO;
 import br.com.milvusartis.ecommerce.model.dto.ProdutoDTO;
+import br.com.milvusartis.ecommerce.model.entity.Estoque;
 import br.com.milvusartis.ecommerce.model.entity.Produto;
 import br.com.milvusartis.ecommerce.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -24,6 +24,7 @@ public class ProdutoService {
         Produto produtoEntity = produto;
         Categoria categoria = categoriaService.buscaPorId(produto.getCategoria().getId());
         produtoEntity.setCategoria(categoria);
+        System.out.println("ESTOQUE"+produto.getEstoque());
         return produtoRepository.save(produtoEntity);
     }
 
