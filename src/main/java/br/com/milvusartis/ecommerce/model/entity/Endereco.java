@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Table(name = "tb_endereco")
 public class Endereco implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_endereco")
     private Long idEndereco;
     @Column(name = "ds_cep")
