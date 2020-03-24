@@ -27,13 +27,13 @@ public class PedidoItem implements Serializable {
     private Produto idProduto;
 
     @Column(name="nr_quantidade")
-    private Integer nrQuantidade;
+    private Integer quantidade;
 
     @Column(name="vl_produto")
     private Double vlProduto;
 
     public double calc(){
-        return this.vlProduto * nrQuantidade;
+        return this.vlProduto * quantidade;
     }
 
 }

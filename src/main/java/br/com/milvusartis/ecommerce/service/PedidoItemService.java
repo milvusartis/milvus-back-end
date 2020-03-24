@@ -66,7 +66,7 @@ public class PedidoItemService {
             pedidoItemEntity = pedidoItemRepository.getOne(pedidoItem.getNrItemPedido());
 
             pedidoItemEntity.setVlProduto(pedidoItem.getVlProduto());
-            pedidoItemEntity.setNrQuantidade(pedidoItem.getNrQuantidade());
+            pedidoItemEntity.setQuantidade(pedidoItem.getQuantidade());
 
         if(pedidoItemEntity != null)
             return ResponseEntity.ok().body(pedidoItemRepository.save(pedidoItemEntity));

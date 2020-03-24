@@ -13,7 +13,7 @@ public class PedidoItemDTO {
     private Long nrItemPedido;
     private Long idPedido;
     private Produto idProduto;
-    private Integer nrQuantidade;
+    private Integer quantidade;
     private Double vlProduto;
 
 }
