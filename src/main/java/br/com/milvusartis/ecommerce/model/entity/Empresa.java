@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Table(name ="tb_empresa")
 public class Empresa implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id_empresa")
     private Long idEmpresa;
     @Column(name ="ds_razao_social")

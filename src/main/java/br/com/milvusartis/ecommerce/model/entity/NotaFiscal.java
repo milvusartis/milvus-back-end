@@ -15,7 +15,7 @@ import java.util.Date;
 @Table(name = "tb_nota_fiscal")
 public class NotaFiscal implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id_nf")
     private Long idNf;
     @Column(name = "dt_emissao")

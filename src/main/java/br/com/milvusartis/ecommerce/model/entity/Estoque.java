@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class Estoque implements Serializable {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_estoque")
     private Long idEstoque;
     @Column(name = "nr_quantidade_estocado")

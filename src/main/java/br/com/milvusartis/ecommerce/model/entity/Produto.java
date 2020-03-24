@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Table(name = "tb_produto")
 public class Produto implements Serializable {
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_produto")
     private Long idProduto;
 
