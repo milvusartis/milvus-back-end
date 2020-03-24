@@ -32,9 +32,9 @@ public class CategoriaController {
     //Parametro opicional, se não passar nada ele listrá todas as categorias
     @GetMapping("/categoria")
     public ResponseEntity<List<CategoriaDTO>> buscarCategoria(@PathParam("codigo") Long id,
-                                                              @PathParam("descricao") String descricao) {
-        List<Categoria> listaDeCategorias = service.buscarCategoria(id, descricao);
-        //Se passa um id que existe mas uma descricao que nao existe,ele sempre está considerando o primeiro parametro
+                                                              @PathParam("nome") String nome) {
+        List<Categoria> listaDeCategorias = service.buscarCategoria(id, nome);
+        //Se passa um id que existe mas um nome que nao existe, ele sempre está considerando o primeiro parametro
         if (listaDeCategorias != null && listaDeCategorias.size() > 0) {
             List<CategoriaDTO> listaDTO = new ArrayList<>();
             for (Categoria c : listaDeCategorias) {
@@ -77,9 +77,9 @@ public class CategoriaController {
 //    //Parametro opicional, se não passar nada ele listrá todas as categorias
 //    @GetMapping("/categoria")
 //    public ResponseEntity<List<Categoria>> buscarCategoria(@PathParam("codigo") Long id,
-//                                                              @PathParam("descricao") String descricao) {
-//        List<Categoria> listaDeCategorias = service.buscarCategoria(id, descricao);
-//        //Se passa um id que existe mas uma descricao que nao existe,ele sempre está considerando o primeiro parametro
+//                                                              @PathParam("nome") String nome) {
+//        List<Categoria> listaDeCategorias = service.buscarCategoria(id, nome);
+//        //Se passa um id que existe mas um nome que nao existe,ele sempre está considerando o primeiro parametro
 //        if (listaDeCategorias != null && listaDeCategorias.size() > 0) {
 //
 //            return ResponseEntity.ok().body(listaDeCategorias);

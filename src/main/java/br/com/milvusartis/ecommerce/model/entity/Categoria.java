@@ -20,6 +20,6 @@ public class Categoria implements Serializable {
     private Long id;
 
     @Column(name = "nm_categoria")
-    private String descricao;
+    private String nome;
 
 }
