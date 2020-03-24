@@ -39,7 +39,7 @@ public class ProdutoService {
     public Produto atualizar(Produto produto) {
         Produto produtoEntity = produtoRepository.getOne(produto.getIdProduto());
         produtoEntity.setDescricao(produto.getDescricao());
-        produtoEntity.setValorUnitario(produto.getValorUnitario());
+        produtoEntity.setVlUnitario(produto.getVlUnitario());
         produtoEntity.setCategoria(produto.getCategoria());
         produtoEntity.setEstoque(produto.getEstoque());
         return produtoRepository.save(produtoEntity);

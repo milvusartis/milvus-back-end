@@ -31,7 +31,7 @@ public class Produto implements Serializable {
 
     @NotNull
     @Column(name = "vl_unitario_produto")
-    private Double valorUnitario;
+    private Double vlUnitario;
 
     @Column(name = "cd_disponibilidade_produto")
     private Boolean disponibilidade;
