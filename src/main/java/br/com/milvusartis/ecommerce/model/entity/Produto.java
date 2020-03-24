@@ -20,15 +20,12 @@ public class Produto implements Serializable {
     @Column(name = "id_produto")
     private Long idProduto;
 
-    @NotNull
     @Column(name = "nm_produto")
     private String nome;
 
-    @NotNull
     @Column(name = "ds_produto")
     private String descricao;
 
-    @NotNull
     @Column(name = "ds_local_imagem")
     private String imagem;
 
