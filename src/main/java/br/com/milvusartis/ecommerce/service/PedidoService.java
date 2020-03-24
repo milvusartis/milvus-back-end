@@ -32,20 +32,20 @@ public class PedidoService {
             return ResponseEntity.badRequest().build();
     }
 
-    public ResponseEntity buscarPedido(@PathParam("nr_pedido") Long nrPedido,
-                                       @PathParam("ds_status_pedido") String dsStatusPedido,
+    public ResponseEntity buscarPedido(@PathParam("nr_pedido") Long numero,
+                                       @PathParam("ds_status_pedido") String statusPedido,
                                        @PathParam("id_cliente") Cliente cliente) {
 
         List<Pedido> pedido = new ArrayList<>();
 
-        if (dsStatusPedido != null)
-            pedido = pedidoRepository.findByDsStatusPedido(dsStatusPedido);
-        else if (nrPedido != null)
-            pedido = pedidoRepository.findByNrPedido(nrPedido);
+        if (statusPedido != null)
+            pedido = pedidoRepository.findByStatusPedido(statusPedido);
+        else if (numero != null)
+            pedido = pedidoRepository.findByNumero(numero);
         else if (cliente != null)
             pedido = pedidoRepository.findByCliente(cliente);
-        else if (dsStatusPedido != null && cliente != null)
-            pedido = pedidoRepository.findByClienteAndDsStatusPedido(cliente, dsStatusPedido);
+        else if (statusPedido != null && cliente != null)
+            pedido = pedidoRepository.findByClienteAndStatusPedido(cliente, statusPedido);
 
         if (pedido != null && pedido.size() > 0)
             return ResponseEntity.ok().body(pedido);
@@ -71,10 +71,10 @@ public class PedidoService {
         if(pedido != null)
             pedidoEntity = pedidoRepository.getOne(pedido.getIdPedido());
 
-            pedidoEntity.setNrPedido(pedido.getNrPedido());
+            pedidoEntity.setNumero(pedido.getNumero());
             pedidoEntity.setDtPedido(pedido.getDtPedido());
             pedidoEntity.setVlFrete(pedido.getVlFrete());
-            pedidoEntity.setDsStatusPedido(pedido.getDsStatusPedido());
+            pedidoEntity.setStatusPedido(pedido.getStatusPedido());
             pedidoEntity.setVlTotal(pedido.getVlTotal());
             pedidoEntity.setNrCartao(pedido.getNrCartao());
             pedidoEntity.setNmCartao(pedido.getNmCartao());

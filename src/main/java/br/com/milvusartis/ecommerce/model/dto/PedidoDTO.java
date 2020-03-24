@@ -15,11 +15,11 @@ import java.util.List;
 public class PedidoDTO {
 
     private Long idPedido;
-    private Long nrPedido;
+    private Long numero;
     private Date dtPedido;
     private Double vlFrete;
     private Cliente cliente;
-    private String dsStatusPedido;
+    private String statusPedido;
     private Double vlTotal;
     private Integer nrCartao;
     private String nmCartao;

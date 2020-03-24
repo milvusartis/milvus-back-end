@@ -23,7 +23,7 @@ public class Pedido implements Serializable {
     private Long idPedido;
 
     @Column(name="nr_pedido")
-    private Long nrPedido;
+    private Long numero;
 
     @Column(name="dt_pedido")
     private Date dtPedido;
@@ -35,12 +35,8 @@ public class Pedido implements Serializable {
     @JoinColumn(name="id_cliente")
     private Cliente cliente;
 
-//    @ManyToOne
-//    @JoinColumn(name="id_cliente")
-//    private Long idCliente;
-
     @Column(name="ds_status_pedido")
-    private String dsStatusPedido;
+    private String statusPedido;
 
     @Column(name="vl_total")
     private Double vlTotal;
