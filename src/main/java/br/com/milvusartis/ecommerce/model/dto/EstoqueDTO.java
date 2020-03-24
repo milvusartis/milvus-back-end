@@ -17,4 +17,5 @@ public class EstoqueDTO {
     private Long idEstoque;
     private Integer quantidadeEstoque;
     private Integer quantidadeReservada;
+
 }

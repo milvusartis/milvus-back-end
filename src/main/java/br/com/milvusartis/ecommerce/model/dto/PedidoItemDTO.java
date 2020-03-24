@@ -17,4 +17,5 @@ public class PedidoItemDTO {
     private Produto idProduto;
     private Integer nrQuantidade;
     private BigDecimal vlProduto;
+
 }

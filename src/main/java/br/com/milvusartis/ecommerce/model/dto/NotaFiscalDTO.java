@@ -13,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NotaFiscalDTO {
+
     private Long idNf;
     private Date data;
     private Cliente cliente;
@@ -20,4 +21,5 @@ public class NotaFiscalDTO {
     private Pedido pedido;
     private String naturezaOperacao;
     private Integer nfe;
+
 }
