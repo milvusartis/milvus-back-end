@@ -14,6 +14,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "tb_produto")
 public class Produto implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_produto")
@@ -22,21 +23,28 @@ public class Produto implements Serializable {
     @NotNull
     @Column(name = "nm_produto")
     private String nome;
+
     @NotNull
     @Column(name = "ds_produto")
     private String descricao;
+
     @NotNull
     @Column(name = "ds_local_imagem")
     private String imagem;
+
     @NotNull
     @Column(name = "vl_unitario_produto")
     private Double valorUnitario;
+
     @Column(name = "cd_disponibilidade_produto")
     private Boolean disponibilidade;
+
     @ManyToOne
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_estoque")
     private Estoque estoque;
+
 }

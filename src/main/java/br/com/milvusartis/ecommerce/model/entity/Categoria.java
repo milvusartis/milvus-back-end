@@ -12,8 +12,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_categoria")
-
 public class Categoria implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_categoria")

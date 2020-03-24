@@ -18,10 +18,11 @@ public class Estoque implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_estoque")
     private Long idEstoque;
+
     @Column(name = "nr_quantidade_estocado")
     private Integer quantidadeEstoque;
+
     @Column(name = "nr_qauntidade_reservado")
     private Integer quantidadeReservada;
-
 
 }

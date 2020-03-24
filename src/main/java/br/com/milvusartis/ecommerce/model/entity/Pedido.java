@@ -15,7 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name="tb_pedido")
-
 public class Pedido implements Serializable {
 
     @Id
@@ -76,4 +75,5 @@ public class Pedido implements Serializable {
             soma += i.calc();
         return soma;
     }
+
 }
