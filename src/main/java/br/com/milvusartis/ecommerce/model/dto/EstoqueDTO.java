@@ -15,7 +15,7 @@ import javax.persistence.Id;
 public class EstoqueDTO {
 
     private Long idEstoque;
-    private Integer quantidadeEstoque;
-    private Integer quantidadeReservada;
+    private Integer qtEstoque;
+    private Integer qtReserva;
 
 }
