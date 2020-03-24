@@ -22,7 +22,7 @@ public class NotaFiscal implements Serializable {
 
     @Column(name = "dt_emissao")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date data;
+    private Date dtNf;
 
     @OneToOne
     @JoinColumn(name = "id_cliente")
@@ -39,7 +39,7 @@ public class NotaFiscal implements Serializable {
     @Column(name ="ds_natureza_operacao")
     private String naturezaOperacao;
 
-    @Column(name ="nr_nfe")
-    private Integer nfe;
+    @Column(name ="nr_nfE")
+    private Integer nfE;
 
 }

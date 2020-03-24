@@ -16,12 +16,12 @@ public class NotaFiscalService {
     public ResponseEntity save(NotaFiscalDTO notaFiscalDTO){
         NotaFiscal notaFiscalEntity = new NotaFiscal();
 
-        notaFiscalEntity.setData(notaFiscalDTO.getData());
+        notaFiscalEntity.setDtNf(notaFiscalDTO.getDtNf());
         notaFiscalEntity.setCliente(notaFiscalDTO.getCliente());
         notaFiscalEntity.setEmpresa(notaFiscalDTO.getEmpresa());
         notaFiscalEntity.setPedido(notaFiscalDTO.getPedido());
         notaFiscalEntity.setNaturezaOperacao(notaFiscalDTO.getNaturezaOperacao());
-        notaFiscalEntity.setNfe(notaFiscalDTO.getNfe());
+        notaFiscalEntity.setNfE(notaFiscalDTO.getNfE());
 
         NotaFiscal retornoNotaFiscal = notaFiscalRepository.save(notaFiscalEntity);
         notaFiscalDTO.setIdNf(retornoNotaFiscal.getIdNf());
@@ -35,12 +35,12 @@ public class NotaFiscalService {
     public ResponseEntity alterar(NotaFiscal notaFiscal) {
         NotaFiscal notaFiscalEntity = notaFiscalRepository.getOne(notaFiscal.getIdNf());
 
-        notaFiscalEntity.setData(notaFiscal.getData());
+        notaFiscalEntity.setDtNf(notaFiscal.getDtNf());
         notaFiscalEntity.setCliente(notaFiscal.getCliente());
         notaFiscalEntity.setEmpresa(notaFiscal.getEmpresa());
         notaFiscalEntity.setPedido(notaFiscal.getPedido());
         notaFiscalEntity.setNaturezaOperacao(notaFiscal.getNaturezaOperacao());
-        notaFiscalEntity.setNfe(notaFiscal.getNfe());
+        notaFiscalEntity.setNfE(notaFiscal.getNfE());
 
         return ResponseEntity.ok().body(notaFiscalRepository.save(notaFiscalEntity));
     }

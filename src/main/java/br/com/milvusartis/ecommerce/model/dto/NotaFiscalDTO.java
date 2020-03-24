@@ -15,11 +15,11 @@ import java.util.Date;
 public class NotaFiscalDTO {
 
     private Long idNf;
-    private Date data;
+    private Date dtNf;
     private Cliente cliente;
     private Empresa empresa;
     private Pedido pedido;
     private String naturezaOperacao;
-    private Integer nfe;
+    private Integer nfE;
 
 }
