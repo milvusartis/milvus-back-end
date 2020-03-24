@@ -1,6 +1,5 @@
 package br.com.milvusartis.ecommerce.model.bo;
 
-import br.com.milvusartis.ecommerce.model.dto.CategoriaDTO;
 import br.com.milvusartis.ecommerce.model.dto.EstoqueDTO;
 import br.com.milvusartis.ecommerce.model.entity.Estoque;
 import org.modelmapper.ModelMapper;
@@ -24,4 +23,5 @@ public class EstoqueBO implements IBO<Estoque, EstoqueDTO> {
         Estoque estoque = modelMapper.map(dto, Estoque.class);
         return estoque;
     }
+
 }

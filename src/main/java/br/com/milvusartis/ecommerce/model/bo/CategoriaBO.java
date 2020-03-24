@@ -23,4 +23,5 @@ public class CategoriaBO implements IBO<Categoria, CategoriaDTO> {
         Categoria categoria = modelMapper.map(dto, Categoria.class);
         return categoria;
     }
+
 }
