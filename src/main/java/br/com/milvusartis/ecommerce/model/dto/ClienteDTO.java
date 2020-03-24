@@ -16,6 +16,7 @@ public class ClienteDTO {
     private String dsTelefone;
     private String dsEmail;
     private String dsSenha;
-    private Endereco endereco;
+    private Long enderecoIdEndereco;
+    //private Endereco endereco;
 
 }

@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -18,10 +17,10 @@ public class PedidoDTO {
     private Long idPedido;
     private Long nrPedido;
     private Date dtPedido;
-    private BigDecimal vlFrete;
+    private Double vlFrete;
     private Cliente cliente;
     private String dsStatusPedido;
-    private BigDecimal vlTotal;
+    private Double vlTotal;
     private Integer nrCartao;
     private String nmCartao;
     private Date dtValidadeCartao;
