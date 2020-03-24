@@ -29,6 +29,7 @@ public class Empresa implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_endereco")
+    //private Long enderecoIdEndereco;
     private Endereco endereco;
 
 }

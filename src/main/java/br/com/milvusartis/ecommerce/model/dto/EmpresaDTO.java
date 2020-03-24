@@ -14,7 +14,7 @@ public class EmpresaDTO {
     private String razaoSocial;
     private String cnpj;
     private String inscricaoEstadual;
-    private Long enderecoIdEndereco;
+    //private Long enderecoIdEndereco;
     private Endereco endereco;
 
 }
