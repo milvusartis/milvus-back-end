@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 public class ClienteDTO {
 
     private Long idCliente;
-    private String nmCliente;
-    private String dsCpf;
-    private String dsTelefone;
-    private String dsEmail;
-    private String dsSenha;
-    private Long enderecoIdEndereco;
-    //private Endereco endereco;
+    private String nome;
+    private String cpf;
+    private String telefone;
+    private String email;
+    private String senha;
+    //private Long enderecoIdEndereco;
+    private Endereco endereco;
 
 }

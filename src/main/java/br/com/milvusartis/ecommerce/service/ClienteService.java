@@ -63,12 +63,12 @@ public class ClienteService {
         if(cliente != null)
             clienteEntity = clienteRepository.getOne(cliente.getIdCliente());
 
-            clienteEntity.setNmCliente(cliente.getNmCliente());
-            clienteEntity.setDsCpf(cliente.getDsCpf());
-            clienteEntity.setDsTelefone(cliente.getDsTelefone());
-            clienteEntity.setDsEmail(cliente.getDsEmail());
-            clienteEntity.setDsSenha(cliente.getDsSenha());
-            clienteEntity.setDsTelefone(cliente.getDsTelefone());
+            clienteEntity.setNome(cliente.getNome());
+            clienteEntity.setCpf(cliente.getCpf());
+            clienteEntity.setTelefone(cliente.getTelefone());
+            clienteEntity.setEmail(cliente.getEmail());
+            clienteEntity.setSenha(cliente.getSenha());
+            clienteEntity.setTelefone(cliente.getTelefone());
 
         if(clienteEntity != null)
             return ResponseEntity.ok().body(clienteRepository.save(clienteEntity));

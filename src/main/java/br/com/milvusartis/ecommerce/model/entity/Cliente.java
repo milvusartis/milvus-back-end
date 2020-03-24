@@ -20,22 +20,23 @@ public class Cliente implements Serializable {
     private Long idCliente;
 
     @Column(name="nm_cliente")
-    private String nmCliente;
+    private String nome;
 
     @Column(name="ds_cpf")
-    private String dsCpf;
+    private String cpf;
 
     @Column(name="ds_telefone")
-    private String dsTelefone;
+    private String telefone;
 
     @Column(name="ds_email")
-    private String dsEmail;
+    private String email;
 
     @Column(name="ds_senha")
-    private String dsSenha;
+    private String senha;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id_endereco")
+    //private Long enderecoIdEndereco;
     private Endereco endereco;
 
 }
