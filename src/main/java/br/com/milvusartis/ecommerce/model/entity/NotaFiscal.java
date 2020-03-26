@@ -1,5 +1,6 @@
 package br.com.milvusartis.ecommerce.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,22 +25,24 @@ public class NotaFiscal implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dtNf;
 
-    @OneToOne
-    @JoinColumn(name = "id_cliente")
-    private Cliente cliente;
-
-    @OneToOne
-    @JoinColumn(name = "id_empresa")
-    private Empresa empresa;
-
-    @OneToOne
-    @JoinColumn(name = "id_pedido")
-    private Pedido pedido;
+//    @OneToOne
+//    @JoinColumn(name = "id_cliente")
+//    private Cliente cliente;
 
     @Column(name ="ds_natureza_operacao")
     private String naturezaOperacao;
 
     @Column(name ="nr_nfE")
     private Integer nfE;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JoinColumn(name = "id_empresa")
+    private Empresa empresa;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JoinColumn(name = "id_pedido")
+    private Pedido pedido;
 
 }

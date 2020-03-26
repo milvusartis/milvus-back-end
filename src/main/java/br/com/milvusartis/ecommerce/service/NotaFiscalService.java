@@ -17,7 +17,7 @@ public class NotaFiscalService {
         NotaFiscal notaFiscalEntity = new NotaFiscal();
 
         notaFiscalEntity.setDtNf(notaFiscalDTO.getDtNf());
-        notaFiscalEntity.setCliente(notaFiscalDTO.getCliente());
+    //    notaFiscalEntity.setCliente(notaFiscalDTO.getCliente());
         notaFiscalEntity.setEmpresa(notaFiscalDTO.getEmpresa());
         notaFiscalEntity.setPedido(notaFiscalDTO.getPedido());
         notaFiscalEntity.setNaturezaOperacao(notaFiscalDTO.getNaturezaOperacao());
@@ -36,7 +36,7 @@ public class NotaFiscalService {
         NotaFiscal notaFiscalEntity = notaFiscalRepository.getOne(notaFiscal.getIdNf());
 
         notaFiscalEntity.setDtNf(notaFiscal.getDtNf());
-        notaFiscalEntity.setCliente(notaFiscal.getCliente());
+    //    notaFiscalEntity.setCliente(notaFiscal.getCliente());
         notaFiscalEntity.setEmpresa(notaFiscal.getEmpresa());
         notaFiscalEntity.setPedido(notaFiscal.getPedido());
         notaFiscalEntity.setNaturezaOperacao(notaFiscal.getNaturezaOperacao());

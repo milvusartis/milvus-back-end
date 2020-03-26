@@ -1,10 +1,11 @@
 package br.com.milvusartis.ecommerce.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -39,5 +40,15 @@ public class Endereco implements Serializable {
 
     @Column(name = "sg_estado")
     private String estado;
+
+    @OneToOne
+    @JsonBackReference
+    @JoinColumn(name="id_cliente")
+    private Cliente cliente;
+
+    @OneToOne
+    @JsonBackReference
+    @JoinColumn(name="id_empresa")
+    private Empresa empresa;
 
 }

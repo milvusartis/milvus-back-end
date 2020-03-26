@@ -1,5 +1,6 @@
 package br.com.milvusartis.ecommerce.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,5 +25,10 @@ public class Estoque implements Serializable {
 
     @Column(name = "nr_quantidade_reservada")
     private Integer qtReserva;
+
+    @OneToOne
+    @JsonBackReference
+    @JoinColumn(name="id_produto")
+    private Produto produto;
 
 }

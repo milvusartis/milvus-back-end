@@ -1,5 +1,7 @@
 package br.com.milvusartis.ecommerce.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,21 +21,24 @@ public class PedidoItem implements Serializable {
     @Column(name="nr_item_pedido")
     private Long nrItemPedido;
 
-    @Column(name="id_pedido")
-    private Long idPedido;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_produto")
-    private Produto idProduto;
-
     @Column(name="nr_quantidade")
     private Integer quantidade;
 
     @Column(name="vl_produto")
     private Double vlProduto;
 
-    public double calc(){
-        return this.vlProduto * quantidade;
-    }
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name="id_pedido")
+    private Pedido pedido;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JoinColumn(name="id_produto")
+    private Produto produto;
+
+//    public double calc(){
+//        return this.vlProduto * quantidade;
+//    }
 
 }

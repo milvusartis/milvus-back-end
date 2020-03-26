@@ -1,11 +1,12 @@
 package br.com.milvusartis.ecommerce.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -29,19 +30,25 @@ public class Produto implements Serializable {
     @Column(name = "ds_local_imagem")
     private String imagem;
 
-    @NotNull
     @Column(name = "vl_unitario_produto")
     private Double vlUnitario;
 
     @Column(name = "cd_disponibilidade_produto")
     private Boolean disponibilidade;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     @JoinColumn(name = "id_estoque")
     private Estoque estoque;
+
+    @OneToOne
+    @JsonBackReference
+    @JoinColumn(name="nrItemPedido")
+    private PedidoItem pedidoItem;
 
 }

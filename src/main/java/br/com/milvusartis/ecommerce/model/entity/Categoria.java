@@ -1,11 +1,13 @@
 package br.com.milvusartis.ecommerce.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -21,5 +23,10 @@ public class Categoria implements Serializable {
 
     @Column(name = "nm_categoria")
     private String nome;
+
+    @OneToMany
+    @JsonBackReference
+    @JoinColumn(name="id_produto")
+    private List<Produto> produtos;
 
 }
