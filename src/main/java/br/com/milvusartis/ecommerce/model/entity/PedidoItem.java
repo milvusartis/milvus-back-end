@@ -18,7 +18,7 @@ public class PedidoItem implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_item_pedido")
+    @Column(name="id_pedido_item")
     private Long id;
 
     @Column(name="nr_quantidade")
@@ -30,6 +30,12 @@ public class PedidoItem implements Serializable {
     @OneToOne
     @JoinColumn(name="produto_id", referencedColumnName = "id_produto")
     private Produto produto;
+
+//
+//    @ManyToOne
+//    @JoinColumn(name = "pedido_id", referencedColumnName = "id_pedido")
+//    private Pedido  pedido;
+
 
     public double calculaValorPorItens(){
         return this.valorProduto * quantidade;

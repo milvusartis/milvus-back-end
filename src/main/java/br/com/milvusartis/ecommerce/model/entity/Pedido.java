@@ -46,9 +46,10 @@ public class Pedido implements Serializable {
     @Column(name="dt_entrega")
     private Date dataEntrega;
 
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="item_pedido_id", referencedColumnName = "id_item_pedido")
-    private List<PedidoItem> pedidoItens;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="pedido_id", referencedColumnName = "id_pedido")
+    private List<PedidoItem> pedidoItems;
+
 
     @ManyToOne
     @JoinColumn(name="cliente_id", referencedColumnName = "id_cliente")
@@ -59,13 +60,13 @@ public class Pedido implements Serializable {
     private Pagamento pagamento;
 
     public void adicionarItem(PedidoItem item) {
-        if(pedidoItens == null)
-            pedidoItens = new ArrayList<>();
-        pedidoItens.add(item);
+        if(pedidoItems == null)
+            pedidoItems = new ArrayList<>();
+        pedidoItems.add(item);
     }
     public Double total() {
         Double soma = 0.00;
-        for(PedidoItem item: pedidoItens)
+        for(PedidoItem item: pedidoItems)
             soma += item.calculaValorPorItens();
         return soma;
     }
