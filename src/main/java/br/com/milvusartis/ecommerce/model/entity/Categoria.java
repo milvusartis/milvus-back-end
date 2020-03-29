@@ -21,12 +21,7 @@ public class Categoria implements Serializable {
     @Column(name = "id_categoria")
     private Long id;
 
-    @Column(name = "nm_categoria")
+    @Column(name = "ds_nome_categoria")
     private String nome;
-
-    @OneToMany
-    @JsonBackReference
-    @JoinColumn(name="id_produto")
-    private List<Produto> produtos;
 
 }
