@@ -19,36 +19,31 @@ public class Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_produto")
-    private Long idProduto;
+    private Long id;
 
-    @Column(name = "nm_produto")
+    @Column(name = "ds_nome_produto")
     private String nome;
 
-    @Column(name = "ds_produto")
+    @Column(name = "ds_descricao")
     private String descricao;
 
-    @Column(name = "ds_local_imagem")
+    @Column(name = "ds_imagem_url")
     private String imagem;
 
-    @Column(name = "vl_unitario_produto")
-    private Double vlUnitario;
+    @Column(name = "vl_unitario")
+    private Double valorUnitario;
 
-    @Column(name = "cd_disponibilidade_produto")
-    private Boolean disponibilidade;
+    @Column(name = "cd_ativo")
+    private Boolean isAtivo;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JoinColumn(name = "id_categoria")
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", referencedColumnName = "id_categoria")
     private Categoria categoria;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JoinColumn(name = "id_estoque")
+    @JoinColumn(name = "estoque_id", referencedColumnName = "id_estoque")
     private Estoque estoque;
 
-    @OneToOne
-    @JsonBackReference
-    @JoinColumn(name="nrItemPedido")
-    private PedidoItem pedidoItem;
+
 
 }

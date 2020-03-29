@@ -1,7 +1,6 @@
 package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.entity.Categoria;
-import br.com.milvusartis.ecommerce.model.entity.Estoque;
 import br.com.milvusartis.ecommerce.model.entity.Produto;
 import br.com.milvusartis.ecommerce.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +36,9 @@ public class ProdutoService {
     }
 
     public Produto atualizar(Produto produto) {
-        Produto produtoEntity = produtoRepository.getOne(produto.getIdProduto());
+        Produto produtoEntity = produtoRepository.getOne(produto.getId());
         produtoEntity.setDescricao(produto.getDescricao());
-        produtoEntity.setVlUnitario(produto.getVlUnitario());
+        produtoEntity.setValorUnitario(produto.getValorUnitario());
         produtoEntity.setCategoria(produto.getCategoria());
         produtoEntity.setEstoque(produto.getEstoque());
         return produtoRepository.save(produtoEntity);
