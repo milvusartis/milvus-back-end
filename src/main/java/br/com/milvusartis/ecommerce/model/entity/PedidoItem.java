@@ -18,27 +18,25 @@ public class PedidoItem implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="nr_item_pedido")
-    private Long nrItemPedido;
+    @Column(name="id_item_pedido")
+    private Long id;
 
     @Column(name="nr_quantidade")
     private Integer quantidade;
 
     @Column(name="vl_produto")
-    private Double vlProduto;
+    private Double valorProduto;
 
     @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name="id_pedido")
+    @JoinColumn(name="pedido_id", referencedColumnName = "id_pedido")
     private Pedido pedido;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JoinColumn(name="id_produto")
+    @OneToOne
+    @JoinColumn(name="produto_id", referencedColumnName = "id_produto")
     private Produto produto;
 
-//    public double calc(){
-//        return this.vlProduto * quantidade;
-//    }
+    public double calculaValorPorItens(){
+        return this.valorProduto * quantidade;
+    }
 
 }
