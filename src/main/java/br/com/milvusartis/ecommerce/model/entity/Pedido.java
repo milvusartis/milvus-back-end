@@ -39,7 +39,7 @@ public class Pedido implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name="cd_status_pedido")
     private StatusPedido statusPedido;
-    
+
     @Column(name="dt_entrega")
     private Date dataEntrega;
 
