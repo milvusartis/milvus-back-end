@@ -61,7 +61,7 @@ public class ClienteService {
         Cliente clienteEntity = new Cliente();
 
         if(cliente != null)
-            clienteEntity = clienteRepository.getOne(cliente.getIdCliente());
+            clienteEntity = clienteRepository.getOne(cliente.getId());
 
             clienteEntity.setNome(cliente.getNome());
             clienteEntity.setCpf(cliente.getCpf());

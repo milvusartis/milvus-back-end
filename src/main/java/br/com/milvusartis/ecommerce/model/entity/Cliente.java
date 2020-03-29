@@ -20,31 +20,20 @@ public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_cliente")
-    private Long idCliente;
-
-    @Column(name="nm_cliente")
-    private String nome;
+    private Long id;
 
     @Column(name="ds_cpf")
     private String cpf;
 
+    @Column(name="ds_rg")
+    private String rg;
+
+
     @Column(name="ds_telefone")
     private String telefone;
 
-    @Column(name="ds_email")
-    private String email;
-
-    @Column(name="ds_senha")
-    private String senha;
-
     @OneToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JoinColumn(name="id_endereco")
+    @JoinColumn(name="endereco_id", referencedColumnName = "id_endereco")
     private Endereco endereco;
-
-    @OneToMany
-    @JsonBackReference
-    @JoinColumn(name="id_pedido")
-    private List<Pedido> pedidos;
 
 }

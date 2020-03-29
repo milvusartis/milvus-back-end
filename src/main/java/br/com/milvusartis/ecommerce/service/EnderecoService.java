@@ -21,10 +21,10 @@ public class EnderecoService {
         enderecoEntity.setComplemento(enderecoDTO.getComplemento());
         enderecoEntity.setBairro(enderecoDTO.getBairro());
         enderecoEntity.setCidade(enderecoDTO.getCidade());
-        enderecoEntity.setEstado(enderecoDTO.getEstado());
+        enderecoEntity.setUf(enderecoDTO.getEstado());
 
         Endereco retornoEndereco = enderecoRepository.save(enderecoEntity);
-        enderecoDTO.setIdEndereco(retornoEndereco.getIdEndereco());
+        enderecoDTO.setIdEndereco(retornoEndereco.getId());
         return ResponseEntity.ok().body(enderecoDTO);
     }
     public void deleteById(Long id) {
@@ -32,7 +32,7 @@ public class EnderecoService {
     }
 
     public ResponseEntity alterar(Endereco endereco) {
-       Endereco enderecoEntity = enderecoRepository.getOne(endereco.getIdEndereco());
+       Endereco enderecoEntity = enderecoRepository.getOne(endereco.getId());
 
         enderecoEntity.setCep(endereco.getCep());
         enderecoEntity.setRua(endereco.getRua());
@@ -40,7 +40,7 @@ public class EnderecoService {
         enderecoEntity.setComplemento(endereco.getComplemento());
         enderecoEntity.setBairro(endereco.getBairro());
         enderecoEntity.setCidade(endereco.getCidade());
-        enderecoEntity.setEstado(endereco.getEstado());
+        enderecoEntity.setUf(endereco.getUf());
 
        return ResponseEntity.ok().body(enderecoRepository.save(enderecoEntity));
     }

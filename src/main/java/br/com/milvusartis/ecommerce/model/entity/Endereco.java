@@ -18,15 +18,12 @@ public class Endereco implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_endereco")
-    private Long idEndereco;
-
-    @Column(name = "ds_cep")
-    private String cep;
+    private Long id;
 
     @Column(name = "ds_rua")
     private String rua;
 
-    @Column(name = "nr_imovel")
+    @Column(name = "nr_numero")
     private Integer numero;
 
     @Column(name = "ds_complemento")
@@ -38,17 +35,10 @@ public class Endereco implements Serializable {
     @Column(name = "ds_cidade")
     private String cidade;
 
-    @Column(name = "sg_estado")
-    private String estado;
+    @Column(name = "sg_uf")
+    private String uf;
 
-    @OneToOne
-    @JsonBackReference
-    @JoinColumn(name="id_cliente")
-    private Cliente cliente;
-
-    @OneToOne
-    @JsonBackReference
-    @JoinColumn(name="id_empresa")
-    private Empresa empresa;
+    @Column(name = "cd_cep")
+    private String cep;
 
 }
