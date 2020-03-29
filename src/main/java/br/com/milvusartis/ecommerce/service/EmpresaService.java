@@ -20,7 +20,7 @@ public class EmpresaService {
         empresaEntity.setEndereco(empresaDTO.getEndereco());
 
         Empresa retornoEmpresa = empresaRepository.save(empresaEntity);
-        empresaDTO.setIdEmpresa(retornoEmpresa.getIdEmpresa());
+        empresaDTO.setIdEmpresa(retornoEmpresa.getId());
         return ResponseEntity.ok().body(empresaDTO);
     }
     public void deleteById(Long id){
