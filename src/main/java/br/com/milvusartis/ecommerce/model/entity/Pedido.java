@@ -26,6 +26,7 @@ public class Pedido implements Serializable {
     @Column(name="nr_pedido")
     private Long numero;
 
+    //TODO JASON DATE FORMAT
 //    @Temporal(TemporalType.DATE)
     @Column(name="dt_data_pedido")
     private Date dataPedido;
@@ -40,6 +41,8 @@ public class Pedido implements Serializable {
     @Column(name="cd_status_pedido")
     private StatusPedido statusPedido;
 
+    //TODO JASON DATE FORMAT
+//    @Temporal(TemporalType.DATE)
     @Column(name="dt_entrega")
     private Date dataEntrega;
 
