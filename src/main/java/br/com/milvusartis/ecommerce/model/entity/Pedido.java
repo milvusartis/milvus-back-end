@@ -15,48 +15,47 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="tb_pedido")
+@Table(name = "tb_pedido")
 public class Pedido implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_pedido")
-    private Long id;
+    @Column(name = "id_pedido")
+    private Long idPedido;
 
-    @Column(name="nr_pedido")
+    @Column(name = "nr_pedido")
     private Long numero;
 
     //TODO JASON DATE FORMAT
 //    @Temporal(TemporalType.DATE)
-    @Column(name="dt_data_pedido")
+    @Column(name = "dt_data_pedido")
     private Date dataPedido;
 
-    @Column(name="vl_frete")
+    @Column(name = "vl_frete")
     private Double valorFrete;
 
-    @Column(name="vl_total_pedido")
+    @Column(name = "vl_total_pedido")
     private Double valorTotal;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="cd_status_pedido")
+    @Column(name = "cd_status_pedido")
     private StatusPedido statusPedido;
 
     //TODO JASON DATE FORMAT
 //    @Temporal(TemporalType.DATE)
-    @Column(name="dt_entrega")
+    @Column(name = "dt_entrega")
     private Date dataEntrega;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="pedido_id", referencedColumnName = "id_pedido")
+    @JoinColumn(name = "pedido_id", referencedColumnName = "id_pedido")
     private List<PedidoItem> pedidoItems;
 
-
     @ManyToOne
-    @JoinColumn(name="cliente_id", referencedColumnName = "id_cliente")
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id_cliente")
     private Cliente cliente;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="pagamento_id", referencedColumnName = "id_pagamento")
+    @JoinColumn(name = "pagamento_id", referencedColumnName = "id_pagamento")
     private Pagamento pagamento;
 
     public void adicionarItem(PedidoItem item) {

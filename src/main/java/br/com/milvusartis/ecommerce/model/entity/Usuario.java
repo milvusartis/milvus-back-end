@@ -11,13 +11,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="tb_usuario")
+@Table(name = "tb_usuario")
 public class Usuario  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-    private Long id;
+    private Long idUsuario;
 
     @Column(name = "ds_nome")
     private String nome;
@@ -35,4 +35,5 @@ public class Usuario  implements Serializable {
     @OneToOne
     @JoinColumn(name = "acesso_id", referencedColumnName = "id_acesso")
     private Acesso acesso;
+
 }

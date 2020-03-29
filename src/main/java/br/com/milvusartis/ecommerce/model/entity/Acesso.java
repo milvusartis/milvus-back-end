@@ -12,16 +12,16 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="tb_acesso")
+@Table(name = "tb_acesso")
 public class Acesso implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_acesso")
-    private Long id;
-
+    private Long idAcesso;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "ds_regra")
     private Regra regra;
+
 }

@@ -11,21 +11,21 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name ="tb_empresa")
+@Table(name = "tb_empresa")
 public class Empresa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id_empresa")
-    private Long id;
+    @Column(name = "id_empresa")
+    private Long idEmpresa;
 
-    @Column(name ="ds_razao_social")
+    @Column(name = "ds_razao_social")
     private String razaoSocial;
 
-    @Column(name ="ds_cnpj")
+    @Column(name = "ds_cnpj")
     private String cnpj;
 
-    @Column(name ="ds_inscricao_estadual")
+    @Column(name = "ds_inscricao_estadual")
     private String inscricaoEstadual;
 
     @OneToOne(cascade = CascadeType.ALL)

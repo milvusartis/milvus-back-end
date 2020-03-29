@@ -16,6 +16,4 @@ public class PedidoItemDTO {
     private ProdutoDTO produto;
     private PedidoDTO pedido;
 
-
-
 }

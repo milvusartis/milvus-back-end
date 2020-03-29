@@ -11,26 +11,25 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="tb_cliente")
+@Table(name = "tb_cliente")
 public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_cliente")
-    private Long id;
+    @Column(name = "id_cliente")
+    private Long idCliente;
 
-    @Column(name="ds_cpf")
+    @Column(name = "ds_cpf")
     private String cpf;
 
-    @Column(name="ds_rg")
+    @Column(name = "ds_rg")
     private String rg;
 
-
-    @Column(name="ds_telefone")
+    @Column(name = "ds_telefone")
     private String telefone;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="endereco_id", referencedColumnName = "id_endereco")
+    @JoinColumn(name = "endereco_id", referencedColumnName = "id_endereco")
     private Endereco endereco;
 
 }

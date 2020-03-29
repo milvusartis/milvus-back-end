@@ -17,10 +17,10 @@ public class NotaFiscal implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id_nf")
-    private Long id;
+    @Column(name = "id_nf")
+    private Long idNotaFiscal;
 
-    @Column(name ="nr_nf")
+    @Column(name = "nr_nf")
     private Integer numeroNf;
 
     @Column(name = "dt_emissao")
@@ -28,7 +28,7 @@ public class NotaFiscal implements Serializable {
 //    @Temporal(TemporalType.TIMESTAMP)
     private Date dataEmissao;
 
-    @Column(name ="ds_natureza_operacao")
+    @Column(name = "ds_natureza_operacao")
     private String naturezaOperacao;
 
     @OneToOne(cascade = CascadeType.ALL)
