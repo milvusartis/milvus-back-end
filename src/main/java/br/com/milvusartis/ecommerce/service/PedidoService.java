@@ -69,18 +69,18 @@ public class PedidoService {
         Pedido pedidoEntity = new Pedido();
 
         if(pedido != null)
-            pedidoEntity = pedidoRepository.getOne(pedido.getIdPedido());
+            pedidoEntity = pedidoRepository.getOne(pedido.getId());
 
             pedidoEntity.setNumero(pedido.getNumero());
-            pedidoEntity.setDtPedido(pedido.getDtPedido());
-            pedidoEntity.setVlFrete(pedido.getVlFrete());
+            pedidoEntity.setDataPedido(pedido.getDataPedido());
+            pedidoEntity.setValorFrete(pedido.getValorFrete());
             pedidoEntity.setStatusPedido(pedido.getStatusPedido());
-            pedidoEntity.setVlTotal(pedido.getVlTotal());
+            pedidoEntity.setValorTotal(pedido.getValorTotal());
             pedidoEntity.setNrCartao(pedido.getNrCartao());
             pedidoEntity.setNmCartao(pedido.getNmCartao());
             pedidoEntity.setDtValidadeCartao(pedido.getDtValidadeCartao());
             pedidoEntity.setCdSegurancaCartao(pedido.getCdSegurancaCartao());
-            pedidoEntity.setDtEntrega(pedido.getDtEntrega());
+            pedidoEntity.setDataEntrega(pedido.getDataEntrega());
 
         if(pedidoEntity != null)
             return ResponseEntity.ok().body(pedidoRepository.save(pedidoEntity));

@@ -27,10 +27,6 @@ public class PedidoItem implements Serializable {
     @Column(name="vl_produto")
     private Double valorProduto;
 
-    @ManyToOne
-    @JoinColumn(name="pedido_id", referencedColumnName = "id_pedido")
-    private Pedido pedido;
-
     @OneToOne
     @JoinColumn(name="produto_id", referencedColumnName = "id_produto")
     private Produto produto;
