@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmpresaDTO {
 
-    private Long id;
+    private Long idEmpresa;
     private String razaoSocial;
     private String cnpj;
     private String inscricaoEstadual;

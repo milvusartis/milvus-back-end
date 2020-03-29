@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class NotaFiscalDTO {
 
-    private Long id;
+    private Long idNotaFiscal;
     private Integer numeroNf;
     private Date dataEmissao;
     private String naturezaOperacao;

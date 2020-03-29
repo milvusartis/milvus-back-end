@@ -12,6 +12,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class AcessoDTO {
 
-    private Long id;
+    private Long idAcesso;
     private Regra regra;
 }

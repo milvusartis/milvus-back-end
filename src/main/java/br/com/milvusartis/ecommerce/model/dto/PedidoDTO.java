@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 public class PedidoDTO {
 
-    private Long id;
+    private Long idPedido;
     private Long numero;
     private Date dataPedido;
     private Double valorFrete;

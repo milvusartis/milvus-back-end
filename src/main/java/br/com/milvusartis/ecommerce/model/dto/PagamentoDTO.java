@@ -11,7 +11,7 @@ import javax.persistence.Column;
 @NoArgsConstructor
 public class PagamentoDTO {
 
-    private Long id;
+    private Long idPagamento;
     private String titularPagamento;
     private String telefoneTitular;
     private String cpfTitular;

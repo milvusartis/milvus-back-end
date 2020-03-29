@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class EstoqueDTO {
 
-    private Long id;
+    private Long idEstoque;
     private Integer qtdEstocada;
     private Integer qtdReservada;
 

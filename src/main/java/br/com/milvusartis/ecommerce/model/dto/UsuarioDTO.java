@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class UsuarioDTO {
 
-    private Long id;
+    private Long idUsuario;
     private String nome;
     private String email;
     private ClienteDTO cliente;
