@@ -14,12 +14,14 @@ import java.util.Date;
 @NoArgsConstructor
 public class NotaFiscalDTO {
 
-    private Long idNf;
-    private Date dtNf;
-    private Cliente cliente;
-    private Empresa empresa;
-    private Pedido pedido;
+    private Long id;
+    private Integer numeroNf;
+    private Date dataEmissao;
     private String naturezaOperacao;
-    private Integer nfE;
+    private PedidoDTO pedido;
+    private EmpresaDTO empresa;
+
+
+
 
 }

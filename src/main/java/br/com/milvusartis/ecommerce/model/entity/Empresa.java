@@ -20,7 +20,7 @@ public class Empresa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id_empresa")
-    private Long idEmpresa;
+    private Long id;
 
     @Column(name ="ds_razao_social")
     private String razaoSocial;
@@ -32,13 +32,7 @@ public class Empresa implements Serializable {
     private String inscricaoEstadual;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JoinColumn(name = "id_endereco")
+    @JoinColumn(name = "endereco_id", referencedColumnName = "id_endereco")
     private Endereco endereco;
-
-    @OneToMany
-    @JsonBackReference
-    @JoinColumn(name="id_nf")
-    private List<NotaFiscal> notasFiscais;
 
 }

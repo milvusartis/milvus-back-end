@@ -5,17 +5,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EstoqueDTO {
+public class PagamentoDTO {
 
     private Long id;
-    private Integer qtdEstocada;
-    private Integer qtdReservada;
+    private String titularPagamento;
+    private String telefoneTitular;
+    private String cpfTitular;
+    private String formaPagamento;
+    private Boolean isAprovado;
+
 
 }

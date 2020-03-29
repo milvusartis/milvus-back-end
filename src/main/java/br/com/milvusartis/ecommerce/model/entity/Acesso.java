@@ -1,27 +1,27 @@
 package br.com.milvusartis.ecommerce.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import br.com.milvusartis.ecommerce.model.tipos.Regra;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_categoria")
-public class Categoria implements Serializable {
+@Table(name="tb_acesso")
+public class Acesso implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_categoria")
+    @Column(name = "id_acesso")
     private Long id;
 
-    @Column(name = "ds_nome_categoria")
-    private String nome;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ds_regra")
+    private Regra regra;
 }

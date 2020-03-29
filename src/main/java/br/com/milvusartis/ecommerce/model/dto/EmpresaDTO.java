@@ -10,11 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmpresaDTO {
 
-    private Long idEmpresa;
+    private Long id;
     private String razaoSocial;
     private String cnpj;
     private String inscricaoEstadual;
-    //private Long enderecoIdEndereco;
-    private Endereco endereco;
+    private EnderecoDTO endereco;
 
 }

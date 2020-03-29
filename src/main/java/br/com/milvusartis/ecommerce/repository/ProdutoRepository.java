@@ -10,6 +10,5 @@ import java.util.List;
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     List<Produto> findByNome(String nome);
-
-    List<Produto> findByDisponibilidade(Boolean disponibilidade);
+    List<Produto> findByIsAtivo(Boolean isAtivo);
 }

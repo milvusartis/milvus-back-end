@@ -19,30 +19,25 @@ public class NotaFiscal implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id_nf")
-    private Long idNf;
+    private Long id;
+
+    @Column(name ="nr_nf")
+    private Integer numeroNf;
 
     @Column(name = "dt_emissao")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtNf;
-
-//    @OneToOne
-//    @JoinColumn(name = "id_cliente")
-//    private Cliente cliente;
+    //TODO JASON DATE FORMAT
+//    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataEmissao;
 
     @Column(name ="ds_natureza_operacao")
     private String naturezaOperacao;
 
-    @Column(name ="nr_nfE")
-    private Integer nfE;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JoinColumn(name = "id_empresa")
-    private Empresa empresa;
-
     @OneToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JoinColumn(name = "id_pedido")
+    @JoinColumn(name = "pedido_id", referencedColumnName = "id_pedido")
     private Pedido pedido;
+
+    @ManyToOne
+    @JoinColumn(name = "empresa_id", referencedColumnName = "id_empresa")
+    private Empresa empresa;
 
 }
