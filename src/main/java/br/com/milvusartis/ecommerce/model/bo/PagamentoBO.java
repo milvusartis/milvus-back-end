@@ -4,7 +4,9 @@ import br.com.milvusartis.ecommerce.model.dto.PagamentoDTO;
 import br.com.milvusartis.ecommerce.model.entity.Pagamento;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PagamentoBO implements IBO<Pagamento, PagamentoDTO>  {
 
     @Autowired

@@ -25,5 +25,4 @@ public class PedidoDTO {
     private ClienteDTO cliente;
     private PagamentoDTO pagamento;
 
-
 }

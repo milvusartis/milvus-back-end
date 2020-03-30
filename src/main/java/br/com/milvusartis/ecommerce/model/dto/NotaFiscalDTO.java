@@ -20,7 +20,4 @@ public class NotaFiscalDTO {
     private PedidoDTO pedido;
     private EmpresaDTO empresa;
 
-
-
-
 }
