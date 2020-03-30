@@ -34,7 +34,7 @@ public class PedidoItem implements Serializable {
 //    private Pedido pedido;
 
     public double calculaValorPorItens(){
-        return this.precoVendido * this.quantidade;
+        return getPrecoVendido() * getQuantidade();
     }
 
 }
