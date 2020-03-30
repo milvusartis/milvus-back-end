@@ -63,6 +63,8 @@ public class Pedido implements Serializable {
             pedidoItems = new ArrayList<>();
         pedidoItems.add(item);
     }
+
+    @Transient
     public Double total() {
         Double soma = 0.00;
         for(PedidoItem item: pedidoItems)
