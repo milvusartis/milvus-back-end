@@ -24,7 +24,7 @@ public class ClienteController {
 
 
     @PostMapping("/clientes")
-    public ResponseEntity<?> save(@RequestBody Cliente cliente) {
+    public ResponseEntity<?> cadastrar(@RequestBody Cliente cliente) {
         if (cliente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente não pode estar vazio");
         }
@@ -33,6 +33,14 @@ public class ClienteController {
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteAtualizado);
 
     }
+
+    @GetMapping("/clientes/{id}")
+    public ResponseEntity<?> mostrar(@PathVariable("id") Long id) {
+        Cliente cliente = clienteService.buscarCliente(id);
+        return ResponseEntity.status(HttpStatus.OK).body(cliente);
+    }
+
+
 
 
 
