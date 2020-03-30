@@ -22,8 +22,8 @@ public class PedidoItem implements Serializable {
     @Column(name = "nr_quantidade")
     private Integer quantidade;
 
-    @Column(name = "vl_produto")
-    private Double valorProduto;
+    @Column(name = "vl_preco_vendido")
+    private Double precoVendido;
 
     @OneToOne
     @JoinColumn(name = "produto_id", referencedColumnName = "id_produto")
@@ -34,7 +34,7 @@ public class PedidoItem implements Serializable {
 //    private Pedido pedido;
 
     public double calculaValorPorItens(){
-        return this.valorProduto * quantidade;
+        return this.precoVendido * this.quantidade;
     }
 
 }
