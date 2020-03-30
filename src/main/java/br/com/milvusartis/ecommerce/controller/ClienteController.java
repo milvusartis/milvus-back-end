@@ -1,5 +1,6 @@
 package br.com.milvusartis.ecommerce.controller;
 
+import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.service.ClienteService;
 import br.com.milvusartis.ecommerce.model.entity.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,29 +41,5 @@ public class ClienteController {
         return ResponseEntity.status(HttpStatus.OK).body(cliente);
     }
 
-
-
-
-
-//    @GetMapping("/clientes")
-//    public ResponseEntity<?> buscarLista(Long id) {
-//        return ResponseEntity.ok().body(clienteService.buscarCliente(id));
-//    }
-//
-
-//
-//
-//
-//
-//
-//    @PutMapping("/clientes")
-//    public ResponseEntity<?> alterar(@RequestBody Cliente cl) {
-//        return ResponseEntity.ok().body(clienteService.alterarCliente(cl));
-//    }
-//
-//    @DeleteMapping("/clientes")
-//    public void deletar(Long id) {
-//        clienteService.deletarCliente(id);
-//    }
 
 }

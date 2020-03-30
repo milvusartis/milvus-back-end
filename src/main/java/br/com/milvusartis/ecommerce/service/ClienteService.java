@@ -19,7 +19,7 @@ import java.util.Optional;
 public class ClienteService {
 
     @Autowired
-    private ClienteRepository repository;
+    ClienteRepository repository;
 
 
     public List<Cliente> buscarTodosOsClientes() {
@@ -39,29 +39,4 @@ public class ClienteService {
         Cliente cliente = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
         return cliente;
     }
-
-
-//    public ResponseEntity alterarCliente(@RequestBody Cliente cliente) {
-//
-//        Cliente clienteEntity = new Cliente();
-//
-//        if(cliente != null)
-//            clienteEntity = repository.getOne(cliente.getId());
-//
-//            clienteEntity.setNome(cliente.getNome());
-//            clienteEntity.setCpf(cliente.getCpf());
-//            clienteEntity.setTelefone(cliente.getTelefone());
-//            clienteEntity.setEmail(cliente.getEmail());
-//            clienteEntity.setSenha(cliente.getSenha());
-//            clienteEntity.setTelefone(cliente.getTelefone());
-//
-//        if(clienteEntity != null)
-//            return ResponseEntity.ok().body(repository.save(clienteEntity));
-//        else
-//            return ResponseEntity.badRequest().build();
-//    }
-//
-//    public void deletarCliente(@PathVariable("id_cliente") Long id) {
-//        repository.deleteById(id);
-//    }
 }
