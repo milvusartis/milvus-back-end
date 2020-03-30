@@ -29,10 +29,6 @@ public class Usuario  implements Serializable {
     private String senha;
 
     @OneToOne
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id_cliente")
-    private Cliente cliente;
-
-    @OneToOne
     @JoinColumn(name = "acesso_id", referencedColumnName = "id_acesso")
     private Acesso acesso;
 

@@ -29,6 +29,10 @@ public class Cliente implements Serializable {
     private String telefone;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id_usuario")
+    private Usuario usuario;
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id_endereco")
     private Endereco endereco;
 
