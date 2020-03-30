@@ -70,5 +70,22 @@
 //        ProdutoDTO dto = produtoBO.parseToDTO(produto);
 //        return ResponseEntity.ok().body(dto);
 //    }
+
+
+
+
+//@GetMapping(path = "/clientes")
+//    Page<Cliente> loadClientesPage(
+////            @PageableDefault(page = 0, size = 5)
+//@SortDefault.SortDefaults({
+//        @SortDefault(sort = "idCliente", direction = Sort.Direction.ASC)
+//})
+//                    Pageable pageable) {
+//                            System.out.println("ESTOU AQUIIIII");
+//                            return repository.findAllPage(pageable);
+//                            }
+
+
+
 //
 //}
