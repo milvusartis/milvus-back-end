@@ -1,5 +1,6 @@
 package br.com.milvusartis.ecommerce.model.entity;
 
+import br.com.milvusartis.ecommerce.model.tipos.Regra;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_usuario")
-public class Usuario  implements Serializable {
+public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +29,8 @@ public class Usuario  implements Serializable {
     @Column(name = "ds_senha")
     private String senha;
 
-    @OneToOne
-    @JoinColumn(name = "acesso_id", referencedColumnName = "id_acesso")
-    private Acesso acesso;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ds_regra_acesso")
+    private Regra regraDeAcesso;
 
 }

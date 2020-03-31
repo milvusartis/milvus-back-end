@@ -6,6 +6,7 @@ import br.com.milvusartis.ecommerce.model.bo.ClienteResponseBO;
 import br.com.milvusartis.ecommerce.model.dto.ClienteDTO;
 import br.com.milvusartis.ecommerce.model.dto.ClienteResponseDTO;
 import br.com.milvusartis.ecommerce.model.entity.Cliente;
+import br.com.milvusartis.ecommerce.model.tipos.Regra;
 import br.com.milvusartis.ecommerce.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +45,15 @@ public class ClienteController {
     }
 
 
-
     @PostMapping("/clientes")
     public ResponseEntity<?> cadastrar(@RequestBody ClienteDTO clienteDTO) {
         if (clienteDTO == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente não pode estar vazio");
         }
+        Cliente cliente = clienteBO.parseToPOJO(clienteDTO);
+        cliente.getUsuario().setRegraDeAcesso(Regra.ROLE_USER);
 
-        Cliente clienteEntity = repository.save(clienteBO.parseToPOJO(clienteDTO));
+        Cliente clienteEntity = repository.save(cliente);
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteBO.parseToDTO(clienteEntity));
 
     }
