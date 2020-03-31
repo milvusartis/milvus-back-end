@@ -2,7 +2,9 @@ package br.com.milvusartis.ecommerce.controller;
 
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.model.bo.ClienteBO;
+import br.com.milvusartis.ecommerce.model.bo.ClienteResponseBO;
 import br.com.milvusartis.ecommerce.model.dto.ClienteDTO;
+import br.com.milvusartis.ecommerce.model.dto.ClienteResponseDTO;
 import br.com.milvusartis.ecommerce.model.entity.Cliente;
 import br.com.milvusartis.ecommerce.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +28,17 @@ public class ClienteController {
     @Autowired
     private ClienteBO clienteBO;
 
+    @Autowired
+    private ClienteResponseBO clienteResponseBO;
+
 
     @GetMapping("/clientes")
     public ResponseEntity<?> listar() {
         List<Cliente> clientes = repository.findAll();
-        List<ClienteDTO> listaDeClientesResposta = new ArrayList<>();
+        List<ClienteResponseDTO> listaDeClientesResposta = new ArrayList<>();
 
         clientes.forEach((cliente) -> {
-            listaDeClientesResposta.add(clienteBO.parseToDTO(cliente));
+            listaDeClientesResposta.add(clienteResponseBO.parseToDTO(cliente));
         });
         return ResponseEntity.status(HttpStatus.OK).body(listaDeClientesResposta);
     }
