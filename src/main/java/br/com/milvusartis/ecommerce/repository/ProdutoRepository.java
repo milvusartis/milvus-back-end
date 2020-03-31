@@ -15,11 +15,9 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     List<Produto> findByNome(String nome);
     List<Produto> findByIsAtivo(Boolean isAtivo);
 
-
     @Query("select p from Produto p")
     Page<Produto> findAllPage(Pageable pageable);
 }
-
 
 //@Repository
 //public interface ClienteRepository extends PagingAndSortingRepository<Cliente, Long> {

@@ -34,25 +34,25 @@ public class CategoriaService {
             lista = repository.findByNome(nome);
 
         return lista;
-    }
 
+    }
 
     public void excluirPorId(Long id) {
         repository.deleteById(id);
     }
 
     public Categoria alterar(Categoria categoria) {
+
         Categoria categoriaEntity = repository.getOne(categoria.getIdCategoria());
+
         categoriaEntity.setNome(categoria.getNome());
+
         return repository.save(categoriaEntity);
+
     }
 
     public Categoria alterarCamposEspecificos(Categoria categoria) {
         return this.alterar(categoria);
     }
-
-
-
-
 
 }
