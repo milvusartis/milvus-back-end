@@ -12,14 +12,14 @@ import java.util.List;
 public class CategoriaService {
 
     @Autowired
-    CategoriaRepository repository;
+    CategoriaRepository categoriaRepository;
 
     public Categoria salvar(Categoria categoria) {
-        return repository.save(categoria);
+        return categoriaRepository.save(categoria);
     }
 
     public Categoria buscaPorId(Long idCategoria) {
-        return repository.findById(idCategoria).get();
+        return categoriaRepository.findById(idCategoria).get();
     }
 
     public List<Categoria> buscarCategoria(Long id, String nome) {
@@ -27,27 +27,27 @@ public class CategoriaService {
         List<Categoria> lista = new ArrayList<>();
 
         if (id == null && nome == null)
-            lista = repository.findAll();
+            lista = categoriaRepository.findAll();
         else if (id != null)
-            lista.add(repository.findById(id).get());
+            lista.add(categoriaRepository.findById(id).get());
         else if (nome != null)
-            lista = repository.findByNome(nome);
+            lista = categoriaRepository.findByNome(nome);
 
         return lista;
 
     }
 
     public void excluirPorId(Long id) {
-        repository.deleteById(id);
+        categoriaRepository.deleteById(id);
     }
 
     public Categoria alterar(Categoria categoria) {
 
-        Categoria categoriaEntity = repository.getOne(categoria.getIdCategoria());
+        Categoria categoriaEntity = categoriaRepository.getOne(categoria.getIdCategoria());
 
         categoriaEntity.setNome(categoria.getNome());
 
-        return repository.save(categoriaEntity);
+        return categoriaRepository.save(categoriaEntity);
 
     }
 
