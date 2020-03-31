@@ -18,5 +18,4 @@ public class PagamentoDTO {
     private String formaPagamento;
     private Boolean isAprovado;
 
-
 }

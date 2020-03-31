@@ -17,9 +17,10 @@ public class ProdutoDTO {
     private Boolean isAtivo;
     private CategoriaDTO categoria;
 
-    /*Ótima opção quando é necessário proteger alguns dados da entidade
+    /*Ótima opção quando é necessário proteger alguns dados da entidade*/
 
-     Quando desejar mostrar um atributo apenas da entidade, utilize o padrão camel case, iniciando com o nome da entidade, seguido do nome do atributo*/
+     /*Quando desejar mostrar um atributo apenas da entidade, utilize o padrão camel case, iniciando com o nome da entidade, seguido do nome do atributo*/
+//    private Long estoqueIdEstoque;
 
     private Long estoqueIdEstoque;
 

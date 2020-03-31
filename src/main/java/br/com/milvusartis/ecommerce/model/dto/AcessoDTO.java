@@ -14,4 +14,5 @@ public class AcessoDTO {
 
     private Long idAcesso;
     private Regra regra;
+
 }
