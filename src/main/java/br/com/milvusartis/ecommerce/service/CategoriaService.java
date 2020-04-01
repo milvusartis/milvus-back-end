@@ -1,6 +1,6 @@
 package br.com.milvusartis.ecommerce.service;
 
-import br.com.milvusartis.ecommerce.model.Categoria;
+import br.com.milvusartis.ecommerce.model.entity.Categoria;
 import br.com.milvusartis.ecommerce.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,16 +22,16 @@ public class CategoriaService {
         return repository.findById(idCategoria).get();
     }
 
-    public List<Categoria> buscarCategoria(Long id, String descricao) {
+    public List<Categoria> buscarCategoria(Long id, String nome) {
 
         List<Categoria> lista = new ArrayList<>();
 
-        if (id == null && descricao == null)
+        if (id == null && nome == null)
             lista = repository.findAll();
         else if (id != null)
             lista.add(repository.findById(id).get());
-        else if (descricao != null)
-            lista = repository.findByDescricao(descricao);
+        else if (nome != null)
+            lista = repository.findByNome(nome);
 
         return lista;
     }
@@ -42,8 +42,8 @@ public class CategoriaService {
     }
 
     public Categoria alterar(Categoria categoria) {
-        Categoria categoriaEntity = repository.getOne(categoria.getId());
-        categoriaEntity.setDescricao(categoria.getDescricao());
+        Categoria categoriaEntity = repository.getOne(categoria.getIdCategoria());
+        categoriaEntity.setNome(categoria.getNome());
         return repository.save(categoriaEntity);
     }
 

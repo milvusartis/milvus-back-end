@@ -1,6 +1,5 @@
 package br.com.milvusartis.ecommerce.model.dto;
 
-import br.com.milvusartis.ecommerce.model.Produto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,24 +9,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProdutoDTO {
 
-    private Long codigo;
+    private Long idProduto;
     private String nome;
     private String descricao;
     private String imagem;
-    private Double valor;
-    private Boolean disponibilidade;
+    private Double valorUnitario;
+    private Boolean isAtivo;
     private CategoriaDTO categoria;
-    private Integer qtd_estoque;
-    private Integer qtd_reservada;
 
-    public static ProdutoDTO transformaEmDTO(Produto p){
+    /*Ótima opção quando é necessário proteger alguns dados da entidade*/
 
-        return new ProdutoDTO(p.getIdProduto(), p.getNome(), p.getDescricao(), p.getImagem(), p.getValorUnitario(), p.getDisponibilidade(), CategoriaDTO.transformaEmDTO(p.getCategoria()), p.getQuantidadeEstoque(), p.getQuantidadeReservada());
-    }
-//TODO Dando erro ao consultar estoque
-    public Produto trasnsformaParaProduto(){
-        return new Produto(codigo, nome, descricao, imagem, valor, disponibilidade, categoria.transformaParaCategoria(), qtd_estoque, qtd_reservada);
-    }
+     /*Quando desejar mostrar um atributo apenas da entidade, utilize o padrão camel case, iniciando com o nome da entidade, seguido do nome do atributo*/
+//    private Long estoqueIdEstoque;
 
+    private Long estoqueIdEstoque;
+
+    /* Também pode-se utilizar o nome do atributo desde que as duas entidades não possuam o memso nome*/
+//    private Long idEstoque;
+
+    /*Quando desejar mostrar todos os atributos do objeto*/
+//    private EstoqueDTO estoque;
 
 }

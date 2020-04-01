@@ -1,6 +1,5 @@
 package br.com.milvusartis.ecommerce.model.dto;
 
-import br.com.milvusartis.ecommerce.model.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,11 +10,10 @@ import lombok.NoArgsConstructor;
 public class ClienteDTO {
 
     private Long idCliente;
-    private String nmCliente;
-    private String dsCpf;
-    private String dsTelefone;
-    private String dsEmail;
-    private String dsSenha;
-    private Endereco endereco;
+    private String cpf;
+    private String rg;
+    private String telefone;
+    private UsuarioDTO usuario;
+    private EnderecoDTO endereco;
 
 }

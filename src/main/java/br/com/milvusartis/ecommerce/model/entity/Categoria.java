@@ -1,4 +1,4 @@
-package br.com.milvusartis.ecommerce.model;
+package br.com.milvusartis.ecommerce.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,14 +12,14 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_categoria")
-
 public class Categoria implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_categoria")
-    private Long id;
+    private Long idCategoria;
 
-    @Column(name = "nm_categoria")
-    private String descricao;
+    @Column(name = "ds_nome_categoria")
+    private String nome;
 
 }

@@ -1,8 +1,6 @@
 package br.com.milvusartis.ecommerce.model.dto;
 
-import br.com.milvusartis.ecommerce.model.Cliente;
-import br.com.milvusartis.ecommerce.model.Empresa;
-import br.com.milvusartis.ecommerce.model.Pedido;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,11 +11,13 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NotaFiscalDTO {
-    private Long idNf;
-    private Date data;
-    private Cliente cliente;
-    private Empresa empresa;
-    private Pedido pedido;
+
+    private Long idNotaFiscal;
+    private Integer numeroNf;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date dataEmissao;
     private String naturezaOperacao;
-    private Integer nfe;
+    private PedidoDTO pedido;
+    private EmpresaDTO empresa;
+
 }

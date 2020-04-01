@@ -1,103 +1,74 @@
 package br.com.milvusartis.ecommerce.controller;
 
-import br.com.milvusartis.ecommerce.model.Categoria;
-import br.com.milvusartis.ecommerce.model.dto.CategoriaDTO;
-import br.com.milvusartis.ecommerce.service.CategoriaService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+        import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
+        import br.com.milvusartis.ecommerce.model.bo.CategoriaBO;
+        import br.com.milvusartis.ecommerce.model.dto.CategoriaDTO;
+        import br.com.milvusartis.ecommerce.model.dto.ClienteDTO;
+        import br.com.milvusartis.ecommerce.model.entity.Categoria;
+        import br.com.milvusartis.ecommerce.model.entity.Cliente;
+        import br.com.milvusartis.ecommerce.repository.CategoriaRepository;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.http.HttpStatus;
+        import org.springframework.http.ResponseEntity;
+        import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
+        import java.util.Optional;
 
 
 @RestController
 public class CategoriaController {
 
     @Autowired
-    private CategoriaService service;
+    CategoriaRepository repository;
 
-    @PostMapping("/categoria")
-    public ResponseEntity<CategoriaDTO> salvar(@RequestBody CategoriaDTO categoriaDTO) {
-        Categoria categoria = service.salvar(categoriaDTO.transformaParaCategoria());
-        CategoriaDTO dto = CategoriaDTO.transformaEmDTO(categoria);
-        return ResponseEntity.ok().body(dto);
+
+    @Autowired
+    CategoriaBO categoriaBO;
+
+
+    @GetMapping("/categorias")
+    public ResponseEntity<?> listar() {
+        List<Categoria> ListaCategorias = repository.findAll();
+        List<CategoriaDTO> listaDeCategoriasResposta = new ArrayList<>();
+
+        ListaCategorias.forEach((categoria) -> {
+            listaDeCategoriasResposta.add(categoriaBO.parseToDTO(categoria));
+        });
+        return ResponseEntity.status(HttpStatus.OK).body(listaDeCategoriasResposta);
     }
 
-    //Parametro opicional, se não passar nada ele listrá todas as categorias
-    @GetMapping("/categoria")
-    public ResponseEntity<List<CategoriaDTO>> buscarCategoria(@PathParam("codigo") Long id,
-                                                              @PathParam("descricao") String descricao) {
-        List<Categoria> listaDeCategorias = service.buscarCategoria(id, descricao);
-        //Se passa um id que existe mas uma descricao que nao existe,ele sempre está considerando o primeiro parametro
-        if (listaDeCategorias != null && listaDeCategorias.size() > 0) {
-            List<CategoriaDTO> listaDTO = new ArrayList<>();
-            for (Categoria c : listaDeCategorias) {
-                listaDTO.add(CategoriaDTO.transformaEmDTO(c));
-            }
-            return ResponseEntity.ok().body(listaDTO);
-        } else {
-            return ResponseEntity.badRequest().build();
+
+
+    @PostMapping("/categorias")
+    public ResponseEntity<?> cadastrar(@RequestBody CategoriaDTO categoriaDTO) {
+        if (categoriaDTO == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria não pode estar vazia");
         }
 
-    }
-
-    @DeleteMapping("/categoria/{id}")
-    public void excluirPorId(@PathVariable("id") Long id) {
-        service.excluirPorId(id);
-    }
-
-//
-
-    //Put alterar todos os campos, Patch alterar alguns apenas
-
-
-    @PutMapping("/categoria")
-    public ResponseEntity<CategoriaDTO> alterar(@RequestBody CategoriaDTO categoriaDTO) {
-        Categoria categoria = service.alterar(categoriaDTO.transformaParaCategoria());
-        return ResponseEntity.ok().body(CategoriaDTO.transformaEmDTO(categoria));
+        Categoria categoriaEntity = repository.save(categoriaBO.parseToPOJO(categoriaDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoriaBO.parseToDTO(categoriaEntity));
 
     }
 
-//    @PatchMapping("/categoria")
-//    public ResponseEntity alterarCamposEspecificos(@RequestBody CategoriaDTO categoriaDTO) {
-//       return service.alterarCamposEspecificos(categoriaDTO);
-//    }
+    @GetMapping("/categorias/{id}")
+    public ResponseEntity<?> mostrar(@PathVariable("id") Long id) {
+        Optional<Categoria> opt_categoria = repository.findById(id);
+        Categoria categoria = opt_categoria.orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada"));
+        return ResponseEntity.status(HttpStatus.OK).body(categoriaBO.parseToDTO(categoria));
+    }
 
-//    @PostMapping("/categoria")
-//    public ResponseEntity<Categoria> salvar(@RequestBody Categoria categoria) {
-//        return ResponseEntity.ok().body(service.salvar(categoria));
-//    }
-//
-//    //Parametro opicional, se não passar nada ele listrá todas as categorias
-//    @GetMapping("/categoria")
-//    public ResponseEntity<List<Categoria>> buscarCategoria(@PathParam("codigo") Long id,
-//                                                              @PathParam("descricao") String descricao) {
-//        List<Categoria> listaDeCategorias = service.buscarCategoria(id, descricao);
-//        //Se passa um id que existe mas uma descricao que nao existe,ele sempre está considerando o primeiro parametro
-//        if (listaDeCategorias != null && listaDeCategorias.size() > 0) {
-//
-//            return ResponseEntity.ok().body(listaDeCategorias);
-//        } else {
-//            return ResponseEntity.badRequest().build();
-//        }
-//
-//    }
-//
-//    @DeleteMapping("/categoria/{id}")
-//    public void excluirPorId(@PathVariable("id") Long id) {
-//        service.excluirPorId(id);
-//    }
-//
-////
-//
-//    //Put alterar todos os campos, Patch alterar alguns apenas
-//
-//
-//    @PutMapping("/categoria")
-//    public ResponseEntity<Categoria> alterar(@RequestBody Categoria categoria) {
-//        return ResponseEntity.ok().body(service.alterar(categoria));
-//
-//    }
+
+    @DeleteMapping("/categorias/{id}")
+    public ResponseEntity<?> remover(@PathVariable("id") Long id) {
+        return repository.findById(id)
+                .map(categoria -> {
+                    repository.delete(categoria);
+                    return ResponseEntity.status(HttpStatus.OK).body("Categoria excluida");
+
+                }).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+
 }
