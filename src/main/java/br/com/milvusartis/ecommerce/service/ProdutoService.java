@@ -1,11 +1,8 @@
 package br.com.milvusartis.ecommerce.service;
 
-
-
 import br.com.milvusartis.ecommerce.model.entity.Estoque;
 import br.com.milvusartis.ecommerce.model.entity.Produto;
 import org.springframework.stereotype.Service;
-
 
 @Service("ProdutoService")
 public class ProdutoService {

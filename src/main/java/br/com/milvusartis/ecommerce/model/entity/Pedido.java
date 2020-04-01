@@ -48,7 +48,7 @@ public class Pedido implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "pedido_id", referencedColumnName = "id_pedido")
-    private List<PedidoItem> pedidoItems;
+    private List<PedidoItem> pedidoItens;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "id_cliente")
@@ -59,15 +59,15 @@ public class Pedido implements Serializable {
     private Pagamento pagamento;
 
     public void adicionarItem(PedidoItem item) {
-        if(pedidoItems == null)
-            pedidoItems = new ArrayList<>();
-        pedidoItems.add(item);
+        if(pedidoItens == null)
+            pedidoItens = new ArrayList<>();
+        pedidoItens.add(item);
     }
 
     @Transient
     public Double total() {
         Double soma = 0.00;
-        for(PedidoItem item: pedidoItems)
+        for(PedidoItem item: pedidoItens)
             soma += item.calculaValorPorItens();
         return soma;
     }
