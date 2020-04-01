@@ -31,7 +31,7 @@ public class UsuarioService {
         else if (id != null)
             lista.add(usuarioRepository.findById(id).get());
         else if (email != null)
-            lista = usuarioRepository.findByEmail(email);
+            lista.add(usuarioRepository.findByEmail(email));
 
         return lista;
 
