@@ -23,58 +23,63 @@ import java.util.Optional;
 public class ClienteController {
 
     @Autowired
-    ClienteRepository repository;
-
-
-    @Autowired
-    private ClienteBO clienteBO;
+    ClienteRepository clienteRepository;
 
     @Autowired
-    private ClienteResponseBO clienteResponseBO;
+    ClienteBO clienteBO;
 
+    @Autowired
+    ClienteResponseBO clienteResponseBO;
+
+    @PostMapping("/clientes")
+    public ResponseEntity<?> cadastrar(@RequestBody ClienteDTO clienteDTO) {
+
+        if (clienteDTO == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente não pode estar vazio");
+        }
+
+        Cliente cliente = clienteBO.parseToPOJO(clienteDTO);
+        cliente.getUsuario().setRegraDeAcesso(Regra.ROLE_USER);
+        Cliente clienteEntity = clienteRepository.save(cliente);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(clienteBO.parseToDTO(clienteEntity));
+
+    }
 
     @GetMapping("/clientes")
     public ResponseEntity<?> listar() {
-        List<Cliente> clientes = repository.findAll();
+
+        List<Cliente> clientes = clienteRepository.findAll();
         List<ClienteResponseDTO> listaDeClientesResposta = new ArrayList<>();
 
         clientes.forEach((cliente) -> {
             listaDeClientesResposta.add(clienteResponseBO.parseToDTO(cliente));
         });
+
         return ResponseEntity.status(HttpStatus.OK).body(listaDeClientesResposta);
-    }
-
-
-    @PostMapping("/clientes")
-    public ResponseEntity<?> cadastrar(@RequestBody ClienteDTO clienteDTO) {
-        if (clienteDTO == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente não pode estar vazio");
-        }
-        Cliente cliente = clienteBO.parseToPOJO(clienteDTO);
-        cliente.getUsuario().setRegraDeAcesso(Regra.ROLE_USER);
-
-        Cliente clienteEntity = repository.save(cliente);
-        return ResponseEntity.status(HttpStatus.CREATED).body(clienteBO.parseToDTO(clienteEntity));
 
     }
 
     @GetMapping("/clientes/{id}")
     public ResponseEntity<?> mostrar(@PathVariable("id") Long id) {
-        Optional<Cliente> opt_cliente = repository.findById(id);
-        Cliente cliente = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
-        return ResponseEntity.status(HttpStatus.OK).body(clienteBO.parseToDTO(cliente));
-    }
 
+        Optional<Cliente> opt_cliente = clienteRepository.findById(id);
+        Cliente cliente = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
+
+        return ResponseEntity.status(HttpStatus.OK).body(clienteBO.parseToDTO(cliente));
+
+    }
 
     @DeleteMapping("/clientes/{id}")
     public ResponseEntity<?> remover(@PathVariable("id") Long id) {
-        return repository.findById(id)
+
+        return clienteRepository.findById(id)
                 .map(cliente -> {
-                    repository.delete(cliente);
+                    clienteRepository.delete(cliente);
                     return ResponseEntity.status(HttpStatus.OK).body("Cliente excluido");
 
                 }).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-    }
 
+    }
 
 }
