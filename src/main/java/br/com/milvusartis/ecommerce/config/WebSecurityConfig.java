@@ -2,6 +2,7 @@ package br.com.milvusartis.ecommerce.config;
 
 import br.com.milvusartis.ecommerce.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -38,7 +39,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
 
                 .authorizeRequests()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers("/h2/**").permitAll()
                 //CONFIGURAÇÃO DE REQUEST
                 .anyRequest().permitAll()
                 .and().headers().frameOptions();
