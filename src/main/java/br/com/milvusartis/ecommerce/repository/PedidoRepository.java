@@ -1,6 +1,7 @@
 package br.com.milvusartis.ecommerce.repository;
 
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
+import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +11,6 @@ import java.util.List;
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
     List<Pedido> findByNumero(Long numero);
-    List<Pedido> findByStatusPedido(String statusPedido);
+    List<Pedido> findByStatusPedido(StatusPedido statusPedido);
 
 }
