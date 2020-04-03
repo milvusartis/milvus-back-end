@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface PagamentoRepository extends JpaRepository<Pagamento, Long> {
-    List<Pagamento> findByIsAprovado(Boolean isAprovado);
+//    List<Pagamento> findByIsAprovado(Boolean isAprovado);
 }

@@ -23,6 +23,7 @@ public class Pedido implements Serializable {
     @Column(name = "id_pedido")
     private Long idPedido;
 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "nr_pedido")
     private Long numero;
 

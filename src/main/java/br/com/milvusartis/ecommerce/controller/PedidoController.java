@@ -30,7 +30,11 @@ public class PedidoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pedido não pode estar vazio");
         }
 
-        Pedido pedidoEntity = pedidoRepository.save(pedidoBO.parseToPOJO(pedidoDTO));
+        Pedido pedido = pedidoBO.parseToPOJO(pedidoDTO);
+
+
+
+        Pedido pedidoEntity = pedidoRepository.save(pedido);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoBO.parseToDTO(pedidoEntity));
 

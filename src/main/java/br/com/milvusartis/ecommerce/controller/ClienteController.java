@@ -40,6 +40,7 @@ public class ClienteController {
 
         Cliente cliente = clienteBO.parseToPOJO(clienteDTO);
         cliente.getUsuario().setRegraDeAcesso(Regra.ROLE_USER);
+        //todo cripografar senha usuario
         Cliente clienteEntity = clienteRepository.save(cliente);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteBO.parseToDTO(clienteEntity));

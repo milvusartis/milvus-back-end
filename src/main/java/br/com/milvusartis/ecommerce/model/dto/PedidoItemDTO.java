@@ -13,6 +13,5 @@ public class PedidoItemDTO {
     private Integer quantidade;
     private Double precoVendido;
     private ProdutoDTO produto;
-    private PedidoDTO pedido;
 
 }
