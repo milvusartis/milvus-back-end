@@ -16,6 +16,7 @@ public class AuthController {
     @GetMapping("/auth/token")
     public Usuario perfil(Authentication authentication) {
         Usuario user = usuarioRepository.findByEmail(authentication.getName());
+        //TODO trocar retorno para ResponseDTO
         return user;
     }
 }
