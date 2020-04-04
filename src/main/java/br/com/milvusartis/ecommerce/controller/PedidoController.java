@@ -2,9 +2,10 @@ package br.com.milvusartis.ecommerce.controller;
 
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.model.bo.PedidoBO;
-import br.com.milvusartis.ecommerce.model.dto.PedidoDTO;
+import br.com.milvusartis.ecommerce.model.dto.PedidoResponseDTO;
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
 import br.com.milvusartis.ecommerce.repository.PedidoRepository;
+import br.com.milvusartis.ecommerce.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,16 +22,21 @@ public class PedidoController {
     PedidoRepository pedidoRepository;
 
     @Autowired
+    PedidoService pedidoService;
+
+    @Autowired
     PedidoBO pedidoBO;
 
     @PostMapping("/pedidos")
-    public ResponseEntity<?> cadastrar(@RequestBody PedidoDTO pedidoDTO) {
+    public ResponseEntity<?> cadastrar(@RequestBody PedidoResponseDTO pedidoResponseDTO) {
 
-        if (pedidoDTO == null) {
+        if (pedidoResponseDTO == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pedido não pode estar vazio");
         }
 
-        Pedido pedido = pedidoBO.parseToPOJO(pedidoDTO);
+        Pedido pedido = pedidoBO.parseToPOJO(pedidoResponseDTO);
+
+        pedidoService.inicializaPedido(pedido);
 
         Pedido pedidoEntity = pedidoRepository.save(pedido);
 
@@ -42,7 +48,7 @@ public class PedidoController {
     public ResponseEntity<?> listar() {
 
         List<Pedido> listaPedidos = pedidoRepository.findAll();
-        List<PedidoDTO> listaDePedidosResposta = new ArrayList<>();
+        List<PedidoResponseDTO> listaDePedidosResposta = new ArrayList<>();
 
         listaPedidos.forEach((pedido) -> {
             listaDePedidosResposta.add(pedidoBO.parseToDTO(pedido));
