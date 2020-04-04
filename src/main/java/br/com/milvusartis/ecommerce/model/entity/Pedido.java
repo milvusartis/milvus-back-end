@@ -58,6 +58,10 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "pagamento_id", referencedColumnName = "id_pagamento")
     private Pagamento pagamento;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "nota_fiscal_id", referencedColumnName = "id_nota_fiscal")
+    private NotaFiscal notaFiscal;
+
     public void adicionarItem(PedidoItem item) {
         if(pedidoItens == null)
             pedidoItens = new ArrayList<>();
