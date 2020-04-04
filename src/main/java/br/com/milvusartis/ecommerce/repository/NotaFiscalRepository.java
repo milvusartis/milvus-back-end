@@ -8,5 +8,4 @@ import java.util.List;
 
 @Repository
 public interface NotaFiscalRepository extends JpaRepository<NotaFiscal,Long>{
-    List<NotaFiscal> findByNumeroNf(Integer numeroNf);
 }

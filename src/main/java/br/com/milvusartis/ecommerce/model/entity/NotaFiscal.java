@@ -31,12 +31,12 @@ public class NotaFiscal implements Serializable {
     @Column(name = "ds_natureza_operacao")
     private String naturezaOperacao;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pedido_id", referencedColumnName = "id_pedido")
-    private Pedido pedido;
-
     @ManyToOne
     @JoinColumn(name = "empresa_id", referencedColumnName = "id_empresa")
     private Empresa empresa;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pedido_id", referencedColumnName = "pedido_fiscal")
+    private Pedido pedido;
 
 }
