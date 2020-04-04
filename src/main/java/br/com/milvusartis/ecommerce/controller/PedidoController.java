@@ -32,8 +32,6 @@ public class PedidoController {
 
         Pedido pedido = pedidoBO.parseToPOJO(pedidoDTO);
 
-
-
         Pedido pedidoEntity = pedidoRepository.save(pedido);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoBO.parseToDTO(pedidoEntity));
