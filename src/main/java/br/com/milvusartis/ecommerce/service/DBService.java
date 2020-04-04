@@ -45,7 +45,10 @@ public class DBService {
         Usuario u1 = new Usuario(null, "Diógenes Bezerra Pereira", "ads.diogenes@gmail.com", "123456", null);
         Cliente c1 = new Cliente(null, "04205595310", "2003034096537", "11964367824", u1, e1);
 
-        clienteRepository.saveAll(Arrays.asList(c1));
+        Usuario u2 = new Usuario(null, "Alvaro dos Santos Saraiva", "trusteco@hotmail.com", "123456", null);
+        Cliente c2 = new Cliente(null, "07381194821", "157278293", "11932145053", u2, e1);
+
+        clienteRepository.saveAll(Arrays.asList(c1,c2));
 
 
         PedidoItem pi1 = new PedidoItem(null, 2, 40.5, p1);
