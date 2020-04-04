@@ -10,7 +10,6 @@ import br.com.milvusartis.ecommerce.repository.EmpresaRepository;
 import br.com.milvusartis.ecommerce.repository.NotaFiscalRepository;
 import br.com.milvusartis.ecommerce.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -56,7 +55,9 @@ public class NotaFiscalService {
         notaFiscal.setEmpresa(empresa);
         notaFiscal.setPedido(pedido);
 
-        return notaFiscal;
+        NotaFiscal notaFiscalEntity = notaFiscalRepository.save(notaFiscal);
+
+        return notaFiscalEntity;
 
     }
 
