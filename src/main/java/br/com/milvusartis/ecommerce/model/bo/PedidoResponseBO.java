@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PedidoBO implements IBO<Pedido, PedidoResponseDTO> {
+public class PedidoResponseBO implements IBO<Pedido, PedidoResponseDTO> {
 
     @Autowired
     private ModelMapper modelMapper;

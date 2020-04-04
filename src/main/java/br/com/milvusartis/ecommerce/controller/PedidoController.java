@@ -1,7 +1,7 @@
 package br.com.milvusartis.ecommerce.controller;
 
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
-import br.com.milvusartis.ecommerce.model.bo.PedidoBO;
+import br.com.milvusartis.ecommerce.model.bo.PedidoResponseBO;
 import br.com.milvusartis.ecommerce.model.dto.PedidoResponseDTO;
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
 import br.com.milvusartis.ecommerce.repository.PedidoRepository;
@@ -25,7 +25,7 @@ public class PedidoController {
     PedidoService pedidoService;
 
     @Autowired
-    PedidoBO pedidoBO;
+    PedidoResponseBO pedidoResponseBO;
 
     @PostMapping("/pedidos")
     public ResponseEntity<?> cadastrar(@RequestBody PedidoResponseDTO pedidoResponseDTO) {
@@ -34,13 +34,13 @@ public class PedidoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pedido não pode estar vazio");
         }
 
-        Pedido pedido = pedidoBO.parseToPOJO(pedidoResponseDTO);
+        Pedido pedido = pedidoResponseBO.parseToPOJO(pedidoResponseDTO);
 
         pedidoService.inicializaPedido(pedido);
 
         Pedido pedidoEntity = pedidoRepository.save(pedido);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(pedidoBO.parseToDTO(pedidoEntity));
+        return ResponseEntity.status(HttpStatus.CREATED).body(pedidoResponseBO.parseToDTO(pedidoEntity));
 
     }
 
@@ -51,7 +51,7 @@ public class PedidoController {
         List<PedidoResponseDTO> listaDePedidosResposta = new ArrayList<>();
 
         listaPedidos.forEach((pedido) -> {
-            listaDePedidosResposta.add(pedidoBO.parseToDTO(pedido));
+            listaDePedidosResposta.add(pedidoResponseBO.parseToDTO(pedido));
         });
 
         return ResponseEntity.status(HttpStatus.OK).body(listaDePedidosResposta);
@@ -64,7 +64,7 @@ public class PedidoController {
         Optional<Pedido> opt_pedido = pedidoRepository.findById(id);
         Pedido pedido = opt_pedido.orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado"));
 
-        return ResponseEntity.status(HttpStatus.OK).body(pedidoBO.parseToDTO(pedido));
+        return ResponseEntity.status(HttpStatus.OK).body(pedidoResponseBO.parseToDTO(pedido));
 
     }
 
