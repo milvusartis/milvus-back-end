@@ -40,6 +40,10 @@ public class PedidoController {
 
         Pedido pedidoEntity = pedidoRepository.save(pedido);
 
+        //TODO enviar email para cliente
+
+        System.out.println(pedidoEntity.toString());
+
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoBO.parseToDTO(pedidoEntity));
 
     }

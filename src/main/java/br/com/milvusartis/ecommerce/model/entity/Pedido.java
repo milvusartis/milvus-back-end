@@ -8,10 +8,13 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Data
 @NoArgsConstructor
@@ -78,4 +81,29 @@ public class Pedido implements Serializable {
         return soma;
     }
 
+    @Override
+    public String toString() {
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        DateTimeFormatter formatadorBarra = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Pedido número: ");
+        sb.append(getIdPedido());
+        sb.append(", Data do Pedido: ");
+        sb.append(getDataPedido().format(formatadorBarra));
+        sb.append(", Cliente: ");
+        sb.append(getCliente().getUsuario().getNome());
+        sb.append(", Situação do Pagamento: ");
+        sb.append(getPagamento().getStatusPagamento().name());
+        sb.append("\nDetalhes:\n");
+        for (PedidoItem pi : getPedidoItens()){
+            sb.append(pi.toString());
+        }
+        sb.append("Frete: ");
+        sb.append(nf.format(getValorFrete()));
+        sb.append("\n");
+        sb.append("Valor Total: ");
+        sb.append(nf.format(getValorTotal()));
+
+        return sb.toString();
+    }
 }
