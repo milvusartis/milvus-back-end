@@ -1,60 +1,63 @@
 package br.com.milvusartis.ecommerce.service;
 
+import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
+import br.com.milvusartis.ecommerce.model.entity.Cliente;
+import br.com.milvusartis.ecommerce.model.entity.Empresa;
 import br.com.milvusartis.ecommerce.model.entity.NotaFiscal;
+import br.com.milvusartis.ecommerce.model.entity.Pedido;
+import br.com.milvusartis.ecommerce.repository.ClienteRepository;
+import br.com.milvusartis.ecommerce.repository.EmpresaRepository;
 import br.com.milvusartis.ecommerce.repository.NotaFiscalRepository;
+import br.com.milvusartis.ecommerce.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.security.core.parameters.P;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
+import java.util.Optional;
 
-@Service("NotaFiscalService")
+@Component
 public class NotaFiscalService {
 
     @Autowired
     NotaFiscalRepository notaFiscalRepository;
 
-    public NotaFiscal salvar(NotaFiscal notaFiscal) {
-        return notaFiscalRepository.save(notaFiscal);
-    }
+    @Autowired
+    EmpresaRepository empresaRepository;
 
-    public NotaFiscal buscaPorId(Long idNotaFiscal) {
-        return notaFiscalRepository.findById(idNotaFiscal).get();
-    }
+    @Autowired
+    ClienteRepository clienteRepository;
 
-    public List<NotaFiscal> buscarNotaFiscal(Long id, Integer numeroNf) {
+    @Autowired
+    PedidoRepository pedidoRepository;
 
-        List<NotaFiscal> lista = new ArrayList<>();
+    public NotaFiscal emitirNotaFiscal(Long idEmpresa, Long idCliente, Long idPedido) {
 
-        if (id == null && numeroNf == null)
-            lista = notaFiscalRepository.findAll();
-        else if (id != null)
-            lista.add(notaFiscalRepository.findById(id).get());
-        else if (numeroNf != null)
-            lista = notaFiscalRepository.findByNumeroNf(numeroNf);
+        Optional<Empresa> opt_empresa = empresaRepository.findById(idEmpresa);
+        Empresa empresa = opt_empresa.orElseThrow(() -> new ResourceNotFoundException("Empresa não encontrada"));
 
-        return lista;
+        Optional<Cliente> opt_cliente = clienteRepository.findById(idCliente);
+        Cliente cliente = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
 
-    }
+        Optional<Pedido> opt_pedido = pedidoRepository.findById(idPedido);
+        Pedido pedido = opt_pedido.orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado"));
 
-    public void excluirPorId(Long id) {
-        notaFiscalRepository.deleteById(id);
-    }
+        String uf = cliente.getEndereco().getUf();
+        String naturezaOperacao;
 
-    public NotaFiscal alterar(NotaFiscal notaFiscal) {
+        if(uf == "SP")
+            naturezaOperacao = "5.102";
+        else
+            naturezaOperacao = "6.102";
 
-        NotaFiscal notaFiscalEntity = notaFiscalRepository.getOne(notaFiscal.getIdNotaFiscal());
+        NotaFiscal notaFiscal = new NotaFiscal();
+        notaFiscal.setDataEmissao(new Date());
+        notaFiscal.setNaturezaOperacao(naturezaOperacao);
+        notaFiscal.setEmpresa(empresa);
+        notaFiscal.setPedido(pedido);
 
-        notaFiscalEntity.setNumeroNf(notaFiscal.getNumeroNf());
-        notaFiscalEntity.setDataEmissao(notaFiscal.getDataEmissao());
-        notaFiscalEntity.setNaturezaOperacao(notaFiscal.getNaturezaOperacao());
+        return notaFiscal;
 
-        return notaFiscalRepository.save(notaFiscalEntity);
-
-    }
-
-    public NotaFiscal alterarCamposEspecificos(NotaFiscal notaFiscal) {
-        return this.alterar(notaFiscal);
     }
 
 }
