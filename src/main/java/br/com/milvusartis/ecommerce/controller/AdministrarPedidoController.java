@@ -15,9 +15,6 @@ public class AdministrarPedidoController {
     @Autowired
     PedidoRepository pedidoRepository;
 
-    @Autowired
-    PedidoController pedidoController;
-
     @GetMapping("pedidos/{statusPedido}")
     public List<Pedido> filtrarPedidos(StatusPedido statusPedido) {
 
