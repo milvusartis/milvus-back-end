@@ -27,7 +27,7 @@ public class PedidoService {
 //		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 //		System.out.println(sdf.format(new Date()));
 
-
+//TODO if pagamento aprovado, chamar notafiscalservice
 
         return pedido;
     }

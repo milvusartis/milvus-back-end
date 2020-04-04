@@ -15,10 +15,13 @@ public class AdministrarPedidoController {
     @Autowired
     PedidoRepository pedidoRepository;
 
-    @GetMapping("pedidos/{statusPedido}")
+    @GetMapping("/admin/pedidos/{statusPedido}")
     public List<Pedido> filtrarPedidos(StatusPedido statusPedido) {
 
         List<Pedido> pedidos = pedidoRepository.findByStatusPedido(statusPedido);
+
+        //TODO trocar retorno por ResponseEntity<?>
+
 
         return pedidos;
     }

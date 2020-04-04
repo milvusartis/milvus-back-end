@@ -35,8 +35,8 @@ public class NotaFiscal implements Serializable {
     @JoinColumn(name = "empresa_id", referencedColumnName = "id_empresa")
     private Empresa empresa;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pedido_id", referencedColumnName = "pedido_fiscal")
+    @OneToOne
+    @JoinColumn(name = "pedido_id", referencedColumnName = "id_pedido")
     private Pedido pedido;
 
 }
