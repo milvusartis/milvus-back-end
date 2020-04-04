@@ -1,8 +1,8 @@
 package br.com.milvusartis.ecommerce.controller;
 
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
-import br.com.milvusartis.ecommerce.model.bo.PedidoResponseBO;
-import br.com.milvusartis.ecommerce.model.dto.PedidoResponseDTO;
+import br.com.milvusartis.ecommerce.model.bo.PedidoBO;
+import br.com.milvusartis.ecommerce.model.dto.PedidoDTO;
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
 import br.com.milvusartis.ecommerce.repository.PedidoRepository;
 import br.com.milvusartis.ecommerce.service.PedidoService;
@@ -25,22 +25,22 @@ public class PedidoController {
     PedidoService pedidoService;
 
     @Autowired
-    PedidoResponseBO pedidoResponseBO;
+    PedidoBO pedidoBO;
 
     @PostMapping("/pedidos")
-    public ResponseEntity<?> cadastrar(@RequestBody PedidoResponseDTO pedidoResponseDTO) {
+    public ResponseEntity<?> cadastrar(@RequestBody PedidoDTO pedidoDTO) {
 
-        if (pedidoResponseDTO == null) {
+        if (pedidoDTO == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pedido não pode estar vazio");
         }
 
-        Pedido pedido = pedidoResponseBO.parseToPOJO(pedidoResponseDTO);
+        Pedido pedido = pedidoBO.parseToPOJO(pedidoDTO);
 
         pedidoService.inicializaPedido(pedido);
 
         Pedido pedidoEntity = pedidoRepository.save(pedido);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(pedidoResponseBO.parseToDTO(pedidoEntity));
+        return ResponseEntity.status(HttpStatus.CREATED).body(pedidoBO.parseToDTO(pedidoEntity));
 
     }
 
@@ -48,10 +48,10 @@ public class PedidoController {
     public ResponseEntity<?> listar() {
 
         List<Pedido> listaPedidos = pedidoRepository.findAll();
-        List<PedidoResponseDTO> listaDePedidosResposta = new ArrayList<>();
+        List<PedidoDTO> listaDePedidosResposta = new ArrayList<>();
 
         listaPedidos.forEach((pedido) -> {
-            listaDePedidosResposta.add(pedidoResponseBO.parseToDTO(pedido));
+            listaDePedidosResposta.add(pedidoBO.parseToDTO(pedido));
         });
 
         return ResponseEntity.status(HttpStatus.OK).body(listaDePedidosResposta);
@@ -64,7 +64,7 @@ public class PedidoController {
         Optional<Pedido> opt_pedido = pedidoRepository.findById(id);
         Pedido pedido = opt_pedido.orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado"));
 
-        return ResponseEntity.status(HttpStatus.OK).body(pedidoResponseBO.parseToDTO(pedido));
+        return ResponseEntity.status(HttpStatus.OK).body(pedidoBO.parseToDTO(pedido));
 
     }
 

@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PedidoResponseDTO {
+public class PedidoDTO {
 
     private Long idPedido;
     private Long numero;
@@ -25,6 +25,7 @@ public class PedidoResponseDTO {
     private StatusPedido statusPedido;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataEntrega;
+    private Integer diasParaEntrega;
     private List<PedidoItemDTO> pedidoItens;
     private ClienteResponseDTO cliente;
     private PagamentoDTO pagamento;

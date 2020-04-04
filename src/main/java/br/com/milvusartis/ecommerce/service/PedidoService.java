@@ -21,8 +21,8 @@ public class PedidoService {
         pedido.setValorTotal(pedido.calculaSubtotalValorTotalDosItensDePedido()+pedido.getValorFrete());
         pedido.setStatusPedido(StatusPedido.PEDIDO_REALIZADO);
 
-
-        pedido.setDataEntrega(pedido.getDataPedido().plusDays(5));
+//TODO No momento de Aprovar o Pedido, gerar a data de entrega a partir dos dias
+//        pedido.setDataEntrega(pedido.getDataPedido().plusDays(pedido.getDiasParaEntrega()));
 
 //		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 //		System.out.println(sdf.format(new Date()));

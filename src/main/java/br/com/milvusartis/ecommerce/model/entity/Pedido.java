@@ -49,6 +49,9 @@ public class Pedido implements Serializable {
     @Column(name = "dt_entrega")
     private LocalDate dataEntrega;
 
+    @Column(name = "vl_dias_entrega")
+    private Integer diasParaEntrega;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "pedido_id", referencedColumnName = "id_pedido")
     private List<PedidoItem> pedidoItens;

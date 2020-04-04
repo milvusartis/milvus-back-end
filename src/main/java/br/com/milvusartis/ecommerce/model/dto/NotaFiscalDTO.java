@@ -17,7 +17,7 @@ public class NotaFiscalDTO {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataEmissao;
     private String naturezaOperacao;
-    private PedidoResponseDTO pedido;
+    private PedidoDTO pedido;
     private EmpresaDTO empresa;
 
 }
