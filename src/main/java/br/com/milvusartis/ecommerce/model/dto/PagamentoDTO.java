@@ -1,5 +1,6 @@
 package br.com.milvusartis.ecommerce.model.dto;
 
+import br.com.milvusartis.ecommerce.model.tipos.StatusPagamento;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,6 @@ public class PagamentoDTO {
     private String telefoneTitular;
     private String cpfTitular;
     private String formaPagamento;
-    private Boolean isAprovado;
+    private StatusPagamento statusPagamento;
 
 }

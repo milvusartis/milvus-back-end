@@ -5,6 +5,7 @@ import br.com.milvusartis.ecommerce.model.bo.PedidoBO;
 import br.com.milvusartis.ecommerce.model.dto.PedidoDTO;
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
 import br.com.milvusartis.ecommerce.repository.PedidoRepository;
+import br.com.milvusartis.ecommerce.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,9 @@ public class PedidoController {
     PedidoRepository pedidoRepository;
 
     @Autowired
+    PedidoService pedidoService;
+
+    @Autowired
     PedidoBO pedidoBO;
 
     @PostMapping("/pedidos")
@@ -30,7 +34,11 @@ public class PedidoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pedido não pode estar vazio");
         }
 
-        Pedido pedidoEntity = pedidoRepository.save(pedidoBO.parseToPOJO(pedidoDTO));
+        Pedido pedido = pedidoBO.parseToPOJO(pedidoDTO);
+
+        pedidoService.inicializaPedido(pedido);
+
+        Pedido pedidoEntity = pedidoRepository.save(pedido);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoBO.parseToDTO(pedidoEntity));
 

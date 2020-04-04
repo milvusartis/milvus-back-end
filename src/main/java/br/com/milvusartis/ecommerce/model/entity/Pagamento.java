@@ -1,5 +1,7 @@
 package br.com.milvusartis.ecommerce.model.entity;
 
+import br.com.milvusartis.ecommerce.model.tipos.Regra;
+import br.com.milvusartis.ecommerce.model.tipos.StatusPagamento;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,8 +33,10 @@ public class Pagamento implements Serializable {
     @Column(name = "ds_forma_pagamento")
     private String formaPagamento;
 
-    @Column(name = "cd_aprovado")
-    private Boolean isAprovado;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ds_status_pagamento")
+    private StatusPagamento statusPagamento;
+
 
 }
 

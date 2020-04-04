@@ -1,66 +1,35 @@
 package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
-import br.com.milvusartis.ecommerce.repository.PedidoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.*;
 
 @Service("PedidoService")
+
 public class PedidoService {
 
-    @Autowired
-    PedidoRepository pedidoRepository;
 
-    public Pedido salvar(Pedido pedido) {
-        return pedidoRepository.save(pedido);
-    }
 
-    public Pedido buscaPorId(Long idPedido) {
-        return pedidoRepository.findById(idPedido).get();
-    }
+    public Pedido inicializaPedido(Pedido pedido){
+        //TODO inicializar pedido
+//        pedido.setDataPedido(new Date());
+        pedido.setDataPedido(LocalDate.now());
+        pedido.setValorTotal(pedido.calculaSubtotalValorTotalDosItensDePedido()+pedido.getValorFrete());
+        pedido.setStatusPedido(StatusPedido.PEDIDO_REALIZADO);
 
-    public List<Pedido> buscarPedido(Long id, Long numero, String statusPedido) {
+//TODO No momento de Aprovar o Pedido, gerar a data de entrega a partir dos dias
+//        pedido.setDataEntrega(pedido.getDataPedido().plusDays(pedido.getDiasParaEntrega()));
 
-        List<Pedido> lista = new ArrayList<>();
+//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+//		System.out.println(sdf.format(new Date()));
 
-        if (id == null && numero == null)
-            lista = pedidoRepository.findAll();
-        else if (id != null)
-            lista.add(pedidoRepository.findById(id).get());
-        else if (numero != null)
-            lista = pedidoRepository.findByNumero(numero);
-        else if (statusPedido != null)
-            lista = pedidoRepository.findByStatusPedido(statusPedido);
 
-        return lista;
 
-    }
-
-    public void excluirPorId(Long id) {
-        pedidoRepository.deleteById(id);
-    }
-
-    public Pedido alterar(Pedido pedido) {
-
-        Pedido pedidoEntity = pedidoRepository.getOne(pedido.getIdPedido());
-
-        pedidoEntity.setNumero(pedido.getNumero());
-        pedidoEntity.setDataPedido(pedido.getDataPedido());
-        pedidoEntity.setValorFrete(pedido.getValorFrete());
-        pedidoEntity.setValorTotal(pedido.getValorTotal());
-        pedidoEntity.setStatusPedido(pedido.getStatusPedido());
-        pedidoEntity.setDataEntrega(pedido.getDataEntrega());
-        pedidoEntity.setPedidoItens(pedido.getPedidoItens());
-
-        return pedidoRepository.save(pedidoEntity);
-
-    }
-
-    public Pedido alterarCamposEspecificos(Pedido pedido) {
-        return this.alterar(pedido);
+        return pedido;
     }
 
 }

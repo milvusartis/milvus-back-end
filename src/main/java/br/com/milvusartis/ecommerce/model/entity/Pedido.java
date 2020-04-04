@@ -4,9 +4,11 @@ import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,13 +25,14 @@ public class Pedido implements Serializable {
     @Column(name = "id_pedido")
     private Long idPedido;
 
+
     @Column(name = "nr_pedido")
     private Long numero;
 
     //TODO JASON DATE FORMAT
 //    @Temporal(TemporalType.DATE)
     @Column(name = "dt_data_pedido")
-    private Date dataPedido;
+    private LocalDate dataPedido;
 
     @Column(name = "vl_frete")
     private Double valorFrete;
@@ -44,7 +47,10 @@ public class Pedido implements Serializable {
     //TODO JASON DATE FORMAT
 //    @Temporal(TemporalType.DATE)
     @Column(name = "dt_entrega")
-    private Date dataEntrega;
+    private LocalDate dataEntrega;
+
+    @Column(name = "vl_dias_entrega")
+    private Integer diasParaEntrega;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "pedido_id", referencedColumnName = "id_pedido")
@@ -65,7 +71,7 @@ public class Pedido implements Serializable {
     }
 
     @Transient
-    public Double total() {
+    public Double calculaSubtotalValorTotalDosItensDePedido() {
         Double soma = 0.00;
         for(PedidoItem item: pedidoItens)
             soma += item.calculaValorPorItens();
