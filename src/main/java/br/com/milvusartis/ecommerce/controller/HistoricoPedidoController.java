@@ -1,5 +1,6 @@
 package br.com.milvusartis.ecommerce.controller;
 
+import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.model.entity.Cliente;
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
 import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
@@ -26,7 +27,10 @@ public class HistoricoPedidoController {
     public List<Pedido> listarTodos(@PathVariable("idCliente") Long idCliente) {
 
         Optional<Cliente> opt_cliente = clienteRepository.findById(idCliente);
-        List<Pedido> pedidosCliente = pedidoRepository.findByCliente(opt_cliente);
+
+        Cliente cliente = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
+
+        List<Pedido> pedidosCliente = pedidoRepository.findByCliente(cliente);
 
         return pedidosCliente;
     }
@@ -36,7 +40,10 @@ public class HistoricoPedidoController {
                                         @PathVariable("statusPedido") StatusPedido statusPedido) {
 
         Optional<Cliente> opt_cliente = clienteRepository.findById(idCliente);
-        List<Pedido> pedidosClienteStatus = pedidoRepository.findByClienteAndStatus(opt_cliente, statusPedido);
+
+        Cliente cliente = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
+
+        List<Pedido> pedidosClienteStatus = pedidoRepository.findByClienteAndStatusPedido(cliente, statusPedido);
 
         return pedidosClienteStatus;
 
