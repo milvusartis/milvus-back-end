@@ -26,6 +26,9 @@ public class PedidoService {
     @Autowired
     ProdutoRepository produtoRepository;
 
+    @Autowired
+    EmailService emailService;
+
 
 
     public Pedido inicializaPedido(Pedido pedido){
@@ -42,6 +45,9 @@ public class PedidoService {
         pedido.setValorTotal(pedido.calculaSubtotalValorTotalDosItensDePedido()+pedido.getValorFrete());
         pedido.setStatusPedido(StatusPedido.PEDIDO_REALIZADO);
         pedido.getPagamento().setStatusPagamento(StatusPagamento.AGUARDANDO_PAGAMENTO);
+
+        emailService.sendOrderConfirmationEmail(pedido);
+
         return pedido;
     }
 
