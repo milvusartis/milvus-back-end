@@ -9,11 +9,15 @@ import br.com.milvusartis.ecommerce.repository.ClienteRepository;
 import br.com.milvusartis.ecommerce.repository.EmpresaRepository;
 import br.com.milvusartis.ecommerce.repository.NotaFiscalRepository;
 import br.com.milvusartis.ecommerce.repository.PedidoRepository;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Component
 public class NotaFiscalService {
@@ -30,6 +34,24 @@ public class NotaFiscalService {
     @Autowired
     PedidoRepository pedidoRepository;
 
+    @Autowired
+    NotaFiscalService notaFiscalService;
+
+    public Integer contador() {
+        List<NotaFiscal> lista = notaFiscalRepository.findAll();
+
+        Integer contador = lista.size();
+
+        return contador;
+    }
+
+    public Integer numerarNotaFiscal() {
+        Integer contador = notaFiscalService.contador();
+        contador++;
+
+        return contador;
+    }
+
     public NotaFiscal emitirNotaFiscal(Long idEmpresa, Long idCliente, Long idPedido) {
 
         Optional<Empresa> opt_empresa = empresaRepository.findById(idEmpresa);
@@ -41,6 +63,8 @@ public class NotaFiscalService {
         Optional<Pedido> opt_pedido = pedidoRepository.findById(idPedido);
         Pedido pedido = opt_pedido.orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado"));
 
+        Integer contador = notaFiscalService.numerarNotaFiscal();
+
         String uf = cliente.getEndereco().getUf();
         String naturezaOperacao;
 
@@ -50,6 +74,7 @@ public class NotaFiscalService {
             naturezaOperacao = "6.102";
 
         NotaFiscal notaFiscal = new NotaFiscal();
+        notaFiscal.setNumeroNf(contador);
         notaFiscal.setDataEmissao(new Date());
         notaFiscal.setNaturezaOperacao(naturezaOperacao);
         notaFiscal.setEmpresa(empresa);

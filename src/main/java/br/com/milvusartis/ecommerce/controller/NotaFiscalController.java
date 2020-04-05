@@ -3,8 +3,10 @@ package br.com.milvusartis.ecommerce.controller;
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.model.bo.NotaFiscalBO;
 import br.com.milvusartis.ecommerce.model.dto.NotaFiscalDTO;
+import br.com.milvusartis.ecommerce.model.dto.PedidoDTO;
 import br.com.milvusartis.ecommerce.model.entity.NotaFiscal;
 import br.com.milvusartis.ecommerce.repository.NotaFiscalRepository;
+import br.com.milvusartis.ecommerce.service.NotaFiscalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 public class NotaFiscalController {
@@ -25,16 +28,19 @@ public class NotaFiscalController {
     @Autowired
     NotaFiscalBO notaFiscalBO;
 
+    @Autowired
+    NotaFiscalService notaFiscalService;
+
     @GetMapping("/notasfiscais")
     public ResponseEntity<?> listar() {
-        List<NotaFiscal> listaNotaFiscals = notaFiscalRepository.findAll();
-        List<NotaFiscalDTO> listaDeNotaFiscalsResposta = new ArrayList<>();
+        List<NotaFiscal> listaNotaFiscal = notaFiscalRepository.findAll();
+        List<NotaFiscalDTO> listaDeNotaFiscalDTO = new ArrayList<>();
 
-        listaNotaFiscals.forEach((notaFiscal) -> {
-            listaDeNotaFiscalsResposta.add(notaFiscalBO.parseToDTO(notaFiscal));
+        listaNotaFiscal.forEach((notaFiscal) -> {
+            listaDeNotaFiscalDTO.add(notaFiscalBO.parseToDTO(notaFiscal));
         });
 
-        return ResponseEntity.status(HttpStatus.OK).body(listaDeNotaFiscalsResposta);
+        return ResponseEntity.status(HttpStatus.OK).body(listaDeNotaFiscalDTO);
 
     }
 
@@ -42,7 +48,7 @@ public class NotaFiscalController {
     public ResponseEntity<?> mostrar(@PathVariable("id") Long id) {
 
         Optional<NotaFiscal> opt_notaFiscal = notaFiscalRepository.findById(id);
-        NotaFiscal notaFiscal = opt_notaFiscal.orElseThrow(() -> new ResourceNotFoundException("NotaFiscal não encontrado"));
+        NotaFiscal notaFiscal = opt_notaFiscal.orElseThrow(() -> new ResourceNotFoundException("Nota fiscal não encontrada"));
 
         return ResponseEntity.status(HttpStatus.OK).body(notaFiscalBO.parseToDTO(notaFiscal));
 
