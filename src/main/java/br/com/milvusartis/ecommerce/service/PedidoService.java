@@ -31,8 +31,6 @@ public class PedidoService {
 
 
     public Pedido inicializaPedido(Pedido pedido){
-        //TODO inicializar pedido
-//        pedido.setDataPedido(new Date());
         pedido.setDataPedido(LocalDate.now());
 
         Cliente cliente = clienteRepository.findById(pedido.getCliente().getIdCliente()).orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
