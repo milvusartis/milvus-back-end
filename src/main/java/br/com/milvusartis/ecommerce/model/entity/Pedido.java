@@ -74,7 +74,12 @@ public class Pedido implements Serializable {
     }
 
     @Transient
-    public Double calculaSubtotalValorTotalDosItensDePedido() {
+    public Double getSubtotal(){
+        return calculaSubtotalValorTotalDosItensDePedido();
+    }
+
+    @Transient
+    private Double calculaSubtotalValorTotalDosItensDePedido() {
         Double soma = 0.00;
         for(PedidoItem item: pedidoItens)
             soma += item.calculaValorPorItens();

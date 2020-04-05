@@ -10,13 +10,10 @@ import br.com.milvusartis.ecommerce.model.tipos.StatusPagamento;
 import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
 import br.com.milvusartis.ecommerce.repository.ClienteRepository;
 import br.com.milvusartis.ecommerce.repository.ProdutoRepository;
-import com.sun.mail.util.MailConnectException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.*;
 
 @Service("PedidoService")
 
@@ -44,7 +41,7 @@ public class PedidoService {
             Produto produto = produtoRepository.findById(pi.getProduto().getIdProduto()).orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado"));
             pi.setProduto(produto);
         }
-        pedido.setValorTotal(pedido.calculaSubtotalValorTotalDosItensDePedido()+pedido.getValorFrete());
+        pedido.setValorTotal(pedido.getSubtotal()+pedido.getValorFrete());
         pedido.setStatusPedido(StatusPedido.PEDIDO_REALIZADO);
         pedido.getPagamento().setStatusPagamento(StatusPagamento.AGUARDANDO_PAGAMENTO);
 
@@ -70,7 +67,7 @@ public class PedidoService {
 
     public void enviaEmailAprovacao(Pedido pedido){
         try{
-            emailService.sendOrderConfirmationEmail(pedido);
+            emailService.sendOrderConfirmationHtmlEmail(pedido);
         }catch (Exception ex){
             throw new MailNotSendException(pedido.toString());
         }

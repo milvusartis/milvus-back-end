@@ -35,7 +35,11 @@ public class PedidoItem implements Serializable {
 //    @JoinColumn(name = "pedido_id", referencedColumnName = "id_pedido")
 //    private Pedido pedido;
 
-    public double calculaValorPorItens(){
+    @Transient
+    public Double getSubtotal(){
+        return calculaValorPorItens();
+    }
+    public Double calculaValorPorItens(){
         return getPrecoVendido() * getQuantidade();
     }
 
