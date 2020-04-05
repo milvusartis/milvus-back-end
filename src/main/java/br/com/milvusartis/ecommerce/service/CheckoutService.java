@@ -19,15 +19,15 @@ public class CheckoutService {
     @Autowired
     ClienteRepository clienteRepository;
 
-    public Long UsuarioCliente(Long idUsuario) {
+    public Cliente findClienteFromIdUsuario(Long idUsuario) {
         Optional<Usuario> opt_usuario = usuarioRepository.findById(idUsuario);
         Usuario usuario = opt_usuario.orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
 
         Cliente cliente = clienteRepository.findByUsuario(usuario);
 
-        Long idCliente = cliente.getIdCliente();
+//        Long idCliente = cliente.getIdCliente();
 
-        return idCliente;
+        return cliente;
 
     }
 
