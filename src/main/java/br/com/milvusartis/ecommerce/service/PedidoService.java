@@ -46,7 +46,7 @@ public class PedidoService {
         pedido.setStatusPedido(StatusPedido.PEDIDO_REALIZADO);
         pedido.getPagamento().setStatusPagamento(StatusPagamento.AGUARDANDO_PAGAMENTO);
 
-        emailService.sendOrderConfirmationEmail(pedido);
+
 
         return pedido;
     }
@@ -64,6 +64,10 @@ public class PedidoService {
 //TODO if pagamento aprovado, chamar notafiscalservice
 
         return pedido;
+    }
+
+    public void enviaEmailAprovacao(Pedido pedido){
+        emailService.sendOrderConfirmationEmail(pedido);
     }
 
 }
