@@ -22,9 +22,10 @@ public class DevConfig {
     @Bean
     public boolean instantiateDatabase(){
         if(!"create".equals(strategy)){
+            System.out.println(strategy);
             return false;
         }
-        dbService.intantiateTestDatabase();
+       dbService.intantiateTestDatabase();
         return true;
     }
 
