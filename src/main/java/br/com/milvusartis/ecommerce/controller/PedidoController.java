@@ -40,6 +40,9 @@ public class PedidoController {
 
         Pedido pedidoEntity = pedidoRepository.save(pedido);
 
+        pedidoService.enviaEmailAprovacao(pedidoEntity);
+
+
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoBO.parseToDTO(pedidoEntity));
 
     }
