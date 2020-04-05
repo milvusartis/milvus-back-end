@@ -67,6 +67,7 @@ public class PedidoService {
     }
 
     public void enviaEmailAprovacao(Pedido pedido){
+        System.out.println(pedido.getCliente().getUsuario().getEmail());
         emailService.sendOrderConfirmationEmail(pedido);
     }
 
