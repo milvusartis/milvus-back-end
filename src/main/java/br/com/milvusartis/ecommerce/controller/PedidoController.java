@@ -3,6 +3,7 @@ package br.com.milvusartis.ecommerce.controller;
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.model.bo.PedidoBO;
 import br.com.milvusartis.ecommerce.model.dto.PedidoDTO;
+import br.com.milvusartis.ecommerce.model.dto.PedidoRequestDTO;
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
 import br.com.milvusartis.ecommerce.repository.PedidoRepository;
 import br.com.milvusartis.ecommerce.service.PedidoService;
@@ -28,13 +29,13 @@ public class PedidoController {
     PedidoBO pedidoBO;
 
     @PostMapping("/pedidos")
-    public ResponseEntity<?> cadastrar(@RequestBody PedidoDTO pedidoDTO) {
+    public ResponseEntity<?> cadastrar(@RequestBody PedidoRequestDTO pedidoRequestDTO) {
 
-        if (pedidoDTO == null) {
+        if (pedidoRequestDTO == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pedido não pode estar vazio");
         }
 
-        Pedido pedido = pedidoBO.parseToPOJO(pedidoDTO);
+        Pedido pedido = pedidoBO.parseToPOJO(pedidoRequestDTO.getPedido());
 
         pedidoService.inicializaPedido(pedido);
 
