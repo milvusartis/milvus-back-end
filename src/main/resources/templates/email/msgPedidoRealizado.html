@@ -3,162 +3,80 @@
 
 <head>
     <title th:remove="all">Confirmação do Pedido</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
-
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-    }
-
-    .container-email {
-        padding: 0 2% 2%
-    }
-
-    .container-email .header {
-        margin-top: 27px;
-        margin-bottom: 14px;
-        font-size: 20px;
-        line-height: 28px;
-        font-weight: normal;
-    }
-
-    .container-email .header p {
-        color: #5cb85c;
-    }
-
-    .container-email .separator {
-        min-height: 1px;
-        margin-top: 0;
-        margin-bottom: 14px;
-        border-top: 1px solid #e5e5e5;
-        text-align: right;
-        line-height: 0;
-
-    }
-
-    .container-email .menssage {
-        text-align: left;
-        font-family: 'PT Sans', arial;
-        font-size: 1.1em;
-        color: #666666;
-    }
-
-    .container-email .dados_pedido {
-        margin-top: 7px;
-        margin-bottom: 14px;
-        font-size: 20px;
-        line-height: 28px;
-        font-weight: normal;
-        color: #666666;
-    }
-
-    .container-email .track-email {
-        display: flex;
-        justify-content: center;
-    }
-
-    .container-email .detalhe_pedido_email table {
-        display: table!important;
-        width: 100%;
-        border: 1px solid #ddd;
-        border-collapse: collapse;
-
-    }
-
-    .container-email .detalhe_pedido_email table,
-    th,
-    tr,
-    td {
-
-        background: #f5f5f5;
-        text-align: center;
-        padding: 20px;
-        /* 
-        cellpadding: 0;
-        cellspacing: 0; */
-    }
-
-    .container-email .dados_pedido tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-
-    .container-email .box-total_pedido {
-        font-size: 1.5em;
-        margin-top: 20px;
-        background-color: #f0f0f5;
-        padding: 15px;
-        border-width: 2px;
-        border-style: dashed;
-        border-color: #dedede;
-        text-align: center;
-        /* border-radius: 6px;
-        -moz-border-radius: 6px;
-        -webkit-border-radius: 6px; */
-    }
-
-    .container-email .box-total_pedido b {
-        color: #06b545;
-    }
-</style>
-
 <body>
-    <div class="container-email">
+<div>
 
-        <h2 class="header">
-            Recebemos seu pedido #<b><span th:text="${pedido.idPedido}"> </span></b> na loja
-            Milvus Artis</h2>
-        <p class="separator">&nbsp;</p>
-        <p style="margin-top:.25em"></p>
-        <div class="menssage">
-            <h3>Olá, <span th:text="${pedido.cliente.usuario.nome}"></span></h3>
-            <p>Confirmamos o recebimento do pedido número
-                <b><span th:text="${pedido.idPedido}"> </span></b>
-                feito em <span th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy')}"></span> na loja virtual
-                <b>Milvus Artis</b> no valor de
-                <b><span th:text="${#numbers.formatDecimal(pedido.valorTotal, 0, 'POINT', 2, 'COMMA')}"></span></b>.
-            </p><br>
-        </div>
-
-    <div class="track-email" th:switch="${pedido.statusPedido.descricao}" >
-        <span th:case="'PEDIDO_REALIZADO'"><img src="https://i.ibb.co/ZTCX9vx/msg-status-01.png" alt="Pedido Realizado" border="0"></span>
-        <span th:case="'PAGAMENTO_CONFIRMADO'"><img src="https://i.ibb.co/mRwh3wh/msg-status-02.png" alt="Pagamento Confirmado" border="0"></span>
-        <span th:case="'PEDIDO_ENVIADO'"><img src="https://i.ibb.co/cwt6Bzq/msg-status-03.png" alt="Pedido Enviado" border="0"></span>
-        <span th:case="'PEDIDO_ENTREGUE'"><img src="https://i.ibb.co/m8zHz6Z/msg-status-04.png" alt="Pedido Entregue" border="0"></span>
+    <h2>
+        Recebemos seu pedido #<b><span th:text="${pedido.idPedido}"> </span></b> na loja
+        Milvus Artis</h2>
+    <p style="min-height:1px;margin-top:0;margin-bottom:14px;border-top:1px solid #e5e5e5;text-align:right;line-height:0">
+        &nbsp;</p>
+    <p style="margin-top:.25em"></p>
+    <div class="menssage">
+        <h3>Olá, <span th:text="${pedido.cliente.usuario.nome}"></span></h3>
+        <p>Confirmamos o recebimento do pedido número
+            <b><span th:text="${pedido.idPedido}"> </span></b>
+            feito em <span th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy')}"></span> na loja virtual
+            <b>Milvus Artis</b> no valor de
+            <b>R$ <span th:text="${#numbers.formatDecimal(pedido.valorTotal, 0, 'POINT', 2, 'COMMA')}"></span></b>.
+        </p><br>
     </div>
 
-    <h3 class="header">Dados do pedido</h3>
+    <div class="track-email" th:switch="${pedido.statusPedido.descricao}">
+        <span th:case="'PEDIDO_REALIZADO'"><img src="https://i.ibb.co/ZTCX9vx/msg-status-01.png" alt="Pedido Realizado"
+                                                border="0"></span>
+        <span th:case="'PAGAMENTO_CONFIRMADO'"><img src="https://i.ibb.co/mRwh3wh/msg-status-02.png"
+                                                    alt="Pagamento Confirmado" border="0"></span>
+        <span th:case="'PEDIDO_ENVIADO'"><img src="https://i.ibb.co/cwt6Bzq/msg-status-03.png" alt="Pedido Enviado"
+                                              border="0"></span>
+        <span th:case="'PEDIDO_ENTREGUE'"><img src="https://i.ibb.co/m8zHz6Z/msg-status-04.png" alt="Pedido Entregue"
+                                               border="0"></span>
+    </div>
 
-    <table class="detalhe_pedido_email">
+
+    <table style="border:1px solid #e1e1e1" cellpadding="0" cellspacing="0">
+        <thead align="center">
         <tr>
-            <th>Produto</th>
-            <th>Quantidade</th>
-            <th>Preço unitário</th>
-            <th>Subtotal</th>
+            <th colspan="4" style="padding: 10px 20px;">Dados do pedido</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <td colspan="2" style="padding: 10px 20px;">Frete: <b>R$ <span
+                    th:text="${#numbers.formatDecimal(pedido.valorFrete, 0, 'POINT', 2, 'COMMA')}"></span> </b></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding: 10px 20px;">Total do pedido: <b>R$ <span
+                    th:text="${#numbers.formatDecimal(pedido.valorTotal, 0, 'POINT', 2, 'COMMA')}"></span> </b></td>
+        </tr>
+        </tfoot>
+
+        <tbody>
+
+        <tr >
+            <th style="padding: 10px 20px; border:1px solid #e1e1e1">Produto</th>
+            <th style="padding: 10px 20px; border:1px solid #e1e1e1">Quantidade</th>
+            <th style="padding: 10px 20px; border:1px solid #e1e1e1">Preço unitário</th>
+            <th style="padding: 10px 20px; border:1px solid #e1e1e1">Subtotal</th>
         </tr>
         <tr th:each="item : ${pedido.pedidoItens}">
-            <td align="left" th:text="${item.produto.nome}">nome</td>
-            <td align="center" th:text="${item.quantidade}">quantidade</td>
-            <td align="center" th:text="${#numbers.formatDecimal(item.precoVendido, 0, 'POINT', 2, 'COMMA')}">preco</td>
-            <td align="right" th:text="${#numbers.formatDecimal(item.subtotal, 0, 'POINT', 2, 'COMMA')}">subTotal</td>
+            <td style="padding: 10px 20px;border:1px solid #e1e1e1" align="left" th:text="${item.produto.nome}">nome</td>
+            <td style="padding: 10px 20px;border:1px solid #e1e1e1" align="center" th:text="${item.quantidade}">quantidade
+            </td>
+            <td style="padding: 10px 20px;border:1px solid #e1e1e1" align="center"
+                th:text="${#numbers.formatDecimal(item.precoVendido, 0, 'POINT', 2, 'COMMA')}">preco
+            </td>
+            <td style="padding: 10px 20px;border:1px solid #e1e1e1" align="right"
+                th:text="${#numbers.formatDecimal(item.subtotal, 0, 'POINT', 2, 'COMMA')}">subTotal
+            </td>
         </tr>
-        <tr>
-           <td align="left" th:text="Total">Total</td>
-            <td></td>
-            <td></td>
-            <td align="right" th:text="${#numbers.formatDecimal(pedido.valorTotal, 0, 'POINT', 2, 'COMMA')}">Total</td>
 
-        </tr>
+        </tbody>
     </table>
 
 
-    <!-- <div class="box-total_pedido">
-        Total do pedido: 
-        <b>
-        <span th:text="${#numbers.formatDecimal(pedido.valorTotal, 0, 'POINT', 2, 'COMMA')}"></span>
-    </b>
-    </div> -->
 </div>
 </body>
 </html>
