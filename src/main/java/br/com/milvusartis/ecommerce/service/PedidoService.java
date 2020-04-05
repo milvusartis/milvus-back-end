@@ -1,5 +1,6 @@
 package br.com.milvusartis.ecommerce.service;
 
+import br.com.milvusartis.ecommerce.exception.MailNotSendException;
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.model.entity.Cliente;
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
@@ -9,6 +10,7 @@ import br.com.milvusartis.ecommerce.model.tipos.StatusPagamento;
 import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
 import br.com.milvusartis.ecommerce.repository.ClienteRepository;
 import br.com.milvusartis.ecommerce.repository.ProdutoRepository;
+import com.sun.mail.util.MailConnectException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,8 +69,13 @@ public class PedidoService {
     }
 
     public void enviaEmailAprovacao(Pedido pedido){
-        System.out.println(pedido.getCliente().getUsuario().getEmail());
-        emailService.sendOrderConfirmationEmail(pedido);
+        try{
+            emailService.sendOrderConfirmationEmail(pedido);
+        }catch (Exception ex){
+            throw new MailNotSendException(pedido.toString());
+        }
+
+
     }
 
 }
