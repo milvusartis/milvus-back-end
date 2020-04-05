@@ -2,10 +2,11 @@ package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.exception.MailNotSendException;
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
-import br.com.milvusartis.ecommerce.model.entity.Cliente;
-import br.com.milvusartis.ecommerce.model.entity.Pedido;
-import br.com.milvusartis.ecommerce.model.entity.PedidoItem;
-import br.com.milvusartis.ecommerce.model.entity.Produto;
+import br.com.milvusartis.ecommerce.model.bo.PagamentoBO;
+import br.com.milvusartis.ecommerce.model.bo.PedidoBO;
+import br.com.milvusartis.ecommerce.model.bo.UsuarioBO;
+import br.com.milvusartis.ecommerce.model.dto.PedidoRequestDTO;
+import br.com.milvusartis.ecommerce.model.entity.*;
 import br.com.milvusartis.ecommerce.model.tipos.StatusPagamento;
 import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
 import br.com.milvusartis.ecommerce.repository.ClienteRepository;
@@ -28,19 +29,36 @@ public class PedidoService {
     @Autowired
     EmailService emailService;
 
+    @Autowired
+    CheckoutService checkoutService;
+
+    @Autowired
+    PedidoBO pedidoBO;
+
+    @Autowired
+    UsuarioBO usuarioBO;
+
+    @Autowired
+    PagamentoBO pagamentoBO;
 
 
-    public Pedido inicializaPedido(Pedido pedido){
-        pedido.setDataPedido(LocalDate.now());
 
-        Cliente cliente = clienteRepository.findById(pedido.getCliente().getIdCliente()).orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
+    public Pedido inicializaPedido(PedidoRequestDTO pedidoRequestDTO){
+
+        Pedido pedido = pedidoBO.parseToPOJO(pedidoRequestDTO.getPedido());
+        Cliente cliente = checkoutService.findClienteFromIdUsuario(usuarioBO.parseToPOJO(pedidoRequestDTO.getUsuario()).getIdUsuario());
         pedido.setCliente(cliente);
+        pedido.setDataPedido(LocalDate.now());
+//        Cliente cliente = clienteRepository.findById(pedido.getCliente().getIdCliente()).orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
+//        pedido.setCliente(cliente);
         for (PedidoItem  pi: pedido.getPedidoItens()){
             Produto produto = produtoRepository.findById(pi.getProduto().getIdProduto()).orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado"));
             pi.setProduto(produto);
         }
         pedido.setValorTotal(pedido.getSubtotal()+pedido.getValorFrete());
         pedido.setStatusPedido(StatusPedido.PEDIDO_REALIZADO);
+
+        pedido.setPagamento(pagamentoBO.parseToPOJO(pedidoRequestDTO.getPagamento()));
         pedido.getPagamento().setStatusPagamento(StatusPagamento.AGUARDANDO_PAGAMENTO);
 
 

@@ -2,9 +2,14 @@ package br.com.milvusartis.ecommerce.controller;
 
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.model.bo.PedidoBO;
+import br.com.milvusartis.ecommerce.model.bo.UsuarioBO;
 import br.com.milvusartis.ecommerce.model.dto.PedidoDTO;
+import br.com.milvusartis.ecommerce.model.dto.PedidoRequestDTO;
+import br.com.milvusartis.ecommerce.model.entity.Cliente;
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
 import br.com.milvusartis.ecommerce.repository.PedidoRepository;
+import br.com.milvusartis.ecommerce.repository.UsuarioRepository;
+import br.com.milvusartis.ecommerce.service.CheckoutService;
 import br.com.milvusartis.ecommerce.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,19 +29,19 @@ public class PedidoController {
     @Autowired
     PedidoService pedidoService;
 
+
     @Autowired
     PedidoBO pedidoBO;
 
     @PostMapping("/pedidos")
-    public ResponseEntity<?> cadastrar(@RequestBody PedidoDTO pedidoDTO) {
+    public ResponseEntity<?> cadastrar(@RequestBody PedidoRequestDTO pedidoRequestDTO) {
 
-        if (pedidoDTO == null) {
+        if (pedidoRequestDTO == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pedido não pode estar vazio");
         }
 
-        Pedido pedido = pedidoBO.parseToPOJO(pedidoDTO);
 
-        pedidoService.inicializaPedido(pedido);
+       Pedido pedido =  pedidoService.inicializaPedido(pedidoRequestDTO);
 
         Pedido pedidoEntity = pedidoRepository.save(pedido);
 
@@ -44,6 +49,7 @@ public class PedidoController {
 
 
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoBO.parseToDTO(pedidoEntity));
+
 
     }
 
