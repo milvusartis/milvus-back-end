@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:remove="all">Confirmação do Pedido</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div>
+
+    <h2>
+        Recebemos seu pedido #<b><span th:text="${pedido.idPedido}"> </span></b> na loja
+        Milvus Artis</h2>
+    <p style="min-height:1px;margin-top:0;margin-bottom:14px;border-top:1px solid #e5e5e5;text-align:right;line-height:0">
+        &nbsp;</p>
+    <p style="margin-top:.25em"></p>
+    <div class="menssage">
+        <h3>Olá, <span th:text="${pedido.cliente.usuario.nome}"></span></h3>
+        <p>Confirmamos o recebimento do pedido número
+            <b><span th:text="${pedido.idPedido}"> </span></b>
+            feito em <span th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy')}"></span> na loja virtual
+            <b>Milvus Artis</b> no valor de
+            <b>R$ <span th:text="${#numbers.formatDecimal(pedido.valorTotal, 0, 'POINT', 2, 'COMMA')}"></span></b>.
+        </p><br>
+    </div>
+
+    <div>
+        <span>
+            <img src="https://i.ibb.co/ZTCX9vx/msg-status-01.png" alt="Pedido Realizado" border="0">
+        </span>
+
+    </div>
+
+
+    <table style="border:1px solid #e1e1e1" cellpadding="0" cellspacing="0">
+        <thead align="center">
+        <tr>
+            <th colspan="4" style="padding: 10px 20px;">Dados do pedido</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <td colspan="2" style="padding: 10px 20px;">Frete: <b>R$ <span
+                    th:text="${#numbers.formatDecimal(pedido.valorFrete, 0, 'POINT', 2, 'COMMA')}"></span> </b></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding: 10px 20px;">Total do pedido: <b>R$ <span
+                    th:text="${#numbers.formatDecimal(pedido.valorTotal, 0, 'POINT', 2, 'COMMA')}"></span> </b></td>
+        </tr>
+        </tfoot>
+
+        <tbody>
+
+        <tr >
+            <th style="padding: 10px 20px; border:1px solid #e1e1e1">Produto</th>
+            <th style="padding: 10px 20px; border:1px solid #e1e1e1">Quantidade</th>
+            <th style="padding: 10px 20px; border:1px solid #e1e1e1">Preço unitário</th>
+            <th style="padding: 10px 20px; border:1px solid #e1e1e1">Subtotal</th>
+        </tr>
+        <tr th:each="item : ${pedido.pedidoItens}">
+            <td style="padding: 10px 20px;border:1px solid #e1e1e1" align="left" th:text="${item.produto.nome}">nome</td>
+            <td style="padding: 10px 20px;border:1px solid #e1e1e1" align="center" th:text="${item.quantidade}">quantidade
+            </td>
+            <td style="padding: 10px 20px;border:1px solid #e1e1e1" align="center"
+                th:text="${#numbers.formatDecimal(item.precoVendido, 0, 'POINT', 2, 'COMMA')}">preco
+            </td>
+            <td style="padding: 10px 20px;border:1px solid #e1e1e1" align="right"
+                th:text="${#numbers.formatDecimal(item.subtotal, 0, 'POINT', 2, 'COMMA')}">subTotal
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+
+</div>
+</body>
+</html>
