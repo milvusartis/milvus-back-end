@@ -79,20 +79,22 @@ public class PedidoController {
     }
 
 
-    @PutMapping("/pedidos/{id}")
-    public ResponseEntity<?> modificar(@PathVariable("id") Long id, @RequestBody PedidoDTO pedidoDTO) {
+    @PutMapping("/pedidos/{id}/{acao}")
+    public ResponseEntity<?> modificar(@PathVariable("id") Long id, @PathVariable String acao, @RequestBody PedidoDTO pedidoDTO) {
 
         Optional<Pedido> opt_pedido = pedidoRepository.findById(id);
         Pedido pedido = opt_pedido.orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado"));
 
         Pedido pedidoEntity;
 
-        pedidoEntity = pedidoRepository.save(pedidoService.aprovarPedido(pedido));
-
-//        pedidoEntity = pedidoRepository.save(pedidoService.entregarPedido(pedido));
-
-
-        pedidoService.enviaEmailAprovacao(pedidoEntity);
+        switch (acao){
+            case "aprovar":
+                pedidoEntity = pedidoRepository.save(pedidoService.aprovarPedido(pedido));
+                pedidoService.enviaEmailAprovacao(pedidoEntity);
+            case "entregar":
+                pedidoEntity = pedidoRepository.save(pedidoService.entregarPedido(pedido));
+                pedidoService.enviaEmailAprovacao(pedidoEntity);
+        }
 
         return ResponseEntity.status(HttpStatus.OK).body(pedidoBO.parseToDTO(pedido));
 
