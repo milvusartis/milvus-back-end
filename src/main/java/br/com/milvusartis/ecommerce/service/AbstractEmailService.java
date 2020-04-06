@@ -1,6 +1,7 @@
 package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
+import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -44,7 +45,29 @@ public abstract class AbstractEmailService implements EmailService {
     protected String htmlFromTemplatePedido(Pedido pedido) {
         Context context = new Context();
         context.setVariable("pedido", pedido);
-        return templateEngine.process("email/acompanhamentoPedido", context);
+        return switchTemplateHtml(pedido.getStatusPedido(), context);
+
+    }
+
+    private String switchTemplateHtml(StatusPedido statusPedido,  Context context){
+
+        switch (statusPedido) {
+            case PEDIDO_REALIZADO:
+                return templateEngine.process("email/pedidoRealizado", context);
+
+            case PAGAMENTO_CONFIRMADO:
+                return templateEngine.process("email/pagamentoConfirmado", context);
+
+            case PEDIDO_ENVIADO:
+                return templateEngine.process("email/pedidoEnviado", context);
+
+            case PEDIDO_ENTREGUE:
+                return templateEngine.process("email/pedidoEntregue", context);
+
+            default:
+                return templateEngine.process("email/solicitacaoNaoConcluida", context);
+
+        }
     }
 
     @Override

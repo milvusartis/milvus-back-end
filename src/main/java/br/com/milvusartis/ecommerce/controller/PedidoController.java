@@ -47,6 +47,8 @@ public class PedidoController {
 
         pedidoService.enviaEmailAprovacao(pedidoEntity);
 
+        pedidoService.confirmaPagamento(pedidoEntity, pedidoRequestDTO.getCartao());
+
 
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoBO.parseToDTO(pedidoEntity));
 

@@ -7,10 +7,12 @@ import br.com.milvusartis.ecommerce.model.bo.PedidoBO;
 import br.com.milvusartis.ecommerce.model.bo.UsuarioBO;
 import br.com.milvusartis.ecommerce.model.dto.PedidoRequestDTO;
 import br.com.milvusartis.ecommerce.model.entity.*;
+import br.com.milvusartis.ecommerce.model.pojo.Cartao;
 import br.com.milvusartis.ecommerce.model.tipos.StatusPagamento;
 import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
 import br.com.milvusartis.ecommerce.repository.ClienteRepository;
 import br.com.milvusartis.ecommerce.repository.ProdutoRepository;
+import br.com.milvusartis.ecommerce.service.gatway.PagamentoGatwayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,9 @@ public class PedidoService {
 
     @Autowired
     CheckoutService checkoutService;
+
+    @Autowired
+    PagamentoGatwayService pagamentoGatwayService;
 
     @Autowired
     PedidoBO pedidoBO;
@@ -60,24 +65,16 @@ public class PedidoService {
 
         pedido.setPagamento(pagamentoBO.parseToPOJO(pedidoRequestDTO.getPagamento()));
         pedido.getPagamento().setStatusPagamento(StatusPagamento.AGUARDANDO_PAGAMENTO);
-
-
-
         return pedido;
     }
 
 
     public Pedido aprovarPedido(Pedido pedido){
         pedido.setDataEntrega(pedido.getDataPedido().plusDays(pedido.getDiasParaEntrega()));
-
         //TODO No momento de Aprovar o Pedido, gerar a data de entrega a partir dos dias
-
-
 //		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 //		System.out.println(sdf.format(new Date()));
-
 //TODO if pagamento aprovado, chamar notafiscalservice
-
         return pedido;
     }
 
@@ -87,7 +84,16 @@ public class PedidoService {
         }catch (Exception ex){
             throw new MailNotSendException(pedido.toString());
         }
+    }
 
+    public void confirmaPagamento(Pedido pedido, Cartao cartao){
+        if(pagamentoGatwayService.enviarPagamentoParaConfirmacao(pedido.getPagamento(), cartao)){
+            pedido.getPagamento().setStatusPagamento(StatusPagamento.PAGAMENTO_APROVADO);
+            pedido.setStatusPedido(StatusPedido.PAGAMENTO_CONFIRMADO);
+            emailService.sendOrderConfirmationHtmlEmail(pedido);
+        }else{
+            pedido.getPagamento().setStatusPagamento(StatusPagamento.PAGAMENTO_REPROVADO);
+        }
 
     }
 
