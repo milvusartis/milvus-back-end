@@ -11,8 +11,10 @@ import br.com.milvusartis.ecommerce.model.pojo.Cartao;
 import br.com.milvusartis.ecommerce.model.tipos.StatusPagamento;
 import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
 import br.com.milvusartis.ecommerce.repository.ClienteRepository;
+import br.com.milvusartis.ecommerce.repository.PedidoRepository;
 import br.com.milvusartis.ecommerce.repository.ProdutoRepository;
 import br.com.milvusartis.ecommerce.service.gatway.PagamentoGatwayService;
+import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +24,9 @@ import java.time.LocalDate;
 
 public class PedidoService {
 
+
     @Autowired
-    ClienteRepository clienteRepository;
+    PedidoRepository pedidoRepository;
 
     @Autowired
     ProdutoRepository produtoRepository;
@@ -69,15 +72,6 @@ public class PedidoService {
     }
 
 
-    public Pedido aprovarPedido(Pedido pedido){
-        pedido.setDataEntrega(pedido.getDataPedido().plusDays(pedido.getDiasParaEntrega()));
-        //TODO No momento de Aprovar o Pedido, gerar a data de entrega a partir dos dias
-//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-//		System.out.println(sdf.format(new Date()));
-//TODO if pagamento aprovado, chamar notafiscalservice
-        return pedido;
-    }
-
     public void enviaEmailAprovacao(Pedido pedido){
         try{
             emailService.sendOrderConfirmationHtmlEmail(pedido);
@@ -90,11 +84,26 @@ public class PedidoService {
         if(pagamentoGatwayService.enviarPagamentoParaConfirmacao(pedido.getPagamento(), cartao)){
             pedido.getPagamento().setStatusPagamento(StatusPagamento.PAGAMENTO_APROVADO);
             pedido.setStatusPedido(StatusPedido.PAGAMENTO_CONFIRMADO);
+            pedidoRepository.save(pedido);
             emailService.sendOrderConfirmationHtmlEmail(pedido);
         }else{
             pedido.getPagamento().setStatusPagamento(StatusPagamento.PAGAMENTO_REPROVADO);
         }
-
     }
+
+    public Pedido aprovarPedido(Pedido pedido){
+        pedido.setDataEntrega(pedido.getDataPedido().plusDays(pedido.getDiasParaEntrega()));
+        pedido.setStatusPedido(StatusPedido.PEDIDO_ENVIADO);
+        //TODO if pagamento aprovado, chamar notafiscalservice
+        //TODO Atualizar o Estoque
+        return pedido;
+    }
+
+    public Pedido entregarPedido(Pedido pedido){
+        pedido.setStatusPedido(StatusPedido.PEDIDO_ENTREGUE);
+       return pedido;
+    }
+
+
 
 }
