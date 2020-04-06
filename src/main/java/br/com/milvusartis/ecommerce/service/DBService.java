@@ -30,6 +30,9 @@ public class DBService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    @Autowired
+    EmpresaRepository empresaRepository;
+
     public void intantiateTestDatabase(){
 
         Categoria cat1 = new Categoria(null, "Pipa");
@@ -77,6 +80,9 @@ public class DBService {
 
 
         pedidoRepository.saveAll(Arrays.asList(pd1,pd2));
+
+        Empresa emp1 = new Empresa(1L,"Milvus Artis", "61.585.865/0240-93", "116.756.280.113", e1);
+        empresaRepository.save(emp1);
 
     }
 }
