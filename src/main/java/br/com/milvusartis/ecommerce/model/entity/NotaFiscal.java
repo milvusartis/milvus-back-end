@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -26,7 +27,7 @@ public class NotaFiscal implements Serializable {
     @Column(name = "dt_emissao")
     //TODO JASON DATE FORMAT
 //    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataEmissao;
+    private LocalDate dataEmissao;
 
     @Column(name = "ds_natureza_operacao")
     private String naturezaOperacao;

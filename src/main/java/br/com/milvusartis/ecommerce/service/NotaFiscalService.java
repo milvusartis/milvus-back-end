@@ -13,6 +13,7 @@ import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -35,22 +36,8 @@ public class NotaFiscalService {
     PedidoRepository pedidoRepository;
 
     @Autowired
-    NotaFiscalService notaFiscalService;
+    ContadorSequencialService contadorSequencialService;
 
-    public Integer contador() {
-        List<NotaFiscal> lista = notaFiscalRepository.findAll();
-
-        Integer contador = lista.size();
-
-        return contador;
-    }
-
-    public Integer numerarNotaFiscal() {
-        Integer contador = notaFiscalService.contador();
-        contador++;
-
-        return contador;
-    }
 
     public NotaFiscal emitirNotaFiscal(Long idEmpresa, Long idCliente, Long idPedido) {
 
@@ -63,7 +50,7 @@ public class NotaFiscalService {
         Optional<Pedido> opt_pedido = pedidoRepository.findById(idPedido);
         Pedido pedido = opt_pedido.orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado"));
 
-        Integer contador = notaFiscalService.numerarNotaFiscal();
+        Integer contador = contadorSequencialService.numerarNotaFiscal();
 
         String uf = cliente.getEndereco().getUf();
         String naturezaOperacao;
@@ -75,7 +62,7 @@ public class NotaFiscalService {
 
         NotaFiscal notaFiscal = new NotaFiscal();
         notaFiscal.setNumeroNf(contador);
-        notaFiscal.setDataEmissao(new Date());
+        notaFiscal.setDataEmissao(LocalDate.now());
         notaFiscal.setNaturezaOperacao(naturezaOperacao);
         notaFiscal.setEmpresa(empresa);
         notaFiscal.setPedido(pedido);

@@ -49,12 +49,24 @@ public class PedidoService {
     @Autowired
     PagamentoBO pagamentoBO;
 
+    @Autowired
+    NotaFiscalService notaFiscalService;
+
+    @Autowired
+    ClienteRepository clienteRepository;
+
+    @Autowired
+    ContadorSequencialService contadorSequencialService;
 
 
     public Pedido inicializaPedido(PedidoRequestDTO pedidoRequestDTO){
 
         Pedido pedido = pedidoBO.parseToPOJO(pedidoRequestDTO.getPedido());
         Cliente cliente = checkoutService.findClienteFromIdUsuario(usuarioBO.parseToPOJO(pedidoRequestDTO.getUsuario()).getIdUsuario());
+
+        Integer contador = contadorSequencialService.numerarNotaFiscal();
+// TODO consertar numero do pedido para utilizar o contador
+ //       pedido.setNumero(contador);
         pedido.setCliente(cliente);
         pedido.setDataPedido(LocalDate.now());
 //        Cliente cliente = clienteRepository.findById(pedido.getCliente().getIdCliente()).orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
@@ -94,7 +106,14 @@ public class PedidoService {
     public Pedido aprovarPedido(Pedido pedido){
         pedido.setDataEntrega(pedido.getDataPedido().plusDays(pedido.getDiasParaEntrega()));
         pedido.setStatusPedido(StatusPedido.PEDIDO_ENVIADO);
-        //TODO if pagamento aprovado, chamar notafiscalservice
+
+        Cliente cliente = pedido.getCliente();
+        Long idCliente = cliente.getIdCliente();
+
+        Long idPedido = pedido.getIdPedido();
+
+        notaFiscalService.emitirNotaFiscal(1L, idCliente, idPedido);
+
         //TODO Atualizar o Estoque
         return pedido;
     }
