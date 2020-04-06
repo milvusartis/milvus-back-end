@@ -30,7 +30,7 @@ public class Pedido implements Serializable {
 
 
     @Column(name = "nr_pedido")
-    private Long numero;
+    private Integer numero;
 
     //TODO JASON DATE FORMAT
 //    @Temporal(TemporalType.DATE)
