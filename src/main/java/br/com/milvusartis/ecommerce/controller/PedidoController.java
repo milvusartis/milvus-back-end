@@ -49,7 +49,6 @@ public class PedidoController {
 
         pedidoService.confirmaPagamento(pedidoEntity, pedidoRequestDTO.getCartao());
 
-
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoBO.parseToDTO(pedidoEntity));
 
 
@@ -74,6 +73,28 @@ public class PedidoController {
 
         Optional<Pedido> opt_pedido = pedidoRepository.findById(id);
         Pedido pedido = opt_pedido.orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado"));
+
+        return ResponseEntity.status(HttpStatus.OK).body(pedidoBO.parseToDTO(pedido));
+
+    }
+
+
+    @PutMapping("/pedidos/{id}/{acao}")
+    public ResponseEntity<?> modificar(@PathVariable("id") Long id, @PathVariable String acao, @RequestBody PedidoDTO pedidoDTO) {
+
+        Optional<Pedido> opt_pedido = pedidoRepository.findById(id);
+        Pedido pedido = opt_pedido.orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado"));
+
+        Pedido pedidoEntity;
+
+        switch (acao){
+            case "aprovar":
+                pedidoEntity = pedidoRepository.save(pedidoService.aprovarPedido(pedido));
+                pedidoService.enviaEmailAprovacao(pedidoEntity);
+            case "entregar":
+                pedidoEntity = pedidoRepository.save(pedidoService.entregarPedido(pedido));
+                pedidoService.enviaEmailAprovacao(pedidoEntity);
+        }
 
         return ResponseEntity.status(HttpStatus.OK).body(pedidoBO.parseToDTO(pedido));
 
