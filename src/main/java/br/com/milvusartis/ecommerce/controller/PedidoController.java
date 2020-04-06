@@ -7,6 +7,7 @@ import br.com.milvusartis.ecommerce.model.dto.PedidoDTO;
 import br.com.milvusartis.ecommerce.model.dto.PedidoRequestDTO;
 import br.com.milvusartis.ecommerce.model.entity.Cliente;
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
+import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
 import br.com.milvusartis.ecommerce.repository.PedidoRepository;
 import br.com.milvusartis.ecommerce.repository.UsuarioRepository;
 import br.com.milvusartis.ecommerce.service.CheckoutService;
@@ -80,8 +81,9 @@ public class PedidoController {
 
 
     @PutMapping("/pedidos/{id}/{acao}")
-    public ResponseEntity<?> modificar(@PathVariable("id") Long id, @PathVariable String acao, @RequestBody PedidoDTO pedidoDTO) {
+    public ResponseEntity<?> modificar(@PathVariable("id") Long id, @PathVariable("acao") String acao) {
 
+        System.out.println(acao);
         Optional<Pedido> opt_pedido = pedidoRepository.findById(id);
         Pedido pedido = opt_pedido.orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado"));
 
@@ -91,12 +93,15 @@ public class PedidoController {
             case "aprovar":
                 pedidoEntity = pedidoRepository.save(pedidoService.aprovarPedido(pedido));
                 pedidoService.enviaEmailAprovacao(pedidoEntity);
+                break;
             case "entregar":
-                pedidoEntity = pedidoRepository.save(pedidoService.entregarPedido(pedido));
-                pedidoService.enviaEmailAprovacao(pedidoEntity);
+                //TODO fazer execeção caso tente entregar um pedido não aprovado
+                    pedidoEntity = pedidoRepository.save(pedidoService.entregarPedido(pedido));
+                    pedidoService.enviaEmailAprovacao(pedidoEntity);
+                break;
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(pedidoBO.parseToDTO(pedido));
+        return ResponseEntity.status(HttpStatus.CREATED).body(pedidoBO.parseToDTO(pedido));
 
     }
 
