@@ -24,15 +24,11 @@
         </p><br>
     </div>
 
-    <div class="track-email" th:switch="${pedido.statusPedido.descricao}">
-        <span th:case="'PEDIDO_REALIZADO'"><img src="https://i.ibb.co/ZTCX9vx/msg-status-01.png" alt="Pedido Realizado"
-                                                border="0"></span>
-        <span th:case="'PAGAMENTO_CONFIRMADO'"><img src="https://i.ibb.co/mRwh3wh/msg-status-02.png"
-                                                    alt="Pagamento Confirmado" border="0"></span>
-        <span th:case="'PEDIDO_ENVIADO'"><img src="https://i.ibb.co/cwt6Bzq/msg-status-03.png" alt="Pedido Enviado"
-                                              border="0"></span>
-        <span th:case="'PEDIDO_ENTREGUE'"><img src="https://i.ibb.co/m8zHz6Z/msg-status-04.png" alt="Pedido Entregue"
-                                               border="0"></span>
+    <div>
+        <span>
+            <img src="https://i.ibb.co/ZTCX9vx/msg-status-01.png" alt="Pedido Realizado" border="0">
+        </span>
+
     </div>
 
 

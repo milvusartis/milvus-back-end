@@ -2,37 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title th:remove="all">Confirmação do Pedido</title>
+    <title th:remove="all">Confirmação do Pagamento</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 <div>
 
     <h2>
-        Recebemos seu pedido #<b><span th:text="${pedido.idPedido}"> </span></b> na loja
-        Milvus Artis</h2>
+        Seu pagamento foi aprovado: Pedido #<b><span th:text="${pedido.idPedido}"> </span></b> </h2>
     <p style="min-height:1px;margin-top:0;margin-bottom:14px;border-top:1px solid #e5e5e5;text-align:right;line-height:0">
         &nbsp;</p>
     <p style="margin-top:.25em"></p>
     <div class="menssage">
         <h3>Olá, <span th:text="${pedido.cliente.usuario.nome}"></span></h3>
-        <p>Confirmamos o recebimento do pedido número
+        <p>O pagamento do seu pedido número
             <b><span th:text="${pedido.idPedido}"> </span></b>
             feito em <span th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy')}"></span> na loja virtual
-            <b>Milvus Artis</b> no valor de
-            <b>R$ <span th:text="${#numbers.formatDecimal(pedido.valorTotal, 0, 'POINT', 2, 'COMMA')}"></span></b>.
+            <b>Milvus Artis</b> foi aprovado, está sendo embalado e logo estará em transporte.
+        <p>Você receberá novos comunicados por e-mail sobre o andamento do seu pedido.</p></b>.
         </p><br>
     </div>
 
-    <div class="track-email" th:switch="${pedido.statusPedido.descricao}">
-        <span th:case="'PEDIDO_REALIZADO'"><img src="https://i.ibb.co/ZTCX9vx/msg-status-01.png" alt="Pedido Realizado"
-                                                border="0"></span>
-        <span th:case="'PAGAMENTO_CONFIRMADO'"><img src="https://i.ibb.co/mRwh3wh/msg-status-02.png"
-                                                    alt="Pagamento Confirmado" border="0"></span>
-        <span th:case="'PEDIDO_ENVIADO'"><img src="https://i.ibb.co/cwt6Bzq/msg-status-03.png" alt="Pedido Enviado"
-                                              border="0"></span>
-        <span th:case="'PEDIDO_ENTREGUE'"><img src="https://i.ibb.co/m8zHz6Z/msg-status-04.png" alt="Pedido Entregue"
-                                               border="0"></span>
+    <div>
+        <span>
+            <img src="https://i.ibb.co/mRwh3wh/msg-status-02.png" alt="Pagamento Confirmado" border="0">
+        </span>
     </div>
 
 
