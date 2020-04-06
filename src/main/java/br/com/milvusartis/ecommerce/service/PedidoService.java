@@ -59,23 +59,23 @@ public class PedidoService {
     ContadorSequencialService contadorSequencialService;
 
 
-    public Pedido inicializaPedido(PedidoRequestDTO pedidoRequestDTO){
+    public Pedido inicializaPedido(PedidoRequestDTO pedidoRequestDTO) {
 
         Pedido pedido = pedidoBO.parseToPOJO(pedidoRequestDTO.getPedido());
         Cliente cliente = checkoutService.findClienteFromIdUsuario(usuarioBO.parseToPOJO(pedidoRequestDTO.getUsuario()).getIdUsuario());
 
         Integer contador = contadorSequencialService.numerarNotaFiscal();
 // TODO consertar numero do pedido para utilizar o contador
- //       pedido.setNumero(contador);
+        pedido.setNumero(contador);
         pedido.setCliente(cliente);
         pedido.setDataPedido(LocalDate.now());
 //        Cliente cliente = clienteRepository.findById(pedido.getCliente().getIdCliente()).orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
 //        pedido.setCliente(cliente);
-        for (PedidoItem  pi: pedido.getPedidoItens()){
+        for (PedidoItem pi : pedido.getPedidoItens()) {
             Produto produto = produtoRepository.findById(pi.getProduto().getIdProduto()).orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado"));
             pi.setProduto(produto);
         }
-        pedido.setValorTotal(pedido.getSubtotal()+pedido.getValorFrete());
+        pedido.setValorTotal(pedido.getSubtotal() + pedido.getValorFrete());
         pedido.setStatusPedido(StatusPedido.PEDIDO_REALIZADO);
 
         pedido.setPagamento(pagamentoBO.parseToPOJO(pedidoRequestDTO.getPagamento()));
@@ -84,26 +84,26 @@ public class PedidoService {
     }
 
 
-    public void enviaEmailAprovacao(Pedido pedido){
-        try{
+    public void enviaEmailAprovacao(Pedido pedido) {
+        try {
             emailService.sendOrderConfirmationHtmlEmail(pedido);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             throw new MailNotSendException(pedido.toString());
         }
     }
 
-    public void confirmaPagamento(Pedido pedido, Cartao cartao){
-        if(pagamentoGatwayService.enviarPagamentoParaConfirmacao(pedido.getPagamento(), cartao)){
+    public void confirmaPagamento(Pedido pedido, Cartao cartao) {
+        if (pagamentoGatwayService.enviarPagamentoParaConfirmacao(pedido.getPagamento(), cartao)) {
             pedido.getPagamento().setStatusPagamento(StatusPagamento.PAGAMENTO_APROVADO);
             pedido.setStatusPedido(StatusPedido.PAGAMENTO_CONFIRMADO);
             pedidoRepository.save(pedido);
             emailService.sendOrderConfirmationHtmlEmail(pedido);
-        }else{
+        } else {
             pedido.getPagamento().setStatusPagamento(StatusPagamento.PAGAMENTO_REPROVADO);
         }
     }
 
-    public Pedido aprovarPedido(Pedido pedido){
+    public Pedido aprovarPedido(Pedido pedido) {
         pedido.setDataEntrega(pedido.getDataPedido().plusDays(pedido.getDiasParaEntrega()));
         pedido.setStatusPedido(StatusPedido.PEDIDO_ENVIADO);
 
@@ -118,11 +118,10 @@ public class PedidoService {
         return pedido;
     }
 
-    public Pedido entregarPedido(Pedido pedido){
+    public Pedido entregarPedido(Pedido pedido) {
         pedido.setStatusPedido(StatusPedido.PEDIDO_ENTREGUE);
-       return pedido;
+        return pedido;
     }
-
 
 
 }
