@@ -47,8 +47,8 @@ public class DBService {
         //CLIENTE e USUARIO com ENDEREÇO:
 
             Endereco end2 = new Endereco(null, "Rua Eugênia de Carvalho", 525, "Casa A", "Vila Matilde", "São Paulo", "SP", "03516000");
-                Usuario usu1 = new Usuario(null, "Diógenes Bezerra Pereira", "ads.diogenes@gmail.com",  encoder.encode("123456"), Regra.ROLE_ADMIN);
-                    Cliente cli1 = new Cliente(null, "04205595310", "2003034096537", "11964367824", usu1, end2);
+//                Usuario usu1 = new Usuario(null, "Diógenes Bezerra Pereira", "ads.diogenes@gmail.com",  encoder.encode("123456"), Regra.ROLE_ADMIN);
+//                    Cliente cli1 = new Cliente(null, "04205595310", "2003034096537", "11964367824", usu1, end2);
 
                 Usuario usu2 = new Usuario(null, "Alvaro dos Santos Saraiva", "trusteco@hotmail.com", encoder.encode("123456"), Regra.ROLE_USER);
                     Cliente cli2 = new Cliente(null, "07381194821", "157278293", "11932145053", usu2, end2);
@@ -57,7 +57,7 @@ public class DBService {
                 Usuario usu3 = new Usuario(null, "Isabela Zeitune Dezan", "isabelazeitunedezan@gmail.com", encoder.encode("123456"), Regra.ROLE_ADMIN);
                     Cliente cli3 = new Cliente(null, "40692679804", "484223859", "11948383433", usu3, end3);
 
-        clienteRepository.saveAll(Arrays.asList(cli1, cli2, cli3));
+        clienteRepository.saveAll(Arrays.asList( cli2, cli3));
 
         //USUÁRIO:
 
@@ -98,17 +98,17 @@ public class DBService {
 
         //PEDIDO com PEDIDO ITEM e PAGAMENTO:
 
-            PedidoItem pedIte1 = new PedidoItem(null, 2, 40.5, pro1);
-            PedidoItem pedIte2 = new PedidoItem(null, 3, 45.5, pro2);
-                Pagamento pag1 = new Pagamento(null, "Diógenes Bezerra Pereira", "11964367824", "04205595310", "Cartão Master", StatusPagamento.PAGAMENTO_APROVADO);
-                    Pedido pd1 = new Pedido(null, 1, LocalDate.now(), 4.00, 221.5, StatusPedido.PEDIDO_ENVIADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte1, pedIte2), cli1, pag1);
+//            PedidoItem pedIte1 = new PedidoItem(null, 2, 40.5, pro1);
+//            PedidoItem pedIte2 = new PedidoItem(null, 3, 45.5, pro2);
+//                Pagamento pag1 = new Pagamento(null, "Diógenes Bezerra Pereira", "11964367824", "04205595310", "Cartão Master", StatusPagamento.PAGAMENTO_APROVADO);
+//                    Pedido pd1 = new Pedido(null, 1, LocalDate.now(), 4.00, 221.5, StatusPedido.PEDIDO_ENVIADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte1, pedIte2), cli1, pag1);
 
             PedidoItem pedIte3 = new PedidoItem(null, 1, 50.0, pro3);
             PedidoItem pedIte4 = new PedidoItem(null, 3, 10.0, pro4);
                 Pagamento pag2 = new Pagamento(null, "Alvaro dos Santos Saraiva", "11932145053", "07381194821", "Cartão Visa", StatusPagamento.PAGAMENTO_APROVADO);
                     Pedido pd2 = new Pedido(null, 2, LocalDate.now(), 6.00, 86.0, StatusPedido.PAGAMENTO_CONFIRMADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte3, pedIte4), cli2, pag2);
 
-        pedidoRepository.saveAll(Arrays.asList(pd1,pd2));
+        pedidoRepository.saveAll(Arrays.asList(pd2));
 
     }
 }
