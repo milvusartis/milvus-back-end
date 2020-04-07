@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 public class ProdutoService {
 
 
-    public Produto inicializaAtributosProduto(Produto produto){
-        Estoque estoque = new Estoque();
-        estoque.setQtdEstocada(0);
-        estoque.setQtdReservada(0);
-        produto.setEstoque(estoque);
-        produto.setIsAtivo(Boolean.FALSE);
-        return produto;
-    }
+//    public Produto inicializaAtributosProduto(Produto produto){
+//        Estoque estoque = new Estoque();
+//        estoque.setQtdEstocada(0);
+//        estoque.setQtdReservada(0);
+//        produto.setEstoque(estoque);
+//        produto.setIsAtivo(Boolean.FALSE);
+//        return produto;
+//    }
 
 }

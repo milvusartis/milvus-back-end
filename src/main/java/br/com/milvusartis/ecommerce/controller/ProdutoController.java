@@ -3,6 +3,7 @@ package br.com.milvusartis.ecommerce.controller;
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.model.bo.ProdutoBO;
 import br.com.milvusartis.ecommerce.model.dto.ProdutoDTO;
+import br.com.milvusartis.ecommerce.model.entity.Categoria;
 import br.com.milvusartis.ecommerce.model.entity.Produto;
 import br.com.milvusartis.ecommerce.repository.ProdutoRepository;
 import br.com.milvusartis.ecommerce.service.ProdutoService;
@@ -25,10 +26,10 @@ import java.util.stream.Collectors;
 public class ProdutoController {
 
     @Autowired
-    ProdutoRepository repository;
+    ProdutoRepository produtoRepository;
 
     @Autowired
-    ProdutoService service;
+    ProdutoService produtoService;
 
     @Autowired
     ProdutoBO produtoBO;
@@ -53,15 +54,18 @@ public class ProdutoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não pode estar vazio");
         }
 
-        Produto produto = service.inicializaAtributosProduto(produtoBO.parseToPOJO(produtoDTO));
-        Produto produtoEntity = repository.save(produto);
+//        Produto produto = ProdutoService.inicializaAtributosProduto(produtoBO.parseToPOJO(produtoDTO));
+//        Produto produtoEntity = produtoRepository.save(produto);
+
+        Produto produtoEntity = produtoRepository.save(produtoBO.parseToPOJO(produtoDTO));
+
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoBO.parseToDTO(produtoEntity));
 
     }
 
     @GetMapping("/produtos/{id}")
     public ResponseEntity<?> mostrar(@PathVariable("id") Long id) {
-        Optional<Produto> opt_produto = repository.findById(id);
+        Optional<Produto> opt_produto = produtoRepository.findById(id);
         Produto produto = opt_produto.orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado"));
         return ResponseEntity.status(HttpStatus.OK).body(produtoBO.parseToDTO(produto));
     }
@@ -69,9 +73,9 @@ public class ProdutoController {
 
     @DeleteMapping("/produtos/{id}")
     public ResponseEntity<?> remover(@PathVariable("id") Long id) {
-        return repository.findById(id)
+        return produtoRepository.findById(id)
                 .map(produto -> {
-                    repository.delete(produto);
+                    produtoRepository.delete(produto);
                     return ResponseEntity.status(HttpStatus.OK).body("Produto excluido");
 
                 }).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
@@ -86,7 +90,7 @@ public class ProdutoController {
             })
                     Pageable pageable) {
 
-        Page<Produto> page = repository.findAllPage(pageable);
+        Page<Produto> page = produtoRepository.findAllPage(pageable);
 
         return new PageImpl<ProdutoDTO>(page
                 .stream()
@@ -94,5 +98,44 @@ public class ProdutoController {
                 .collect(Collectors.toList()), pageable, page.getTotalElements());
     }
 
+
+    @PutMapping("/admin/produtos/{id}")
+    public ResponseEntity<?> modificar(@PathVariable("id") Long id, @RequestBody Produto edicao) {
+
+        Optional<Produto> opt_produto = produtoRepository.findById(id);
+        Produto produto = opt_produto.orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado"));
+
+
+//        Long idEstoqueEdicao = edicao.getEstoque().getIdEstoque();
+
+        if(edicao.getNome() != null)
+            produto.setNome(edicao.getNome());
+
+        if(edicao.getDescricao() != null)
+            produto.setDescricao(edicao.getDescricao());
+
+        if(edicao.getImagem() != null)
+            produto.setImagem(edicao.getImagem());
+
+        if(edicao.getValorUnitario() != null)
+            produto.setValorUnitario(edicao.getValorUnitario());
+
+        if(edicao.getIsAtivo() != null)
+            produto.setIsAtivo(edicao.getIsAtivo());
+
+        if(edicao.getCategoria().getIdCategoria() != null)
+            produto.setCategoria(edicao.getCategoria());
+
+//            if(edicao.getEstoque().getQtdEstocada() != null)
+//                produto.getEstoque().setQtdEstocada(edicao.getEstoque().getQtdEstocada());
+//
+//            if(edicao.getEstoque().getQtdReservada() != null)
+//                produto.getEstoque().setQtdReservada(edicao.getEstoque().getQtdReservada());
+
+        produtoRepository.save(produto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(produtoBO.parseToDTO(produto));
+
+    }
 
 }

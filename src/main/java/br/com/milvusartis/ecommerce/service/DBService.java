@@ -39,8 +39,21 @@ public class DBService {
 
         //EMPRESA com ENDEREÇO:
 
+//        Produto p1 = new Produto(null, "Pipa Grande Colorida", "Pipa colorida", "https://i.ibb.co/SvxNRNy/pipa-box.png", 40.5, Boolean.TRUE, cat1, new Estoque(null, 5, 0));
+//        Produto p2 = new Produto(null, "Pipa Media Colorida", "Pipa Beneficente", "https://i.ibb.co/rsvK81S/pipa-flex.png", 45.5, Boolean.TRUE, cat1, new Estoque(null, 10, 1));
+//        Produto p3 = new Produto(null, "Pipa Capucheta", "Pipa estilizada", "https://i.ibb.co/xsGBZVK/pipa-neon.png", 50.0, Boolean.TRUE, cat1, new Estoque(null, 20, 0));
+//        Produto p4 = new Produto(null, "Linha colorida", "Linha colorida", "https://i.ibb.co/C2gh325/linhacolorida.png", 10.0, Boolean.TRUE, cat1, new Estoque(null, 8, 4));
+//        Produto p5 = new Produto(null, "Carretilha com linha", "Carretilha", "https://i.ibb.co/h1GkxYP/carretilhacomlinha.png", 20.0, Boolean.FALSE, cat1, new Estoque(null, 0, 0));
+
+        Produto p1 = new Produto(null, "Pipa Grande Colorida", "Pipa colorida", "https://i.ibb.co/SvxNRNy/pipa-box.png", 40.5, Boolean.TRUE, cat1);
+        Produto p2 = new Produto(null, "Pipa Media Colorida", "Pipa Beneficente", "https://i.ibb.co/rsvK81S/pipa-flex.png", 45.5, Boolean.TRUE, cat1);
+        Produto p3 = new Produto(null, "Pipa Capucheta", "Pipa estilizada", "https://i.ibb.co/xsGBZVK/pipa-neon.png", 50.0, Boolean.TRUE, cat1);
+        Produto p4 = new Produto(null, "Linha colorida", "Linha colorida", "https://i.ibb.co/C2gh325/linhacolorida.png", 10.0, Boolean.TRUE, cat1);
+        Produto p5 = new Produto(null, "Carretilha com linha", "Carretilha", "https://i.ibb.co/h1GkxYP/carretilhacomlinha.png", 20.0, Boolean.FALSE, cat1);
+
             Endereco end1 = new Endereco(null, "Rua da Milvus", 1, null, "Vila da Pipa", "Pipópolis", "SP", "000000000");
                 Empresa emp1 = new Empresa(1L,"Milvus Artis", "00.000.000/0000-00", "000.000.000.000", end1);
+
 
             empresaRepository.save(emp1);
 
