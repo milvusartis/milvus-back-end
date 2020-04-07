@@ -3,6 +3,7 @@ package br.com.milvusartis.ecommerce.controller;
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.model.bo.ProdutoBO;
 import br.com.milvusartis.ecommerce.model.dto.ProdutoDTO;
+import br.com.milvusartis.ecommerce.model.entity.Categoria;
 import br.com.milvusartis.ecommerce.model.entity.Produto;
 import br.com.milvusartis.ecommerce.repository.ProdutoRepository;
 import br.com.milvusartis.ecommerce.service.ProdutoService;
@@ -36,7 +37,7 @@ public class ProdutoController {
 
 //    @GetMapping("/produtos")
 //    public ResponseEntity<?> listar() {
-//        List<Produto> ListaProdutos = produtoRepository.findAll();
+//        List<Produto> ListaProdutos = repository.findAll();
 //        List<ProdutoDTO> listaDeProdutosResposta = new ArrayList<>();
 //
 //        ListaProdutos.forEach((produto) -> {
@@ -53,8 +54,11 @@ public class ProdutoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não pode estar vazio");
         }
 
-        Produto produto = produtoService.inicializaAtributosProduto(produtoBO.parseToPOJO(produtoDTO));
-        Produto produtoEntity = produtoRepository.save(produto);
+//        Produto produto = ProdutoService.inicializaAtributosProduto(produtoBO.parseToPOJO(produtoDTO));
+//        Produto produtoEntity = produtoRepository.save(produto);
+
+        Produto produtoEntity = produtoRepository.save(produtoBO.parseToPOJO(produtoDTO));
+
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoBO.parseToDTO(produtoEntity));
 
     }
@@ -102,7 +106,7 @@ public class ProdutoController {
         Produto produto = opt_produto.orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado"));
 
 
-        Long idEstoqueEdicao = edicao.getEstoque().getIdEstoque();
+//        Long idEstoqueEdicao = edicao.getEstoque().getIdEstoque();
 
         if(edicao.getNome() != null)
             produto.setNome(edicao.getNome());
