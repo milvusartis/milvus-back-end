@@ -25,7 +25,7 @@ public class ApiExceptionHandler {
     @ExceptionHandler(MailNotSendException.class)
     public ResponseEntity<?> handleExceptionSendEmail(MailNotSendException ex){
         LOG.info("Email não pode ser enviado!");
-        return ResponseEntity.status(HttpStatus.CREATED).body(ex.getMessage()) ;
+        return ResponseEntity.status(HttpStatus.OK).body(ex.getMessage()) ;
 
     }
 }

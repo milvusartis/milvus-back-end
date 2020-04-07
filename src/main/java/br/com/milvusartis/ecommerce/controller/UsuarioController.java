@@ -39,7 +39,7 @@ public class UsuarioController {
 
         Usuario usuarioEntity = usuarioRepository.save(usuarioBO.parseToPOJO(usuarioDTO));
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioBO.parseToDTO(usuarioEntity));
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioResponseBO.parseToDTO(usuarioEntity));
 
     }
 
@@ -63,7 +63,7 @@ public class UsuarioController {
         Optional<Usuario> opt_usuario = usuarioRepository.findById(id);
         Usuario usuario = opt_usuario.orElseThrow(() -> new ResourceNotFoundException("Usuario não encontrado"));
 
-        return ResponseEntity.status(HttpStatus.OK).body(usuarioBO.parseToDTO(usuario));
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioResponseBO.parseToDTO(usuario));
 
     }
 
