@@ -38,8 +38,8 @@ public class Produto implements Serializable {
     @JoinColumn(name = "categoria_id", referencedColumnName = "id_categoria")
     private Categoria categoria;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "estoque_id", referencedColumnName = "id_estoque")
-    private Estoque estoque;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "estoque_id", referencedColumnName = "id_estoque")
+//    private Estoque estoque;
 
 }

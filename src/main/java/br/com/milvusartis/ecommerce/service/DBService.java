@@ -61,7 +61,7 @@ public class DBService {
 
         //USUÁRIO:
 
-            Usuario u0 = new Usuario(null, "Administrador do Sistema", "admin", encoder.encode("admin"), Regra.ROLE_ADMIN);
+            Usuario u0 = new Usuario(null, "Administrador do Sistema", "admin@admin.com", encoder.encode("admin"), Regra.ROLE_ADMIN);
 
         usuarioRepository.saveAll(Arrays.asList(u0));
 
@@ -77,21 +77,37 @@ public class DBService {
 
         //PRODUTO:
 
-            Produto pro1 = new Produto(null, "Pipa Grande Colorida", "Pipa colorida", "https://i.ibb.co/SvxNRNy/pipa-box.png", 40.5, Boolean.TRUE, cat1, new Estoque(null, 5, 0));
+//            Produto pro1 = new Produto(null, "Pipa Grande Colorida", "Pipa colorida", "https://i.ibb.co/SvxNRNy/pipa-box.png", 40.5, Boolean.TRUE, cat1, new Estoque(null, 5, 0));
+//
+//            Produto pro2 = new Produto(null, "Pipa Media Colorida", "Pipa Beneficente", "https://i.ibb.co/rsvK81S/pipa-flex.png", 45.5, Boolean.TRUE, cat1, new Estoque(null, 10, 1));
+//
+//            Produto pro3 = new Produto(null, "Pipa Capucheta", "Pipa estilizada", "https://i.ibb.co/xsGBZVK/pipa-neon.png", 50.0, Boolean.TRUE, cat1, new Estoque(null, 20, 0));
+//
+//            Produto pro4 = new Produto(null, "Pipa Rocket", "Pipa descolada", "https://i.ibb.co/Db0Z0SM/pipa-rocket.png", 43.75, Boolean.FALSE, cat1, new Estoque(null, 0, 0));
+//
+//            Produto pro5 = new Produto(null, "Linha colorida", "Linha colorida", "https://i.ibb.co/C2gh325/linhacolorida.png", 10.0, Boolean.TRUE, cat2, new Estoque(null, 8, 4));
+//
+//            Produto pro6 = new Produto(null, "Linha amarela", "Linha amarela", "https://i.ibb.co/3Y906L3/linha10.png", 9.0, Boolean.FALSE, cat2, new Estoque(null, 0, 0));
+//
+//            Produto pro7 = new Produto(null, "Carretilha verde com linha", "Carretilha com linha", "https://i.ibb.co/h1GkxYP/carretilhacomlinha.png", 20.0, Boolean.FALSE, cat3, new Estoque(null, 0, 0));
+//
+//            Produto pro8 = new Produto(null, "Mini carretilha amarela", "Mini carretilha", "https://i.ibb.co/QjgpzmJ/minicarretilha.png", 18.0, Boolean.FALSE, cat3, new Estoque(null, 0, 0));
 
-            Produto pro2 = new Produto(null, "Pipa Media Colorida", "Pipa Beneficente", "https://i.ibb.co/rsvK81S/pipa-flex.png", 45.5, Boolean.TRUE, cat1, new Estoque(null, 10, 1));
+        Produto pro1 = new Produto(null, "Pipa Grande Colorida", "Pipa colorida", "https://i.ibb.co/SvxNRNy/pipa-box.png", 40.5, Boolean.TRUE, cat1);
 
-            Produto pro3 = new Produto(null, "Pipa Capucheta", "Pipa estilizada", "https://i.ibb.co/xsGBZVK/pipa-neon.png", 50.0, Boolean.TRUE, cat1, new Estoque(null, 20, 0));
+        Produto pro2 = new Produto(null, "Pipa Media Colorida", "Pipa Beneficente", "https://i.ibb.co/rsvK81S/pipa-flex.png", 45.5, Boolean.TRUE, cat1);
 
-            Produto pro4 = new Produto(null, "Pipa Rocket", "Pipa descolada", "https://i.ibb.co/Db0Z0SM/pipa-rocket.png", 43.75, Boolean.FALSE, cat1, new Estoque(null, 0, 0));
+        Produto pro3 = new Produto(null, "Pipa Capucheta", "Pipa estilizada", "https://i.ibb.co/xsGBZVK/pipa-neon.png", 50.0, Boolean.TRUE, cat1);
 
-            Produto pro5 = new Produto(null, "Linha colorida", "Linha colorida", "https://i.ibb.co/C2gh325/linhacolorida.png", 10.0, Boolean.TRUE, cat2, new Estoque(null, 8, 4));
+        Produto pro4 = new Produto(null, "Pipa Rocket", "Pipa descolada", "https://i.ibb.co/Db0Z0SM/pipa-rocket.png", 43.75, Boolean.FALSE, cat1);
 
-            Produto pro6 = new Produto(null, "Linha amarela", "Linha amarela", "https://i.ibb.co/3Y906L3/linha10.png", 9.0, Boolean.FALSE, cat2, new Estoque(null, 0, 0));
+        Produto pro5 = new Produto(null, "Linha colorida", "Linha colorida", "https://i.ibb.co/C2gh325/linhacolorida.png", 10.0, Boolean.TRUE, cat2);
 
-            Produto pro7 = new Produto(null, "Carretilha verde com linha", "Carretilha com linha", "https://i.ibb.co/h1GkxYP/carretilhacomlinha.png", 20.0, Boolean.FALSE, cat3, new Estoque(null, 0, 0));
+        Produto pro6 = new Produto(null, "Linha amarela", "Linha amarela", "https://i.ibb.co/3Y906L3/linha10.png", 9.0, Boolean.FALSE, cat2);
 
-            Produto pro8 = new Produto(null, "Mini carretilha amarela", "Mini carretilha", "https://i.ibb.co/QjgpzmJ/minicarretilha.png", 18.0, Boolean.FALSE, cat3, new Estoque(null, 0, 0));
+        Produto pro7 = new Produto(null, "Carretilha verde com linha", "Carretilha com linha", "https://i.ibb.co/h1GkxYP/carretilhacomlinha.png", 20.0, Boolean.FALSE, cat3);
+
+        Produto pro8 = new Produto(null, "Mini carretilha amarela", "Mini carretilha", "https://i.ibb.co/QjgpzmJ/minicarretilha.png", 18.0, Boolean.FALSE, cat3);
 
 
         produtoRepository.saveAll(Arrays.asList(pro1, pro2, pro3, pro4, pro5, pro6, pro7, pro8));
