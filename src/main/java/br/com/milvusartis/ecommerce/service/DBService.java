@@ -61,7 +61,7 @@ public class DBService {
 
         //USUÁRIO:
 
-            Usuario u0 = new Usuario(null, "Administrador do Sistema", "admin", encoder.encode("admin"), Regra.ROLE_ADMIN);
+            Usuario u0 = new Usuario(null, "Administrador do Sistema", "admin@admin.com", encoder.encode("admin"), Regra.ROLE_ADMIN);
 
         usuarioRepository.saveAll(Arrays.asList(u0));
 
