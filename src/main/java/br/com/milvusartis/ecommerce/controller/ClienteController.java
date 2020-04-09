@@ -6,17 +6,12 @@ import br.com.milvusartis.ecommerce.model.bo.ClienteResponseBO;
 import br.com.milvusartis.ecommerce.model.dto.ClienteDTO;
 import br.com.milvusartis.ecommerce.model.dto.ClienteResponseDTO;
 import br.com.milvusartis.ecommerce.model.entity.Cliente;
-import br.com.milvusartis.ecommerce.model.entity.Usuario;
-import br.com.milvusartis.ecommerce.model.tipos.Regra;
 import br.com.milvusartis.ecommerce.repository.ClienteRepository;
 import br.com.milvusartis.ecommerce.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -77,6 +72,33 @@ public class ClienteController {
         Cliente cliente = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
 
         return ResponseEntity.status(HttpStatus.OK).body(clienteBO.parseToDTO(cliente));
+
+    }
+
+    @PutMapping("/clientes/{id}")
+    public ResponseEntity<?> modificar(@PathVariable("id") Long id, @RequestBody Cliente edicao) {
+
+        Optional<Cliente> opt_cliente = clienteRepository.findById(id);
+        Cliente cliente = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
+
+        if(edicao.getRg() != null)
+            cliente.setRg(edicao.getRg());
+
+        if(edicao.getTelefone() != null)
+            cliente.setTelefone(edicao.getTelefone());
+
+        if(edicao.getUsuario().getNome() != null)
+            cliente.getUsuario().setNome(edicao.getUsuario().getNome());
+
+        if(edicao.getUsuario().getEmail() != null)
+            cliente.getUsuario().setEmail(edicao.getUsuario().getEmail());
+
+        if(edicao.getUsuario().getSenha() != null)
+            cliente.getUsuario().setSenha(edicao.getUsuario().getSenha());
+
+        clienteRepository.save(cliente);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(clienteBO.parseToDTO(cliente));
 
     }
 
