@@ -29,8 +29,8 @@ public class Pedido implements Serializable {
     private Long idPedido;
 
 
-    @Column(name = "nr_pedido")
-    private Integer numero;
+//    @Column(name = "nr_pedido")
+//    private Integer numero;
 
     //TODO JASON DATE FORMAT
 //    @Temporal(TemporalType.DATE)

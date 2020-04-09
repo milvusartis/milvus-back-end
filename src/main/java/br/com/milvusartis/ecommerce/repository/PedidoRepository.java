@@ -14,7 +14,6 @@ import java.util.Optional;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
-    List<Pedido> findByNumero(Long numero);
     List<Pedido> findByStatusPedido(StatusPedido statusPedido);
     List<Pedido> findByCliente(Cliente cliente);
     List<Pedido> findByClienteAndStatusPedido(Cliente cliente, StatusPedido statusPedido);

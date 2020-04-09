@@ -15,7 +15,7 @@ import java.util.List;
 public class PedidoDTO {
 
     private Long idPedido;
-    private Integer numero;
+//    private Integer numero;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataPedido;
     private Double valorFrete;

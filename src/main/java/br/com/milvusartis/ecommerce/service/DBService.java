@@ -117,12 +117,14 @@ public class DBService {
             PedidoItem pedIte1 = new PedidoItem(null, 2, 40.5, pro1);
             PedidoItem pedIte2 = new PedidoItem(null, 3, 45.5, pro2);
                 Pagamento pag1 = new Pagamento(null, "Diógenes Bezerra Pereira", "11964367824", "04205595310", "Cartão Master", StatusPagamento.PAGAMENTO_APROVADO);
-                    Pedido pd1 = new Pedido(null, 1, LocalDate.now(), 4.00, 221.5, StatusPedido.PEDIDO_ENVIADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte1, pedIte2), cli1, pag1);
+//        Pedido pd1 = new Pedido(null, 1, LocalDate.now(), 4.00, 221.5, StatusPedido.PEDIDO_ENVIADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte1, pedIte2), cli1, pag1);
+        Pedido pd1 = new Pedido(null, LocalDate.now(), 4.00, 221.5, StatusPedido.PEDIDO_ENVIADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte1, pedIte2), cli1, pag1);
 
             PedidoItem pedIte3 = new PedidoItem(null, 1, 50.0, pro3);
             PedidoItem pedIte4 = new PedidoItem(null, 3, 10.0, pro4);
                 Pagamento pag2 = new Pagamento(null, "Alvaro dos Santos Saraiva", "11932145053", "07381194821", "Cartão Visa", StatusPagamento.PAGAMENTO_APROVADO);
-                    Pedido pd2 = new Pedido(null, 2, LocalDate.now(), 6.00, 86.0, StatusPedido.PAGAMENTO_CONFIRMADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte3, pedIte4), cli2, pag2);
+//        Pedido pd2 = new Pedido(null, 2, LocalDate.now(), 6.00, 86.0, StatusPedido.PAGAMENTO_CONFIRMADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte3, pedIte4), cli2, pag2);
+        Pedido pd2 = new Pedido(null, LocalDate.now(), 6.00, 86.0, StatusPedido.PAGAMENTO_CONFIRMADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte3, pedIte4), cli2, pag2);
 
         pedidoRepository.saveAll(Arrays.asList(pd1, pd2));
 
