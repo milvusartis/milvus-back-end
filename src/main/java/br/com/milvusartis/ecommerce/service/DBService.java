@@ -33,9 +33,10 @@ public class DBService {
     @Autowired
     EmpresaRepository empresaRepository;
 
-    public void intantiateTestDatabase(){
+    @Autowired
+    BCryptPasswordEncoder encoder;
 
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
+    public void intantiateTestDatabase(){
 
         //EMPRESA com ENDEREÇO:
 
