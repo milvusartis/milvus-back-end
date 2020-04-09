@@ -6,9 +6,12 @@ import br.com.milvusartis.ecommerce.model.dto.PedidoDTO;
 import br.com.milvusartis.ecommerce.model.dto.ProdutoDTO;
 import br.com.milvusartis.ecommerce.model.entity.Cliente;
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
+import br.com.milvusartis.ecommerce.model.entity.Usuario;
 import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
 import br.com.milvusartis.ecommerce.repository.ClienteRepository;
 import br.com.milvusartis.ecommerce.repository.PedidoRepository;
+import br.com.milvusartis.ecommerce.repository.UsuarioRepository;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
@@ -32,13 +35,19 @@ public class HistoricoPedidoController {
     ClienteRepository clienteRepository;
 
     @Autowired
+    UsuarioRepository usuarioRepository;
+
+
+    @Autowired
     PedidoBO pedidoBO;
 
-    @GetMapping("lista-pedidos/{idCliente}")
-    public ResponseEntity<?> listarTodos(@PathVariable("idCliente") Long idCliente) {
+    @GetMapping("historico-pedidos/{idUsuario}")
+    public ResponseEntity<?> listarTodos(@PathVariable("idUsuario") Long idUsuario) {
 
-        Optional<Cliente> opt_cliente = clienteRepository.findById(idCliente);
-        Cliente cliente = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
+        Optional<Usuario> opt_cliente = usuarioRepository.findById(idUsuario);
+        Usuario usuario = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Uaurio não encontrado"));
+
+        Cliente cliente = clienteRepository.findByUsuario(usuario);
 
         List<Pedido> pedidosCliente = pedidoRepository.findByCliente(cliente);
 
@@ -51,12 +60,14 @@ public class HistoricoPedidoController {
 
     }
 
-    @GetMapping("lista-pedidos/{idCliente}/{statusPedido}")
-    public ResponseEntity<?> listarPorStatus(@PathVariable("idCliente") Long idCliente,
+    @GetMapping("historico-pedidos/{idUsuario}/{statusPedido}")
+    public ResponseEntity<?> listarPorStatus(@PathVariable("idUsuario") Long idUsuario,
                                              @PathVariable("statusPedido") StatusPedido statusPedido) {
 
-        Optional<Cliente> opt_cliente = clienteRepository.findById(idCliente);
-        Cliente cliente = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
+        Optional<Usuario> opt_cliente = usuarioRepository.findById(idUsuario);
+        Usuario usuario = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Uaurio não encontrado"));
+
+        Cliente cliente = clienteRepository.findByUsuario(usuario);
 
         List<Pedido> pedidosClienteStatus = pedidoRepository.findByClienteAndStatusPedido(cliente, statusPedido);
 
