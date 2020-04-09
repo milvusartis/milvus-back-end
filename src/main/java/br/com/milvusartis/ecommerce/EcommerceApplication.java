@@ -16,15 +16,6 @@ public class EcommerceApplication {
 	public static void main(String[] args) {
 		System.setProperty("server.servlet.context-path", "/api/ecommerce");
 		SpringApplication.run(EcommerceApplication.class, args);
-
-
-
-
-	}
-
-	@Bean
-	public ModelMapper modelMapper() {
-		return new ModelMapper();
 	}
 
 }

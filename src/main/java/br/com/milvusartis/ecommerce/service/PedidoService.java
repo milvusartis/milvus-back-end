@@ -66,7 +66,7 @@ public class PedidoService {
 
         Integer contador = contadorSequencialService.numerarNotaFiscal();
 // TODO consertar numero do pedido para utilizar o contador
-        pedido.setNumero(contador);
+//        pedido.setNumero(contador);
         pedido.setCliente(cliente);
         pedido.setDataPedido(LocalDate.now());
 //        Cliente cliente = clienteRepository.findById(pedido.getCliente().getIdCliente()).orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
