@@ -3,6 +3,7 @@ package br.com.milvusartis.ecommerce.config;
 import br.com.milvusartis.ecommerce.service.DBService;
 import br.com.milvusartis.ecommerce.service.EmailService;
 import br.com.milvusartis.ecommerce.service.MockEmailService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,5 +25,10 @@ public class TestConfig {
     @Bean
     public EmailService emailService(){
         return new MockEmailService();
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 }

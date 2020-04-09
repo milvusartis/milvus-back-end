@@ -4,6 +4,7 @@ import br.com.milvusartis.ecommerce.service.DBService;
 import br.com.milvusartis.ecommerce.service.EmailService;
 import br.com.milvusartis.ecommerce.service.MockEmailService;
 import br.com.milvusartis.ecommerce.service.SmtpEmailService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -32,5 +33,10 @@ public class DevConfig {
     @Bean
     public EmailService emailService(){
         return new SmtpEmailService();
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 }
