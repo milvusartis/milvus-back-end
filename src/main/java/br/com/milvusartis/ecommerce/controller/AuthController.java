@@ -1,6 +1,5 @@
 package br.com.milvusartis.ecommerce.controller;
 
-import br.com.milvusartis.ecommerce.model.bo.UsuarioBO;
 import br.com.milvusartis.ecommerce.model.entity.Usuario;
 import br.com.milvusartis.ecommerce.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,21 +9,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static br.com.milvusartis.ecommerce.model.tipos.Perfil.ADMIN;
-
 @RestController
 public class AuthController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    UsuarioBO usuarioBO;
 
     @GetMapping("/auth/token")
     public ResponseEntity<?> perfil(Authentication authentication) {
         Usuario user = usuarioRepository.findByEmail(authentication.getName());
-        return ResponseEntity.status(HttpStatus.OK).body(usuarioBO.parseToDTO(user));
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
 //    @GetMapping("/auth/admin/token")

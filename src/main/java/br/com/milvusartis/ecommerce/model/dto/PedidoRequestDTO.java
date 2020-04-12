@@ -1,5 +1,6 @@
 package br.com.milvusartis.ecommerce.model.dto;
 
+import br.com.milvusartis.ecommerce.model.entity.Usuario;
 import br.com.milvusartis.ecommerce.model.pojo.Cartao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PedidoRequestDTO {
     PedidoDTO pedido;
-    UsuarioDTO usuario;
+    Usuario usuario;
     PagamentoDTO pagamento;
     Cartao cartao;
     String nomeEntrega;
