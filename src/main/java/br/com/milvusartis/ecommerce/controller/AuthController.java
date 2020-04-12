@@ -10,7 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static br.com.milvusartis.ecommerce.model.tipos.Regra.ROLE_ADMIN;
+import static br.com.milvusartis.ecommerce.model.tipos.Perfil.ADMIN;
 
 @RestController
 public class AuthController {
@@ -27,15 +27,15 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.OK).body(usuarioBO.parseToDTO(user));
     }
 
-    @GetMapping("/auth/admin/token")
-    public ResponseEntity<?> perfilAdmin(Authentication authentication) {
-        Usuario user = usuarioRepository.findByEmail(authentication.getName());
-
-        if(user.getRegraDeAcesso() == ROLE_ADMIN)
-            return ResponseEntity.status(HttpStatus.OK).body(usuarioBO.parseToDTO(user));
-        else
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário sem permissão");
-    }
+//    @GetMapping("/auth/admin/token")
+//    public ResponseEntity<?> perfilAdmin(Authentication authentication) {
+//        Usuario user = usuarioRepository.findByEmail(authentication.getName());
+//
+//        if(user.getPerfis() == ADMIN)
+//            return ResponseEntity.status(HttpStatus.OK).body(usuarioBO.parseToDTO(user));
+//        else
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário sem permissão");
+//    }
 
 
 }

@@ -1,13 +1,12 @@
 package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.entity.*;
-import br.com.milvusartis.ecommerce.model.tipos.Regra;
+import br.com.milvusartis.ecommerce.model.tipos.Perfil;
 import br.com.milvusartis.ecommerce.model.tipos.StatusPagamento;
 import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
 import br.com.milvusartis.ecommerce.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -48,21 +47,24 @@ public class DBService {
         //CLIENTE e USUARIO com ENDEREÇO:
 
             Endereco end2 = new Endereco(null, "Rua Eugênia de Carvalho", 525, "Casa A", "Vila Matilde", "São Paulo", "SP", "03516000");
-                Usuario usu1 = new Usuario(null, "Diógenes Bezerra Pereira", "ads.diogenes@gmail.com",  encoder.encode("123456"), Regra.ROLE_ADMIN);
+                Usuario usu1 = new Usuario(null, "Diógenes Bezerra Pereira", "ads.diogenes@gmail.com",  encoder.encode("123456"));
+                usu1.addPerfil(Perfil.ADMIN);
                     Cliente cli1 = new Cliente(null, "04205595310", "2003034096537", "11964367824", usu1, end2);
 
-                Usuario usu2 = new Usuario(null, "Alvaro dos Santos Saraiva", "trusteco@hotmail.com", encoder.encode("123456"), Regra.ROLE_USER);
+                Usuario usu2 = new Usuario(null, "Alvaro dos Santos Saraiva", "trusteco@hotmail.com", encoder.encode("123456"));
                     Cliente cli2 = new Cliente(null, "07381194821", "157278293", "11932145053", usu2, end2);
 
             Endereco end3 = new Endereco(null, "Rua Abadia", 251, "Casa 1", "Nossa Senhora da Abadia", "Uberaba", "MG", "38025-450");
-                Usuario usu3 = new Usuario(null, "Isabela Zeitune Dezan", "isabelazeitunedezan@gmail.com", encoder.encode("123456"), Regra.ROLE_ADMIN);
+                Usuario usu3 = new Usuario(null, "Isabela Zeitune Dezan", "isabelazeitunedezan@gmail.com", encoder.encode("123456"));
+                usu3.addPerfil(Perfil.ADMIN);
                     Cliente cli3 = new Cliente(null, "40692679804", "484223859", "11948383433", usu3, end3);
 
         clienteRepository.saveAll(Arrays.asList( cli1, cli2, cli3));
 
         //USUÁRIO:
 
-            Usuario u0 = new Usuario(null, "Administrador do Sistema", "admin@admin.com", encoder.encode("admin"), Regra.ROLE_ADMIN);
+            Usuario u0 = new Usuario(null, "Administrador do Sistema", "admin@admin.com", encoder.encode("admin"));
+            u0.addPerfil(Perfil.ADMIN);
 
         usuarioRepository.saveAll(Arrays.asList(u0));
 
