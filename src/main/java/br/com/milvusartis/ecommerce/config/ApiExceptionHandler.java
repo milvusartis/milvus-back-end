@@ -1,5 +1,6 @@
 package br.com.milvusartis.ecommerce.config;
 
+import br.com.milvusartis.ecommerce.exception.AuthorizationException;
 import br.com.milvusartis.ecommerce.exception.MailNotSendException;
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.service.MockEmailService;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {
@@ -27,5 +30,12 @@ public class ApiExceptionHandler {
         LOG.info("Email não pode ser enviado!");
         return ResponseEntity.status(HttpStatus.OK).body(ex.getMessage()) ;
 
+    }
+
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
+
+        StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(), "Acesso negado", e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
     }
 }
