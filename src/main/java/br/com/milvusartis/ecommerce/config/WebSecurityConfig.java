@@ -1,6 +1,5 @@
 package br.com.milvusartis.ecommerce.config;
 
-import br.com.milvusartis.ecommerce.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
@@ -12,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -25,11 +25,11 @@ import java.util.Arrays;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Autowired
     protected void criarUsuarios(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 
 
@@ -70,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        if(Arrays.asList((env.getActiveProfiles())).contains("test") || Arrays.asList((env.getActiveProfiles())).contains("dev")){
+        if (Arrays.asList((env.getActiveProfiles())).contains("test") || Arrays.asList((env.getActiveProfiles())).contains("dev")) {
             http.headers().frameOptions().disable();
         }
 
@@ -90,7 +90,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return source;
     }
 
-    @Bean BCryptPasswordEncoder bCryptPasswordEncoder(){
+    @Bean
+    BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

@@ -49,7 +49,7 @@ public class Usuario implements Serializable {
     }
 
     public Set <Perfil> getPerfis(){
-        return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+        return perfis.stream().map(perfil -> Perfil.toEnum(perfil)).collect(Collectors.toSet());
     }
 
     public void addPerfil(Perfil perfil){
