@@ -8,7 +8,8 @@ import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.http.HttpStatus;
         import org.springframework.http.ResponseEntity;
-        import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
         import java.util.ArrayList;
         import java.util.List;
@@ -23,6 +24,7 @@ public class CategoriaController {
     @Autowired
     CategoriaBO categoriaBO;
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/categorias")
     public ResponseEntity<?> cadastrar(@RequestBody CategoriaDTO categoriaDTO) {
 
@@ -60,6 +62,7 @@ public class CategoriaController {
 
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/categorias/{id}")
     public ResponseEntity<?> remover(@PathVariable("id") Long id) {
 

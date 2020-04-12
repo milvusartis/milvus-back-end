@@ -10,6 +10,7 @@ import br.com.milvusartis.ecommerce.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class PedidoController {
 
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/pedidos")
     public ResponseEntity<?> listar() {
 
@@ -75,6 +77,7 @@ public class PedidoController {
     }
 
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/pedidos/{id}/{acao}")
     public ResponseEntity<?> modificar(@PathVariable("id") Long id, @PathVariable("acao") String acao) {
 
@@ -100,6 +103,7 @@ public class PedidoController {
 
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/pedidos/{id}")
     public ResponseEntity<?> remover(@PathVariable("id") Long id) {
 

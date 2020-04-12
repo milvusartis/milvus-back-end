@@ -47,8 +47,8 @@ public class ProdutoController {
 //    }
 
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/produtos")
-//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> cadastrar(@RequestBody ProdutoDTO produtoDTO) {
         if (produtoDTO == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não pode estar vazio");
@@ -71,6 +71,7 @@ public class ProdutoController {
     }
 
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/produtos/{id}")
     public ResponseEntity<?> remover(@PathVariable("id") Long id) {
         return produtoRepository.findById(id)
@@ -99,6 +100,7 @@ public class ProdutoController {
     }
 
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/admin/produtos/{id}")
     public ResponseEntity<?> modificar(@PathVariable("id") Long id, @RequestBody Produto edicao) {
 
