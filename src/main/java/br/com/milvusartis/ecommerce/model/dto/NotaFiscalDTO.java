@@ -14,7 +14,7 @@ import java.util.Date;
 public class NotaFiscalDTO {
 
     private Long idNotaFiscal;
-    private Integer numeroNf;
+    private String numeroNf;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataEmissao;
     private String naturezaOperacao;
