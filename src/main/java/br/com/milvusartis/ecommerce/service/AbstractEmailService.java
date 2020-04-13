@@ -1,6 +1,7 @@
 package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
+import br.com.milvusartis.ecommerce.model.entity.Usuario;
 import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -90,6 +91,22 @@ public abstract class AbstractEmailService implements EmailService {
         mmh.setSentDate(new Date(System.currentTimeMillis()));
         mmh.setText(htmlFromTemplatePedido(pedido), true);
         return mimeMessage;
+    }
+
+    @Override
+    public void sendNewPasswordEmail(Usuario usuario, String newPass){
+        SimpleMailMessage sm = prepareNewPasswordEmail(usuario, newPass);
+        sendEmail(sm);
+    }
+
+    protected SimpleMailMessage prepareNewPasswordEmail(Usuario usuario, String newPass) {
+        SimpleMailMessage sm = new SimpleMailMessage();
+        sm.setTo(usuario.getEmail());
+        sm.setFrom(sender);
+        sm.setSubject("Solicitação de nova senha");
+        sm.setSentDate(new Date(System.currentTimeMillis()));
+        sm.setText("Nova senha: "+newPass);
+        return sm;
     }
 }
 
