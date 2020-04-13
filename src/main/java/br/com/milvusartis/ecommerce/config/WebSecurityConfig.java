@@ -35,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     protected void criarUsuarios(AuthenticationManagerBuilder auth) throws Exception {
+        System.out.println(auth);
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 
@@ -65,6 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] PUBLIC_MATCHERS = {
             "/h2/**",
             "/h2-console/**",
+            "/auth/user",
     };
 
     private static final String[] PUBLIC_MATCHERS_GET = {

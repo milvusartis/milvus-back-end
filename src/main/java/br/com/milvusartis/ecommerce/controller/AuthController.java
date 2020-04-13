@@ -1,6 +1,12 @@
 package br.com.milvusartis.ecommerce.controller;
 
+import br.com.milvusartis.ecommerce.exception.AuthorizationException;
+import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
+import br.com.milvusartis.ecommerce.model.bo.UsuarioBO;
 import br.com.milvusartis.ecommerce.model.dto.EmailDTO;
+import br.com.milvusartis.ecommerce.model.dto.PedidoDTO;
+import br.com.milvusartis.ecommerce.model.entity.Cliente;
+import br.com.milvusartis.ecommerce.model.entity.Pedido;
 import br.com.milvusartis.ecommerce.model.entity.Usuario;
 import br.com.milvusartis.ecommerce.repository.UsuarioRepository;
 import br.com.milvusartis.ecommerce.security.JWTUtil;
@@ -15,6 +21,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/auth")
@@ -29,12 +38,28 @@ public class AuthController {
     @Autowired
     private AuthService service;
 
+    @Autowired
+    private UsuarioBO usuarioBO;
+
 //    @GetMapping("/auth/token")
 //    public ResponseEntity<?> perfil(Authentication authentication) {
 //        Usuario user = usuarioRepository.findByEmail(authentication.getName());
 //        return ResponseEntity.status(HttpStatus.OK).body(user);
 //    }
 
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public ResponseEntity<?> recuperaUsuario() {
+
+        UserSS user = UsuarioService.authenticated();
+
+        if (user == null) {
+            throw new AuthorizationException("Acesso negado");
+        }
+
+        Optional<Usuario> opt_cliente = usuarioRepository.findById(user.getId());
+        Usuario usuario = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Uaurio não encontrado"));
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioBO.parseToDTO(usuario));
+    }
 //    @GetMapping("/auth/admin/token")
 //    public ResponseEntity<?> perfilAdmin(Authentication authentication) {
 //        Usuario user = usuarioRepository.findByEmail(authentication.getName());
