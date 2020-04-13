@@ -31,18 +31,17 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-       try {
-           CredenciaisDTO creds = new ObjectMapper()
-                   .readValue(request.getInputStream(), CredenciaisDTO.class);
+        try {
+            CredenciaisDTO creds = new ObjectMapper()
+                    .readValue(request.getInputStream(), CredenciaisDTO.class);
 
-           UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(creds.getEmail(), creds.getSenha(), new ArrayList<>());
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(creds.getEmail(), creds.getSenha(), new ArrayList<>());
 
-           Authentication auth = authenticationManager.authenticate(authToken);
-           return auth;
-       }
-       catch (IOException e){
-           throw new RuntimeException(e);
-       }
+            Authentication auth = authenticationManager.authenticate(authToken);
+            return auth;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
