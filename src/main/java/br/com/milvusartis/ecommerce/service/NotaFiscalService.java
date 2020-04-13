@@ -1,6 +1,7 @@
 package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
+import br.com.milvusartis.ecommerce.model.dto.NotaFiscalDTO;
 import br.com.milvusartis.ecommerce.model.entity.Cliente;
 import br.com.milvusartis.ecommerce.model.entity.Empresa;
 import br.com.milvusartis.ecommerce.model.entity.NotaFiscal;
@@ -38,7 +39,6 @@ public class NotaFiscalService {
     @Autowired
     ContadorSequencialService contadorSequencialService;
 
-
     public NotaFiscal emitirNotaFiscal(Long idEmpresa, Long idCliente, Long idPedido) {
 
         Optional<Empresa> opt_empresa = empresaRepository.findById(idEmpresa);
@@ -51,6 +51,7 @@ public class NotaFiscalService {
         Pedido pedido = opt_pedido.orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado"));
 
         Integer contador = contadorSequencialService.numerarNotaFiscal();
+        String contadorString = contador.toString();
 
         String uf = cliente.getEndereco().getUf();
         String naturezaOperacao;

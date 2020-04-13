@@ -16,7 +16,7 @@ public class ProdutoDTO {
     private Double valorUnitario;
     private Boolean isAtivo;
     private CategoriaDTO categoria;
-    private String categoriaNome;
+//    private String categoriaNome;
 
     /*Ótima opção quando é necessário proteger alguns dados da entidade*/
 
