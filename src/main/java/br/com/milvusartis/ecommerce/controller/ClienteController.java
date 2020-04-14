@@ -87,7 +87,6 @@ public class ClienteController {
 
     }
 
-
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/clientes/{id}")
     public ResponseEntity<?> modificar(@PathVariable("id") Long id, @RequestBody Cliente edicao) {
