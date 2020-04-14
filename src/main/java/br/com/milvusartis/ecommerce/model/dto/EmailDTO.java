@@ -4,13 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioResponseDTO {
+public class EmailDTO {
 
-    private Long idUsuario;
-    private String nome;
+    @NotEmpty(message = "Preenchimento obrigatório")
+    @Email(message = "Email inválido")
     private String email;
 
 }

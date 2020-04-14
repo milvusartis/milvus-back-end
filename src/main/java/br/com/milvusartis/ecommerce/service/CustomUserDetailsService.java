@@ -2,6 +2,7 @@ package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.entity.Usuario;
 import br.com.milvusartis.ecommerce.repository.UsuarioRepository;
+import br.com.milvusartis.ecommerce.security.UserSS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
@@ -23,11 +25,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         Usuario user = usuarioRepository.findByEmail(email);
-        List<GrantedAuthority> authorityList = AuthorityUtils.createAuthorityList(user.getRegraDeAcesso().name());
-        return new User(
-                user.getEmail(),
-                user.getSenha(),
-                authorityList
-        );
+
+        if(user == null){
+            throw new UsernameNotFoundException(email);
+        }
+        return new UserSS(user.getIdUsuario(), user.getEmail(), user.getSenha(), user.getPerfis());
     }
 }

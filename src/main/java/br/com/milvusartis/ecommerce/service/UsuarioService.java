@@ -1,19 +1,31 @@
 package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.entity.Usuario;
-import br.com.milvusartis.ecommerce.model.tipos.Regra;
+import br.com.milvusartis.ecommerce.model.tipos.Perfil;
+import br.com.milvusartis.ecommerce.security.UserSS;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioService {
 
+    @Autowired
+    BCryptPasswordEncoder encoder;
+
     public Usuario definirAcessoSeguranca(Usuario usuario){
-        usuario.setRegraDeAcesso(Regra.ROLE_USER);
         String senha = usuario.getSenha();
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
         usuario.setSenha(encoder.encode(senha));
         return usuario;
     }
+
+    public static UserSS authenticated(){
+        try {
+            return (UserSS) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        }catch (Exception e){
+            return null;
+        }
+    }
+
 }

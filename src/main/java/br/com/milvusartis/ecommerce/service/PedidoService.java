@@ -4,7 +4,6 @@ import br.com.milvusartis.ecommerce.exception.MailNotSendException;
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.model.bo.PagamentoBO;
 import br.com.milvusartis.ecommerce.model.bo.PedidoBO;
-import br.com.milvusartis.ecommerce.model.bo.UsuarioBO;
 import br.com.milvusartis.ecommerce.model.dto.PedidoRequestDTO;
 import br.com.milvusartis.ecommerce.model.entity.*;
 import br.com.milvusartis.ecommerce.model.pojo.Cartao;
@@ -14,7 +13,6 @@ import br.com.milvusartis.ecommerce.repository.ClienteRepository;
 import br.com.milvusartis.ecommerce.repository.PedidoRepository;
 import br.com.milvusartis.ecommerce.repository.ProdutoRepository;
 import br.com.milvusartis.ecommerce.service.gatway.PagamentoGatwayService;
-import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,9 +42,6 @@ public class PedidoService {
     PedidoBO pedidoBO;
 
     @Autowired
-    UsuarioBO usuarioBO;
-
-    @Autowired
     PagamentoBO pagamentoBO;
 
     @Autowired
@@ -62,7 +57,7 @@ public class PedidoService {
     public Pedido inicializaPedido(PedidoRequestDTO pedidoRequestDTO) {
 
         Pedido pedido = pedidoBO.parseToPOJO(pedidoRequestDTO.getPedido());
-        Cliente cliente = checkoutService.findClienteFromIdUsuario(usuarioBO.parseToPOJO(pedidoRequestDTO.getUsuario()).getIdUsuario());
+        Cliente cliente = checkoutService.findClienteFromIdUsuario(pedidoRequestDTO.getUsuario().getIdUsuario());
 
         Integer contador = contadorSequencialService.numerarNotaFiscal();
 // TODO consertar numero do pedido para utilizar o contador

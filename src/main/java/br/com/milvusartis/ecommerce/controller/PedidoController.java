@@ -2,19 +2,15 @@ package br.com.milvusartis.ecommerce.controller;
 
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.model.bo.PedidoBO;
-import br.com.milvusartis.ecommerce.model.bo.UsuarioBO;
 import br.com.milvusartis.ecommerce.model.dto.PedidoDTO;
 import br.com.milvusartis.ecommerce.model.dto.PedidoRequestDTO;
-import br.com.milvusartis.ecommerce.model.entity.Cliente;
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
-import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
 import br.com.milvusartis.ecommerce.repository.PedidoRepository;
-import br.com.milvusartis.ecommerce.repository.UsuarioRepository;
-import br.com.milvusartis.ecommerce.service.CheckoutService;
 import br.com.milvusartis.ecommerce.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -55,6 +51,7 @@ public class PedidoController {
 
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/pedidos")
     public ResponseEntity<?> listar() {
 
@@ -80,6 +77,7 @@ public class PedidoController {
     }
 
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/pedidos/{id}/{acao}")
     public ResponseEntity<?> modificar(@PathVariable("id") Long id, @PathVariable("acao") String acao) {
 
@@ -105,6 +103,7 @@ public class PedidoController {
 
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/pedidos/{id}")
     public ResponseEntity<?> remover(@PathVariable("id") Long id) {
 

@@ -1,5 +1,6 @@
 package br.com.milvusartis.ecommerce.controller;
 
+import br.com.milvusartis.ecommerce.exception.AuthorizationException;
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.model.bo.PedidoBO;
 import br.com.milvusartis.ecommerce.model.dto.PedidoDTO;
@@ -11,6 +12,8 @@ import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
 import br.com.milvusartis.ecommerce.repository.ClienteRepository;
 import br.com.milvusartis.ecommerce.repository.PedidoRepository;
 import br.com.milvusartis.ecommerce.repository.UsuarioRepository;
+import br.com.milvusartis.ecommerce.security.UserSS;
+import br.com.milvusartis.ecommerce.service.UsuarioService;
 import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
@@ -41,10 +44,16 @@ public class HistoricoPedidoController {
     @Autowired
     PedidoBO pedidoBO;
 
-    @GetMapping("historico-pedidos/{idUsuario}")
-    public ResponseEntity<?> listarTodos(@PathVariable("idUsuario") Long idUsuario) {
+    @GetMapping("historico-pedidos")
+    public ResponseEntity<?> listarTodos() {
 
-        Optional<Usuario> opt_cliente = usuarioRepository.findById(idUsuario);
+        UserSS user = UsuarioService.authenticated();
+
+        if(user == null){
+            throw new AuthorizationException("Acesso negado");
+        }
+
+        Optional<Usuario> opt_cliente = usuarioRepository.findById(user.getId());
         Usuario usuario = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Uaurio não encontrado"));
 
         Cliente cliente = clienteRepository.findByUsuario(usuario);

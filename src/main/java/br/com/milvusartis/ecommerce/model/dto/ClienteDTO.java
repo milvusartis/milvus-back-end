@@ -1,5 +1,6 @@
 package br.com.milvusartis.ecommerce.model.dto;
 
+import br.com.milvusartis.ecommerce.model.entity.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,7 @@ public class ClienteDTO {
     private String rg;
     @NotEmpty(message = "Preenchimento obrigatório")
     private String telefone;
-    private UsuarioDTO usuario;
+    private Usuario usuario;
     private EnderecoDTO endereco;
 
 }

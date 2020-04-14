@@ -1,6 +1,5 @@
 package br.com.milvusartis.ecommerce.model.entity;
 
-import br.com.milvusartis.ecommerce.model.tipos.Regra;
 import br.com.milvusartis.ecommerce.model.tipos.StatusPagamento;
 import lombok.AllArgsConstructor;
 import lombok.Data;

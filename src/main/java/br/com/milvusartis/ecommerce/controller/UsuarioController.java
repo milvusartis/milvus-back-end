@@ -1,16 +1,13 @@
 package br.com.milvusartis.ecommerce.controller;
 
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
-import br.com.milvusartis.ecommerce.model.bo.UsuarioBO;
-import br.com.milvusartis.ecommerce.model.bo.UsuarioResponseBO;
-import br.com.milvusartis.ecommerce.model.dto.UsuarioDTO;
-import br.com.milvusartis.ecommerce.model.dto.UsuarioResponseDTO;
 import br.com.milvusartis.ecommerce.model.entity.Usuario;
 import br.com.milvusartis.ecommerce.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,22 +21,18 @@ public class UsuarioController {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    @Autowired
-    UsuarioBO usuarioBO;
 
-    @Autowired
-    UsuarioResponseBO usuarioResponseBO;
-
+    @PreAuthorize("has")
     @PostMapping("/usuarios")
-    public ResponseEntity<?> cadastrar(@RequestBody UsuarioDTO usuarioDTO) {
+    public ResponseEntity<?> cadastrar(@RequestBody Usuario usuario) {
 
-        if (usuarioDTO == null) {
+        if (usuario == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario não pode estar vazio");
         }
 
-        Usuario usuarioEntity = usuarioRepository.save(usuarioBO.parseToPOJO(usuarioDTO));
+        Usuario usuarioEntity = usuarioRepository.save(usuario);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioResponseBO.parseToDTO(usuarioEntity));
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioEntity);
 
     }
 
@@ -47,10 +40,10 @@ public class UsuarioController {
     public ResponseEntity<?> listar() {
 
         List<Usuario> usuarios = usuarioRepository.findAll();
-        List<UsuarioResponseDTO> listaDeUsuariosResposta = new ArrayList<>();
+        List<Usuario> listaDeUsuariosResposta = new ArrayList<>();
 
         usuarios.forEach((usuario) -> {
-            listaDeUsuariosResposta.add(usuarioResponseBO.parseToDTO(usuario));
+            listaDeUsuariosResposta.add(usuario);
         });
 
         return ResponseEntity.status(HttpStatus.OK).body(listaDeUsuariosResposta);
@@ -63,7 +56,7 @@ public class UsuarioController {
         Optional<Usuario> opt_usuario = usuarioRepository.findById(id);
         Usuario usuario = opt_usuario.orElseThrow(() -> new ResourceNotFoundException("Usuario não encontrado"));
 
-        return ResponseEntity.status(HttpStatus.OK).body(usuarioResponseBO.parseToDTO(usuario));
+        return ResponseEntity.status(HttpStatus.OK).body(usuario);
 
     }
 
@@ -78,5 +71,8 @@ public class UsuarioController {
                 }).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 
     }
+
+
+
 
 }
