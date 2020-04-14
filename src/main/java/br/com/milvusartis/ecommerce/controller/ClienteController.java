@@ -3,7 +3,9 @@ package br.com.milvusartis.ecommerce.controller;
 import br.com.milvusartis.ecommerce.exception.AuthorizationException;
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.model.bo.ClienteBO;
+import br.com.milvusartis.ecommerce.model.bo.ClienteCadastroBO;
 import br.com.milvusartis.ecommerce.model.bo.ClienteResponseBO;
+import br.com.milvusartis.ecommerce.model.dto.ClienteCadastroDTO;
 import br.com.milvusartis.ecommerce.model.dto.ClienteDTO;
 import br.com.milvusartis.ecommerce.model.dto.ClienteResponseDTO;
 import br.com.milvusartis.ecommerce.model.entity.Cliente;
@@ -33,25 +35,28 @@ public class ClienteController {
     ClienteBO clienteBO;
 
     @Autowired
+    ClienteCadastroBO clienteCadastroBO;
+
+    @Autowired
     ClienteResponseBO clienteResponseBO;
 
     @Autowired
     UsuarioService usuarioService;
 
     @PostMapping("/clientes")
-    public ResponseEntity<?> cadastrar(@RequestBody ClienteDTO clienteDTO) {
+    public ResponseEntity<?> cadastrar(@RequestBody ClienteCadastroDTO clienteCadastroDTO) {
 
-        if (clienteDTO == null) {
+        if (clienteCadastroDTO == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente não pode estar vazio");
         }
 
-        Cliente cliente = clienteBO.parseToPOJO(clienteDTO);
+        Cliente cliente = clienteCadastroBO.parseToPOJO(clienteCadastroDTO);
 
         usuarioService.definirAcessoSeguranca(cliente.getUsuario());
 
         Cliente clienteEntity = clienteRepository.save(cliente);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(clienteBO.parseToDTO(clienteEntity));
+        return ResponseEntity.status(HttpStatus.CREATED).body(clienteCadastroBO.parseToDTO(clienteEntity));
 
     }
 
