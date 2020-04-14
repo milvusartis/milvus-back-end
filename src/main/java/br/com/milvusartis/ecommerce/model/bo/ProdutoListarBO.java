@@ -14,8 +14,8 @@ public class ProdutoListarBO implements IBO<Produto, ProdutoListarDTO> {
 
     @Override
     public ProdutoListarDTO parseToDTO(Produto pojo) {
-        ProdutoListarDTO produtoDTO = modelMapper.map(pojo, ProdutoListarDTO.class);
-        return produtoDTO;
+        ProdutoListarDTO produtoListarDTO = modelMapper.map(pojo, ProdutoListarDTO.class);
+        return produtoListarDTO;
     }
 
     @Override
