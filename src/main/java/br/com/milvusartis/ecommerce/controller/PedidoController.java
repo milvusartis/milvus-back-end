@@ -1,12 +1,17 @@
 package br.com.milvusartis.ecommerce.controller;
 
+import br.com.milvusartis.ecommerce.exception.AuthorizationException;
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.model.bo.PedidoBO;
 import br.com.milvusartis.ecommerce.model.dto.PedidoDTO;
 import br.com.milvusartis.ecommerce.model.dto.PedidoRequestDTO;
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
+import br.com.milvusartis.ecommerce.model.entity.Usuario;
 import br.com.milvusartis.ecommerce.repository.PedidoRepository;
+import br.com.milvusartis.ecommerce.repository.UsuarioRepository;
+import br.com.milvusartis.ecommerce.security.UserSS;
 import br.com.milvusartis.ecommerce.service.PedidoService;
+import br.com.milvusartis.ecommerce.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +35,10 @@ public class PedidoController {
     @Autowired
     PedidoBO pedidoBO;
 
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
+
     @PostMapping("/pedidos")
     public ResponseEntity<?> cadastrar(@RequestBody PedidoRequestDTO pedidoRequestDTO) {
 
@@ -37,6 +46,17 @@ public class PedidoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pedido não pode estar vazio");
         }
 
+
+        UserSS user = UsuarioService.authenticated();
+
+        if(user == null){
+            throw new AuthorizationException("Acesso negado");
+        }
+
+        Optional<Usuario> opt_cliente = usuarioRepository.findById(user.getId());
+        Usuario usuario = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
+
+        pedidoRequestDTO.setUsuario(usuario);
 
        Pedido pedido =  pedidoService.inicializaPedido(pedidoRequestDTO);
 
