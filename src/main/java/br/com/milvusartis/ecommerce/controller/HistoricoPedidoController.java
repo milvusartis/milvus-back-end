@@ -54,7 +54,7 @@ public class HistoricoPedidoController {
         }
 
         Optional<Usuario> opt_cliente = usuarioRepository.findById(user.getId());
-        Usuario usuario = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Uaurio não encontrado"));
+        Usuario usuario = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
 
         Cliente cliente = clienteRepository.findByUsuario(usuario);
 
