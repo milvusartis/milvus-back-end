@@ -87,7 +87,37 @@ public class ClienteController {
 
     }
 
+<<<<<<< HEAD
     @PreAuthorize("hasAnyRole('ADMIN')")
+=======
+    @PutMapping("/clientes/{id}")
+    public ResponseEntity<?> modificar(@PathVariable("id") Long id, @RequestBody Cliente edicao) {
+
+        Optional<Cliente> opt_cliente = clienteRepository.findById(id);
+        Cliente cliente = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
+
+        if(edicao.getRg() != null)
+            cliente.setRg(edicao.getRg());
+
+        if(edicao.getTelefone() != null)
+            cliente.setTelefone(edicao.getTelefone());
+
+        if(edicao.getUsuario().getNome() != null)
+            cliente.getUsuario().setNome(edicao.getUsuario().getNome());
+
+        if(edicao.getUsuario().getEmail() != null)
+            cliente.getUsuario().setEmail(edicao.getUsuario().getEmail());
+
+        if(edicao.getUsuario().getSenha() != null)
+            cliente.getUsuario().setSenha(edicao.getUsuario().getSenha());
+
+        clienteRepository.save(cliente);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(clienteBO.parseToDTO(cliente));
+
+    }
+
+>>>>>>> dev
     @DeleteMapping("/clientes/{id}")
     public ResponseEntity<?> remover(@PathVariable("id") Long id) {
 
