@@ -114,13 +114,13 @@ public class ProdutoController {
 
 //        Long idEstoqueEdicao = edicao.getEstoque().getIdEstoque();
 
-        if(edicao.getNome() != null)
+        if(edicao.getNome() != "")
             produto.setNome(edicao.getNome());
 
-        if(edicao.getDescricao() != null)
+        if(edicao.getDescricao() != "")
             produto.setDescricao(edicao.getDescricao());
 
-        if(edicao.getImagem() != null)
+        if(edicao.getImagem() != "")
             produto.setImagem(edicao.getImagem());
 
         if(edicao.getValorUnitario() != null)
