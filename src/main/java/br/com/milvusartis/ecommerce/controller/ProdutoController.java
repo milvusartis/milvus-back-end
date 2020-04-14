@@ -5,6 +5,7 @@ import br.com.milvusartis.ecommerce.model.bo.ProdutoBO;
 import br.com.milvusartis.ecommerce.model.dto.ProdutoDTO;
 import br.com.milvusartis.ecommerce.model.entity.Categoria;
 import br.com.milvusartis.ecommerce.model.entity.Produto;
+import br.com.milvusartis.ecommerce.repository.CategoriaRepository;
 import br.com.milvusartis.ecommerce.repository.ProdutoRepository;
 import br.com.milvusartis.ecommerce.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class ProdutoController {
 
     @Autowired
     ProdutoBO produtoBO;
+
+    @Autowired
+    CategoriaRepository categoriaRepository;
 
 
 //    @GetMapping("/produtos")
@@ -125,8 +129,12 @@ public class ProdutoController {
         if(edicao.getIsAtivo() != null)
             produto.setIsAtivo(edicao.getIsAtivo());
 
-        if(edicao.getCategoria().getIdCategoria() != null)
-            produto.setCategoria(edicao.getCategoria());
+        if(edicao.getCategoria().getIdCategoria() != null && edicao.getCategoria().getIdCategoria() != produto.getCategoria().getIdCategoria()) {
+
+            Optional<Categoria> opt_categoria = categoriaRepository.findById(edicao.getCategoria().getIdCategoria());
+            Categoria categoria = opt_categoria.orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada"));
+            produto.setCategoria(categoria);
+        }
 
 //            if(edicao.getEstoque().getQtdEstocada() != null)
 //                produto.getEstoque().setQtdEstocada(edicao.getEstoque().getQtdEstocada());
