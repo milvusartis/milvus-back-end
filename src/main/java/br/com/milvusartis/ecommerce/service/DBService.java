@@ -33,6 +33,9 @@ public class DBService {
     EmpresaRepository empresaRepository;
 
     @Autowired
+    NotaFiscalRepository notaFiscalRepository;
+
+    @Autowired
     BCryptPasswordEncoder encoder;
 
     public void intantiateTestDatabase(){
@@ -40,33 +43,33 @@ public class DBService {
         //EMPRESA com ENDEREÇO:
 
             Endereco end1 = new Endereco(null, "Rua da Milvus", 1, null, "Vila da Pipa", "Pipópolis", "SP", "000000000");
-                Empresa emp1 = new Empresa(1L,"Milvus Artis", "00.000.000/0000-00", "000.000.000.000", end1);
+                Empresa emp1 = new Empresa(null,"Milvus Artis", "00.000.000/0000-00", "000.000.000.000", end1);
 
             empresaRepository.save(emp1);
+
+        //USUÁRIO:
+
+        Usuario usu1 = new Usuario(null, "Administrador do Sistema", "admin@admin.com", encoder.encode("admin"));
+        usu1.addPerfil(Perfil.ADMIN);
+
+        usuarioRepository.saveAll(Arrays.asList(usu1));
 
         //CLIENTE e USUARIO com ENDEREÇO:
 
             Endereco end2 = new Endereco(null, "Rua Eugênia de Carvalho", 525, "Casa A", "Vila Matilde", "São Paulo", "SP", "03516000");
-                Usuario usu1 = new Usuario(null, "Diógenes Bezerra Pereira", "ads.diogenes@gmail.com",  encoder.encode("123456"));
-                usu1.addPerfil(Perfil.ADMIN);
-                    Cliente cli1 = new Cliente(null, "04205595310", "2003034096537", "11964367824", usu1, end2);
+                Usuario usu2 = new Usuario(null, "Diógenes Bezerra Pereira", "ads.diogenes@gmail.com",  encoder.encode("123456"));
+                usu2.addPerfil(Perfil.ADMIN);
+                    Cliente cli1 = new Cliente(null, "04205595310", "2003034096537", "11964367824", usu2, end2);
 
-                Usuario usu2 = new Usuario(null, "Alvaro dos Santos Saraiva", "trusteco@hotmail.com", encoder.encode("123456"));
-                    Cliente cli2 = new Cliente(null, "07381194821", "157278293", "11932145053", usu2, end2);
+                Usuario usu3 = new Usuario(null, "Alvaro dos Santos Saraiva", "trusteco@hotmail.com", encoder.encode("123456"));
+                    Cliente cli2 = new Cliente(null, "07381194821", "157278293", "11932145053", usu3, end2);
 
             Endereco end3 = new Endereco(null, "Rua Abadia", 251, "Casa 1", "Nossa Senhora da Abadia", "Uberaba", "MG", "38025-450");
-                Usuario usu3 = new Usuario(null, "Isabela Zeitune Dezan", "isabelazeitunedezan@gmail.com", encoder.encode("123456"));
-                usu3.addPerfil(Perfil.ADMIN);
-                    Cliente cli3 = new Cliente(null, "40692679804", "484223859", "11948383433", usu3, end3);
+                Usuario usu4 = new Usuario(null, "Isabela Zeitune Dezan", "isabelazeitunedezan@gmail.com", encoder.encode("123456"));
+                usu4.addPerfil(Perfil.ADMIN);
+                    Cliente cli3 = new Cliente(null, "40692679804", "484223859", "11948383433", usu4, end3);
 
-        clienteRepository.saveAll(Arrays.asList( cli1, cli2, cli3));
-
-        //USUÁRIO:
-
-            Usuario u0 = new Usuario(null, "Administrador do Sistema", "admin@admin.com", encoder.encode("admin"));
-            u0.addPerfil(Perfil.ADMIN);
-
-        usuarioRepository.saveAll(Arrays.asList(u0));
+        clienteRepository.saveAll(Arrays.asList(cli1, cli2, cli3));
 
         //CATEGORIA:
 
@@ -90,7 +93,7 @@ public class DBService {
 //
 //            Produto pro5 = new Produto(null, "Linha colorida", "Linha colorida", "https://i.ibb.co/C2gh325/linhacolorida.png", 10.0, Boolean.TRUE, cat2, new Estoque(null, 8, 4));
 //
-//            Produto pro6 = new Produto(null, "Linha amarela", "Linha amarela", "https://i.ibb.co/3Y906L3/linha10.png", 9.0, Boolean.FALSE, cat2, new Estoque(null, 0, 0));
+//            Produto pro6 = new Produto(null, "Linha amarela", "Linha amarela", "https://i.ibb.co/3Y90null3/linha10.png", 9.0, Boolean.FALSE, cat2, new Estoque(null, 0, 0));
 //
 //            Produto pro7 = new Produto(null, "Carretilha verde com linha", "Carretilha com linha", "https://i.ibb.co/h1GkxYP/carretilhacomlinha.png", 20.0, Boolean.FALSE, cat3, new Estoque(null, 0, 0));
 //
@@ -106,7 +109,7 @@ public class DBService {
 
         Produto pro5 = new Produto(null, "Linha colorida", "Linha colorida", "https://i.ibb.co/C2gh325/linhacolorida.png", 10.0, Boolean.TRUE, cat2);
 
-        Produto pro6 = new Produto(null, "Linha amarela", "Linha amarela", "https://i.ibb.co/3Y906L3/linha10.png", 9.0, Boolean.FALSE, cat2);
+        Produto pro6 = new Produto(null, "Linha amarela", "Linha amarela", "https://i.ibb.co/3Y90null3/linha10.png", 9.0, Boolean.FALSE, cat2);
 
         Produto pro7 = new Produto(null, "Carretilha verde com linha", "Carretilha com linha", "https://i.ibb.co/h1GkxYP/carretilhacomlinha.png", 20.0, Boolean.FALSE, cat3);
 
@@ -120,16 +123,20 @@ public class DBService {
             PedidoItem pedIte1 = new PedidoItem(null, 2, 40.5, pro1);
             PedidoItem pedIte2 = new PedidoItem(null, 3, 45.5, pro2);
                 Pagamento pag1 = new Pagamento(null, "Diógenes Bezerra Pereira", "11964367824", "04205595310", "Cartão Master", StatusPagamento.PAGAMENTO_APROVADO);
-//        Pedido pd1 = new Pedido(null, 1, LocalDate.now(), 4.00, 221.5, StatusPedido.PEDIDO_ENVIADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte1, pedIte2), cli1, pag1);
-        Pedido pd1 = new Pedido(null, LocalDate.now(), 4.00, 221.5, StatusPedido.PEDIDO_ENVIADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte1, pedIte2), cli1, pag1);
+//                  Pedido pd1 = new Pedido(null, 1, LocalDate.now(), 4.00, 221.5, StatusPedido.PEDIDO_ENVIADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte1, pedIte2), cli1, pag1);
+                    Pedido pd1 = new Pedido(null, LocalDate.now(), 4.00, 221.5, StatusPedido.PEDIDO_ENVIADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte1, pedIte2), cli1, pag1);
+                        NotaFiscal nf1 = new NotaFiscal(null, 1, LocalDate.now(), "5.102", emp1, pd1);
 
             PedidoItem pedIte3 = new PedidoItem(null, 1, 50.0, pro3);
             PedidoItem pedIte4 = new PedidoItem(null, 3, 10.0, pro4);
                 Pagamento pag2 = new Pagamento(null, "Alvaro dos Santos Saraiva", "11932145053", "07381194821", "Cartão Visa", StatusPagamento.PAGAMENTO_APROVADO);
-//        Pedido pd2 = new Pedido(null, 2, LocalDate.now(), 6.00, 86.0, StatusPedido.PAGAMENTO_CONFIRMADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte3, pedIte4), cli2, pag2);
-        Pedido pd2 = new Pedido(null, LocalDate.now(), 6.00, 86.0, StatusPedido.PAGAMENTO_CONFIRMADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte3, pedIte4), cli2, pag2);
+//                  Pedido pd2 = new Pedido(null, 2, LocalDate.now(), 6.00, 86.0, StatusPedido.PAGAMENTO_CONFIRMADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte3, pedIte4), cli2, pag2);
+                    Pedido pd2 = new Pedido(null, LocalDate.now(), 6.00, 86.0, StatusPedido.PAGAMENTO_CONFIRMADO, LocalDate.now().plusDays(5), 5, Arrays.asList(pedIte3, pedIte4), cli3, pag2);
+                        NotaFiscal nf2 = new NotaFiscal(null, 2, LocalDate.now(), "6.102", emp1, pd2);
+
 
         pedidoRepository.saveAll(Arrays.asList(pd1, pd2));
+        notaFiscalRepository.saveAll(Arrays.asList(nf1, nf2));
 
     }
 }
