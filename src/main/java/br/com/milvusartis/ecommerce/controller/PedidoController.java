@@ -31,7 +31,6 @@ public class PedidoController {
     @Autowired
     PedidoService pedidoService;
 
-
     @Autowired
     PedidoBO pedidoBO;
 

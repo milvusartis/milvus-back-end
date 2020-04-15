@@ -1,5 +1,6 @@
 package br.com.milvusartis.ecommerce.service;
 
+import br.com.milvusartis.ecommerce.model.dto.ContatoDTO;
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
 import br.com.milvusartis.ecommerce.model.entity.Usuario;
 import org.springframework.mail.SimpleMailMessage;
@@ -17,6 +18,8 @@ public interface EmailService {
     void sendHtmlEmail(MimeMessage msg);
 
     void sendNewPasswordEmail(Usuario usuario, String newPass);
+
+    void envioDeContato(ContatoDTO contato);
 
 
 }

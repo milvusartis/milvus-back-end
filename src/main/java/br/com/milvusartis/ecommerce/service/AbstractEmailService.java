@@ -1,5 +1,6 @@
 package br.com.milvusartis.ecommerce.service;
 
+import br.com.milvusartis.ecommerce.model.dto.ContatoDTO;
 import br.com.milvusartis.ecommerce.model.entity.Pedido;
 import br.com.milvusartis.ecommerce.model.entity.Usuario;
 import br.com.milvusartis.ecommerce.model.tipos.StatusPedido;
@@ -19,6 +20,9 @@ public abstract class AbstractEmailService implements EmailService {
 
     @Value("${default.sender}")
     private String sender;
+
+    @Value("${default.recipient}")
+    private String recipientt;
 
     @Autowired
     private TemplateEngine templateEngine;
@@ -106,6 +110,22 @@ public abstract class AbstractEmailService implements EmailService {
         sm.setSubject("Solicitação de nova senha");
         sm.setSentDate(new Date(System.currentTimeMillis()));
         sm.setText("Nova senha: "+newPass);
+        return sm;
+    }
+
+    @Override
+    public void envioDeContato(ContatoDTO contato) {
+        SimpleMailMessage sm = prepareEnvioDeContato(contato);
+        sendEmail(sm);
+    }
+
+    protected SimpleMailMessage prepareEnvioDeContato(ContatoDTO contato) {
+        SimpleMailMessage sm = new SimpleMailMessage();
+        sm.setTo(recipientt);
+//        sm.setFrom();
+//        sm.setSubject("Acompanhamento de Pedido! Código: " + pedido.getIdPedido());
+        sm.setSentDate(new Date(System.currentTimeMillis()));
+//        sm.setText(pedido.toString());
         return sm;
     }
 }
