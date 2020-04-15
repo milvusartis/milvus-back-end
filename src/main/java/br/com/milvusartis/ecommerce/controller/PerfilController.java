@@ -47,12 +47,14 @@ public class PerfilController {
             throw new AuthorizationException("Acesso negado");
         }
 
-        Optional<Usuario> opt_cliente = usuarioRepository.findById(user.getId());
-        Usuario usuario = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
+
+        System.out.println(user.getId()+user.getUsername()+user.getPassword());
+
+        Optional<Usuario> opt_usuario = usuarioRepository.findById(user.getId());
+        Usuario usuario = opt_usuario.orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
 
 
-        Optional<Cliente> opt_pedido = clienteRepository.findById(usuario.getIdUsuario());
-        Cliente cliente = opt_pedido.orElseThrow(() -> new ResourceNotFoundException("Perfil uauário não encontrado"));
+        Cliente cliente = clienteRepository.findByUsuario(usuario);
         return ResponseEntity.status(HttpStatus.OK).body(clienteResponseBO.parseToDTO(cliente));
     }
 

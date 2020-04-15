@@ -3,6 +3,7 @@ package br.com.milvusartis.ecommerce.controller;
 import br.com.milvusartis.ecommerce.exception.AuthorizationException;
 import br.com.milvusartis.ecommerce.exception.ResourceNotFoundException;
 import br.com.milvusartis.ecommerce.model.bo.UsuarioBO;
+import br.com.milvusartis.ecommerce.model.bo.UsuarioResponseBO;
 import br.com.milvusartis.ecommerce.model.dto.EmailDTO;
 import br.com.milvusartis.ecommerce.model.dto.PedidoDTO;
 import br.com.milvusartis.ecommerce.model.entity.Cliente;
@@ -39,7 +40,7 @@ public class AuthController {
     private AuthService service;
 
     @Autowired
-    private UsuarioBO usuarioBO;
+    private UsuarioResponseBO usuarioResponseBO;
 
 //    @GetMapping("/auth/token")
 //    public ResponseEntity<?> perfil(Authentication authentication) {
@@ -58,14 +59,14 @@ public class AuthController {
 
         Optional<Usuario> opt_cliente = usuarioRepository.findById(user.getId());
         Usuario usuario = opt_cliente.orElseThrow(() -> new ResourceNotFoundException("Uaurio não encontrado"));
-        return ResponseEntity.status(HttpStatus.OK).body(usuarioBO.parseToDTO(usuario));
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioResponseBO.parseToDTO(usuario));
     }
 //    @GetMapping("/auth/admin/token")
 //    public ResponseEntity<?> perfilAdmin(Authentication authentication) {
 //        Usuario user = usuarioRepository.findByEmail(authentication.getName());
 //
 //        if(user.getPerfis() == ADMIN)
-//            return ResponseEntity.status(HttpStatus.OK).body(usuarioBO.parseToDTO(user));
+//            return ResponseEntity.status(HttpStatus.OK).body(usuarioResponseBO.parseToDTO(user));
 //        else
 //            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário sem permissão");
 //    }
