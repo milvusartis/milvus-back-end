@@ -19,7 +19,6 @@ public interface EmailService {
 
     void sendNewPasswordEmail(Usuario usuario, String newPass);
 
-    void envioDeContato(ContatoDTO contato);
-
+    void sendContact(ContatoDTO contatoDTO);
 
 }

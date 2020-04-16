@@ -22,7 +22,7 @@ public abstract class AbstractEmailService implements EmailService {
     private String sender;
 
     @Value("${default.recipient}")
-    private String recipientt;
+    private String recipient;
 
     @Autowired
     private TemplateEngine templateEngine;
@@ -114,20 +114,21 @@ public abstract class AbstractEmailService implements EmailService {
     }
 
     @Override
-    public void envioDeContato(ContatoDTO contato) {
-        SimpleMailMessage sm = prepareEnvioDeContato(contato);
+    public void sendContact(ContatoDTO contatoDTO) {
+        SimpleMailMessage sm = prepareSendContact(contatoDTO);
         sendEmail(sm);
     }
 
-    protected SimpleMailMessage prepareEnvioDeContato(ContatoDTO contato) {
+    protected SimpleMailMessage prepareSendContact(ContatoDTO contatoDTO) {
         SimpleMailMessage sm = new SimpleMailMessage();
-        sm.setTo(recipientt);
-//        sm.setFrom();
-//        sm.setSubject("Acompanhamento de Pedido! Código: " + pedido.getIdPedido());
+        sm.setTo(recipient);
+        sm.setCc(contatoDTO.getEmail());
+        sm.setSubject("[contato] " + contatoDTO.getAssunto() + " de " + contatoDTO.getEmail());
         sm.setSentDate(new Date(System.currentTimeMillis()));
-//        sm.setText(pedido.toString());
+        sm.setText(contatoDTO.toString());
         return sm;
     }
+
 }
 
 
