@@ -64,7 +64,7 @@ public class DBService {
                 Usuario usu3 = new Usuario(null, "Alvaro dos Santos Saraiva", "trusteco@hotmail.com", encoder.encode("123456"));
                     Cliente cli2 = new Cliente(null, "07381194821", "157278293", "11932145053", usu3, end2);
 
-            Endereco end3 = new Endereco(null, "Rua Abadia", 251, "Casa 1", "Nossa Senhora da Abadia", "Uberaba", "MG", "38025-450");
+            Endereco end3 = new Endereco(null, "Rua Abadia", 251, "Casa 1", "Nossa Senhora da Abadia", "Uberaba", "MG", "38025450");
                 Usuario usu4 = new Usuario(null, "Isabela Zeitune Dezan", "isabelazeitunedezan@gmail.com", encoder.encode("123456"));
                 usu4.addPerfil(Perfil.ADMIN);
                     Cliente cli3 = new Cliente(null, "40692679804", "484223859", "11948383433", usu4, end3);
@@ -109,14 +109,14 @@ public class DBService {
 
         Produto pro5 = new Produto(null, "Linha colorida", "Linha colorida", "https://i.ibb.co/C2gh325/linhacolorida.png", 10.0, Boolean.TRUE, cat2);
 
-        Produto pro6 = new Produto(null, "Linha amarela", "Linha amarela", "https://i.ibb.co/3Y90null3/linha10.png", 9.0, Boolean.FALSE, cat2);
+//        Produto pro6 = new Produto(null, "Linha amarela", "Linha amarela", "https://i.ibb.co/3Y90null3/linha10.png", 9.0, Boolean.FALSE, cat2);
 
         Produto pro7 = new Produto(null, "Carretilha verde com linha", "Carretilha com linha", "https://i.ibb.co/h1GkxYP/carretilhacomlinha.png", 20.0, Boolean.FALSE, cat3);
 
         Produto pro8 = new Produto(null, "Mini carretilha amarela", "Mini carretilha", "https://i.ibb.co/QjgpzmJ/minicarretilha.png", 18.0, Boolean.FALSE, cat3);
 
 
-        produtoRepository.saveAll(Arrays.asList(pro1, pro2, pro3, pro4, pro5, pro6, pro7, pro8));
+        produtoRepository.saveAll(Arrays.asList(pro1, pro2, pro3, pro4, pro5, pro7, pro8));
 
 //        PEDIDO com PEDIDO ITEM e PAGAMENTO:
 
