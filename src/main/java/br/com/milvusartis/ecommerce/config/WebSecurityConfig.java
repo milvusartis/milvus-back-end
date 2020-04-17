@@ -66,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] PUBLIC_MATCHERS = {
             "/h2/**",
             "/h2-console/**",
-            "/auth/user",
+            "/auth/user"
     };
 
     private static final String[] PUBLIC_MATCHERS_GET = {
@@ -77,6 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] PUBLIC_MATCHERS_POST = {
             "/clientes/**",
             "/auth/forgot/**",
+            "/enviarcontato"
     };
 
     @Override
