@@ -1,7 +1,6 @@
 package br.com.milvusartis.ecommerce.service;
 
 import br.com.milvusartis.ecommerce.model.entity.Usuario;
-import br.com.milvusartis.ecommerce.model.tipos.Perfil;
 import br.com.milvusartis.ecommerce.security.UserSS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
